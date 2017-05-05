@@ -1,5 +1,5 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
-
 <html lang="en-US">
 <head>
     <meta charset="UTF-8"/>
@@ -145,8 +145,14 @@
                         </li>
                         -->
                         <li><a href="#">ติดต่อ</a></li>
-                        <li><a href="sign-in.html">ลงทะเบียน</a></li>
-                        <li><a href="sign-in.html">ลงชื่อเข้าใช้</a></li>
+                        <li><a href="#">ลงทะเบียน</a></li>
+                        <?php
+                            if (isset($_SESSION['email']) && isset($_SESSION['name'])) {
+                                echo "<li>" . $_SESSION['name'] . "<a href='assets/php/sign-out.php'>[ออกจากระบบ]</a></li>";
+                            } else {
+                                echo "<li><a href='sign-in.php'>ลงชื่อเข้าใช้</a></li>";
+                            }
+                        ?>
                     </ul>
                 </nav><!-- /.navbar collapse-->
                 <div class="add-your-property">

@@ -39,7 +39,11 @@ class Admin{
 
     // read one record
     function readone(){
+<<<<<<< HEAD
         $query = "SELECT * FROM " . $this->table_name . " WHERE email = " . $this->email . " and passwd = " . $this->passwd;
+=======
+        $query = "SELECT * FROM " . $this->table_name . " WHERE email = '" . $this->email . "' and passwd = '" . md5($this->passwd) . "' and status = 1";
+>>>>>>> master
         $result = mysqli_query($this->conn, $query);
         return $result;
     }

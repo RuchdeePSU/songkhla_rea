@@ -1,5 +1,11 @@
-<!DOCTYPE html>
+<?php
+    session_start();
 
+    if (!isset($_SESSION['email'])) {
+        header("Location: index.php");
+    }
+?>
+<!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8"/>
@@ -14,8 +20,12 @@
     <link rel="stylesheet" href="assets/css/jquery.slider.min.css" type="text/css">
     <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
+    <style>
+        h1, h2, h3, h4, h5, h6, legend, a { font-family: 'Pridi', serif; }
+    </style>
 
-    <title>Zoner | Profile</title>
+    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ผู้ดูแลระบบ</title>
 
 </head>
 
@@ -24,26 +34,6 @@
 <div class="wrapper">
     <!-- Navigation -->
     <div class="navigation">
-        <div class="secondary-navigation">
-            <div class="container">
-                <div class="contact">
-                    <figure><strong>Phone:</strong>+1 810-991-3842</figure>
-                    <figure><strong>Email:</strong>zoner@example.com</figure>
-                </div>
-                <div class="user-area">
-                    <div class="actions">
-                        <a href="create-agency.html" class="promoted">Create Agency</a>
-                        <a href="create-account.html" class="promoted"><strong>Register</strong></a>
-                        <a href="sign-in.html">Sign In</a>
-                    </div>
-                    <div class="language-bar">
-                        <a href="#" class="active"><img src="assets/img/flags/gb.png" alt=""></a>
-                        <a href="#"><img src="assets/img/flags/de.png" alt=""></a>
-                        <a href="#"><img src="assets/img/flags/es.png" alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="container">
             <header class="navbar" id="top" role="banner">
                 <div class="navbar-header">
@@ -54,11 +44,18 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand nav" id="brand">
+                        <!--
                         <a href="index-google-map-fullscreen.html"><img src="assets/img/logo.png" alt="brand"></a>
+                      -->
+                        <legend>
+                          โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น
+                        </legend>
                     </div>
                 </div>
                 <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
                     <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">หน้าแรก</a></li>
+                        <!--
                         <li class="active has-child"><a href="#">Homepage</a>
                             <ul class="child-navigation">
                                 <li><a href="index-google-map-fullscreen.html">Google Map Full Screen</a></li>
@@ -75,6 +72,9 @@
                                 <li><a href="index-slider-horizontal-search-box-floated.html">Horizontal Slider Floated Search</a></li>
                             </ul>
                         </li>
+                        -->
+                        <li><a href="#">ความเป็นมาของโครงการ</a></li>
+                        <!--
                         <li class="has-child"><a href="#">Properties</a>
                             <ul class="child-navigation">
                                 <li><a href="property-detail.html">Property Detail</a></li>
@@ -83,6 +83,8 @@
                                 <li><a href="properties-listing-lines.html">Lines Listing</a></li>
                             </ul>
                         </li>
+                        -->
+                        <!--
                         <li class="has-child"><a href="#">Pages</a>
                             <ul class="child-navigation">
                                 <li><a href="about-us.html">About Us</a></li>
@@ -127,11 +129,20 @@
                                 <li><a href="blog-detail.html">Blog Post Detail</a></li>
                             </ul>
                         </li>
-                        <li><a href="contact.html">Contact</a></li>
+                        -->
+                        <li><a href="#">ติดต่อ</a></li>
+                        <li><a href="#">ลงทะเบียน</a></li>
+                        <?php
+                            if (isset($_SESSION['email']) && isset($_SESSION['name'])) {
+                                echo "<li>" . $_SESSION['name'] . "<a href='assets/php/sign-out.php'>[ออกจากระบบ]</a></li>";
+                            } else {
+                                echo "<li><a href='sign-in.php'>ลงชื่อเข้าใช้</a></li>";
+                            }
+                        ?>
                     </ul>
                 </nav><!-- /.navbar collapse-->
                 <div class="add-your-property">
-                    <a href="submit.html" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">Add Your Property</span></a>
+                    <a href="submit.html" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">เพิ่มโครงการ</span></a>
                 </div>
             </header><!-- /.navbar -->
         </div><!-- /.container -->
