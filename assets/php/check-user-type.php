@@ -1,7 +1,4 @@
 <?php
-<<<<<<< HEAD
-    
-=======
     session_start();
 
     include_once 'dbconnect.php';
@@ -24,10 +21,10 @@
         if ($row = mysqli_fetch_array($result)) {
             $_SESSION['email'] = $row['email'];
             $_SESSION['name'] = $row['name'];
+            $_SESSION['user_type'] = "admin";
             header("Location: ../../profile.php");
         } else {
             header("Location: ../../sign-in.php?result=fail");
         }
     }
->>>>>>> master
 ?>

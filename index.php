@@ -145,7 +145,14 @@
                         </li>
                         -->
                         <li><a href="#">ติดต่อ</a></li>
-                        <li><a href="#">ลงทะเบียน</a></li>
+                        <?php
+                            if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == "admin") {
+                              echo "<li><a href='profile.php'>จัดการข้อมูล</a></li>";
+                            } else {
+                              // menu for typical user
+                              echo "<li><a href='#'>ลงทะเบียน</a></li>";
+                            }
+                        ?>
                         <?php
                             if (isset($_SESSION['email']) && isset($_SESSION['name'])) {
                                 echo "<li>" . $_SESSION['name'] . "<a href='assets/php/sign-out.php'>[ออกจากระบบ]</a></li>";
