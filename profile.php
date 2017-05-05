@@ -22,10 +22,10 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn { font-family: 'Pridi', serif; }
     </style>
 
-    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ผู้ดูแลระบบ</title>
+    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลผู้ใช้งาน</title>
 
 </head>
 
@@ -55,24 +55,6 @@
                 <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
                     <ul class="nav navbar-nav">
                         <li><a href="index.php">หน้าแรก</a></li>
-                        <!--
-                        <li class="active has-child"><a href="#">Homepage</a>
-                            <ul class="child-navigation">
-                                <li><a href="index-google-map-fullscreen.html">Google Map Full Screen</a></li>
-                                <li><a href="index-google-map-fixed-height.html">Google Map Fixed Height</a></li>
-                                <li><a href="index-google-map-fixed-navigation.html">Google Map Fixed Navigation</a></li>
-                                <li><a href="index-osm.html">OpenStreetMap Full Screen</a></li>
-                                <li><a href="index-osm-fixed-height.html">OpenStreetMap Fixed Height</a></li>
-                                <li><a href="index-osm-fixed-navigation.html">OpenStreetMap Fixed Navigation</a></li>
-                                <li><a href="index-slider.html">Slider Homepage</a></li>
-                                <li><a href="index-slider-search-box.html">Slider with Search Box</a></li>
-                                <li><a href="index-horizontal-search-floated.html">Horizontal Search Floated</a></li>
-                                <li><a href="index-advanced-horizontal-search.html">Horizontal Advanced Search</a></li>
-                                <li><a href="index-slider-horizontal-search-box.html">Horizontal Slider Search</a></li>
-                                <li><a href="index-slider-horizontal-search-box-floated.html">Horizontal Slider Floated Search</a></li>
-                            </ul>
-                        </li>
-                        -->
                         <li><a href="#">ความเป็นมาของโครงการ</a></li>
                         <li><a href="#">ติดต่อ</a></li>
                         <?php
@@ -91,9 +73,9 @@
                         ?>
                     </ul>
                 </nav><!-- /.navbar collapse-->
-                <div class="add-your-property">
+                <!-- <div class="add-your-property">
                     <a href="submit.html" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">เพิ่มโครงการ</span></a>
-                </div>
+                </div> -->
             </header><!-- /.navbar -->
         </div><!-- /.container -->
     </div><!-- /.navigation -->
@@ -103,9 +85,9 @@
         <!-- Breadcrumb -->
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Account</a></li>
-                <li class="active">Profile</li>
+                <li>หน้าแรก</li>
+                <li>จัดการข้อมูล</li>
+                <li class="active">ข้อมูลผู้ใช้งาน</li>
             </ol>
         </div>
         <!-- end Breadcrumb -->
@@ -115,12 +97,13 @@
             <!-- sidebar -->
             <div class="col-md-3 col-sm-2">
                 <section id="sidebar">
-                    <header><h3>Account</h3></header>
+                    <header><h3>ประเภทข้อมูล</h3></header>
                     <aside>
                         <ul class="sidebar-navigation">
-                            <li class="active"><a href="profile.html"><i class="fa fa-user"></i><span>Profile</span></a></li>
-                            <li><a href="my-properties.html"><i class="fa fa-home"></i><span>My Properties</span></a></li>
-                            <li><a href="bookmarked.html"><i class="fa fa-heart"></i><span>Bookmarked Properties</span></a></li>
+                            <li class="active"><a href="profile.php"><i class="fa fa-user"></i><span>ข้อมูลผู้ใช้งาน</span></a></li>
+                            <li><a href="property-types-listing.php"><i class="fa fa-list"></i><span>ข้อมูลประเภทอสังหาริมทรัพย์</span></a></li>
+                            <li><a href="bookmarked.html"><i class="fa fa-list"></i><span>ข้อมูลเทศบาล</span></a></li>
+                            <li><a href="bookmarked.html"><i class="fa fa-home"></i><span>ข้อมูลโครงการ</span></a></li>
                         </ul>
                     </aside>
                 </section><!-- /#sidebar -->
@@ -129,125 +112,66 @@
                 <!-- My Properties -->
                 <div class="col-md-9 col-sm-10">
                     <section id="profile">
-                        <header><h1>Profile</h1></header>
+                        <header><h1>เกี่ยวกับผู้ใช้งาน</h1></header>
                         <div class="account-profile">
                             <div class="row">
-                                <div class="col-md-3 col-sm-3">
+                                <!-- <div class="col-md-3 col-sm-3">
                                     <img alt="" class="image" src="assets/img/agent-01.jpg">
-                                </div>
-                                <div class="col-md-9 col-sm-9">
+                                </div> -->
+                                <div class="col-md-6 col-sm-6">
                                     <form role="form" id="form-account-profile" method="post" >
-                                        <div class="checkbox switch" id="agent-switch" data-agent-state="is-agent">
-                                            <label>
-                                                I am an agent<input type="checkbox">
-                                            </label>
-                                        </div>
-                                        <section id="agency">
-                                            <h3>My Agency</h3>
-                                            <div class="row">
-                                                <div class="col-md-4 col-sm-4">
-                                                    <label for="account-agency">Select your agency:</label>
-                                                </div>
-                                                <div class="col-md-8 col-sm-8">
-                                                    <div class="form-group">
-                                                        <select name="account-agency" id="account-agency">
-                                                            <option value="">Agency</option>
-                                                            <option value="1">Estate+</option>
-                                                            <option value="2">Northfolk Eastate</option>
-                                                            <option value="3">Maximum Properties</option>
-                                                            <option value="4">Edd's Homes</option>
-                                                            <option value="5">Will & Scotch</option>
-                                                        </select>
-                                                    </div><!-- /.form-group -->
-                                                </div>
-                                            </div>
-                                        </section>
                                         <section id="contact">
-                                            <h3>Contact</h3>
-                                            <dl class="contact-fields">
-                                                <dt><label for="form-account-name">Your Name:</label></dt>
-                                                <dd><div class="form-group">
-                                                    <input type="text" class="form-control" id="form-account-name" name="form-account-name" required value="Jeffrey Scott">
-                                                </div><!-- /.form-group --></dd>
-                                                <dt><label for="form-account-phone">Phone:</label></dt>
-                                                <dd><div class="form-group">
-                                                    <input type="text" class="form-control" id="form-account-phone" name="form-account-phone" value="(123) 456 789">
-                                                </div><!-- /.form-group --></dd>
-                                                <dt><label for="form-account-email">Email:</label></dt>
-                                                <dd><div class="form-group">
-                                                    <input type="text" class="form-control" id="form-account-email" name="form-account-phone" value="jeffrey.scott@example.com">
-                                                </div><!-- /.form-group --></dd>
-                                                <dt><label for="form-account-skype">Skype:</label></dt>
-                                                <dd><div class="form-group">
-                                                    <input type="text" class="form-control" id="form-account-skype" name="form-account-skype" value="jeffrey.scott">
-                                                </div><!-- /.form-group --></dd>
-                                            </dl>
-                                        </section>
-                                        <section id="about-me">
-                                            <h3>About Me</h3>
                                             <div class="form-group">
-                                                <textarea class="form-control" id="form-contact-agent-message" rows="5" name="form-contact-agent-message">
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum, bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt. Duis euismod placerat rhoncus.
-Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. Aliquam posuere fermentum lorem, a aliquam mauris rutrum.</textarea>
-                                            </div><!-- /.form-group -->
-                                        </section>
-                                        <section id="social">
-                                            <h3>My Social Network</h3>
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-twitter"></i></span>
-                                                    <input type="text" class="form-control" id="account-social-twitter" name="account-social-twitter">
-                                                </div>
+                                                <label for="form-account-email">อีเมล</label>
+                                                <input type="text" class="form-control" id="form-account-email" name="form-account-phone" placeholder="email@example.com" value="<?php echo $_SESSION['email']; ?>" readonly>
                                             </div><!-- /.form-group -->
                                             <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-facebook"></i></span>
-                                                    <input type="text" class="form-control" id="account-social-facebook" name="account-social-facebook" >
-                                                </div>
-                                            </div><!-- /.form-group -->
-                                            <div class="form-group">
-                                                <div class="input-group">
-                                                    <span class="input-group-addon"><i class="fa fa-pinterest"></i></span>
-                                                    <input type="text" class="form-control" id="account-social-pinterest" name="account-social-pinterest">
-                                                </div>
+                                                <label for="form-account-name">ชื่อผู้ใช้งาน</label>
+                                                <input type="text" class="form-control" id="form-account-name" name="form-account-name" required placeholder="Your name" value="<?php echo $_SESSION['name']; ?>">
                                             </div><!-- /.form-group -->
                                             <div class="form-group clearfix">
-                                                <button type="submit" class="btn pull-right btn-default" id="account-submit">Save Changes</button>
+                                                <button type="submit" class="btn pull-right btn-default" id="account-submit">บันทึกการแก้ไข</button>
                                             </div><!-- /.form-group -->
                                         </section>
                                     </form><!-- /#form-contact -->
-                                    <section id="change-password">
-                                        <header><h2>Change Your Password</h2></header>
-                                        <div class="row">
-                                            <div class="col-md-6 col-sm-6">
-                                                <form role="form" id="form-account-password" method="post" >
-                                                    <div class="form-group">
-                                                        <label for="form-account-password-current">Current Password</label>
-                                                        <input type="password" class="form-control" id="form-account-password-current" name="form-account-password-current">
-                                                    </div><!-- /.form-group -->
-                                                    <div class="form-group">
-                                                        <label for="form-account-password-new">New Password</label>
-                                                        <input type="password" class="form-control" id="form-account-password-new" name="form-account-password-new">
-                                                    </div><!-- /.form-group -->
-                                                    <div class="form-group">
-                                                        <label for="form-account-password-confirm-new">Confirm New Password</label>
-                                                        <input type="password" class="form-control" id="form-account-password-confirm-new" name="form-account-password-confirm-new">
-                                                    </div><!-- /.form-group -->
-                                                    <div class="form-group clearfix">
-                                                        <button type="submit" class="btn btn-default" id="form-account-password-submit">Change Password</button>
-                                                    </div><!-- /.form-group -->
-                                                </form><!-- /#form-account-password -->
-                                            </div>
-                                            <div class="col-md-6 col-sm-6">
-                                                <strong>Hint:</strong>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui
-                                                    vestibulum, bibendum purus sit amet, vulputate mauris.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </section>
                                 </div><!-- /.col-md-9 -->
+                                <div class="col-md-offset-6 col-sm-offset-6">
+                                </div>
                             </div><!-- /.row -->
+                            <div class="row">
+                              <div class="col-md-9 col-sm-9">
+                                <section id="change-password">
+                                    <header><h2>แก้ไขรหัสผ่าน</h2></header>
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6">
+                                            <form role="form" id="form-account-password" method="post" >
+                                                <div class="form-group">
+                                                    <label for="form-account-password-current">รหัสผ่านปัจจุบัน</label>
+                                                    <input type="password" class="form-control" id="form-account-password-current" name="form-account-password-current">
+                                                </div><!-- /.form-group -->
+                                                <div class="form-group">
+                                                    <label for="form-account-password-new">รหัสผ่านใหม่</label>
+                                                    <input type="password" class="form-control" id="form-account-password-new" name="form-account-password-new">
+                                                </div><!-- /.form-group -->
+                                                <div class="form-group">
+                                                    <label for="form-account-password-confirm-new">ยืนยันรหัสผ่านใหม่</label>
+                                                    <input type="password" class="form-control" id="form-account-password-confirm-new" name="form-account-password-confirm-new">
+                                                </div><!-- /.form-group -->
+                                                <div class="form-group clearfix">
+                                                    <button type="submit" class="btn btn-default" id="form-account-password-submit">บันทึกรหัสผ่านใหม่</button>
+                                                </div><!-- /.form-group -->
+                                            </form><!-- /#form-account-password -->
+                                        </div>
+                                        <div class="col-md-6 col-sm-6">
+                                            <strong>คำแนะนำ:</strong>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui
+                                                vestibulum, bibendum purus sit amet, vulputate mauris.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </section>
+                              </div>
+                            </div>
                         </div><!-- /.account-profile -->
                     </section><!-- /#profile -->
                 </div><!-- /.col-md-9 -->
@@ -263,7 +187,7 @@ Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. 
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3 col-sm-3">
-                            <article>
+                            <!-- <article>
                                 <h3>About Us</h3>
                                 <p>Vel fermentum ipsum. Suspendisse quis molestie odio. Interdum et malesuada fames ac ante ipsum
                                     primis in faucibus. Quisque aliquet a metus in aliquet. Praesent ut turpis posuere, commodo odio
@@ -271,47 +195,20 @@ Phasellus mollis imperdiet placerat. Sed ac turpis nisl. Mauris at ante mauris. 
                                 </p>
                                 <hr>
                                 <a href="#" class="link-arrow">Read More</a>
-                            </article>
+                            </article> -->
                         </div><!-- /.col-sm-3 -->
                         <div class="col-md-3 col-sm-3">
-                            <article>
-                                <h3>Recent Properties</h3>
-                                <div class="property small">
-                                    <a href="property-detail.html">
-                                        <div class="property-image">
-                                            <img alt="" src="assets/img/properties/property-06.jpg">
-                                        </div>
-                                    </a>
-                                    <div class="info">
-                                        <a href="property-detail.html"><h4>2186 Rinehart Road</h4></a>
-                                        <figure>Doral, FL 33178 </figure>
-                                        <div class="tag price">$ 72,000</div>
-                                    </div>
-                                </div><!-- /.property -->
-                                <div class="property small">
-                                    <a href="property-detail.html">
-                                        <div class="property-image">
-                                            <img alt="" src="assets/img/properties/property-09.jpg">
-                                        </div>
-                                    </a>
-                                    <div class="info">
-                                        <a href="property-detail.html"><h4>2479 Murphy Court</h4></a>
-                                        <figure>Minneapolis, MN 55402</figure>
-                                        <div class="tag price">$ 36,000</div>
-                                    </div>
-                                </div><!-- /.property -->
-                            </article>
                         </div><!-- /.col-sm-3 -->
                         <div class="col-md-3 col-sm-3">
                             <article>
                                 <h3>Contact</h3>
-                                <address>
+                                <!-- <address>
                                     <strong>Your Company</strong><br>
                                     4877 Spruce Drive<br>
                                     West Newton, PA 15089
                                 </address>
                                 +1 (734) 123-4567<br>
-                                <a href="#">hello@example.com</a>
+                                <a href="#">hello@example.com</a> -->
                             </article>
                         </div><!-- /.col-sm-3 -->
                         <div class="col-md-3 col-sm-3">

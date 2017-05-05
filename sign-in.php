@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .alert { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, li, .alert { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ลงชื่อเข้าใช้</title>
@@ -73,7 +73,7 @@
         <!-- Breadcrumb -->
         <div class="container">
             <ol class="breadcrumb">
-                <li><a href="#">Home</a></li>
+                <li>หน้าแรก</li>
                 <li class="active">ลงชื่อเข้าใช้ (Sign In)</li>
             </ol>
         </div>
