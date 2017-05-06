@@ -163,17 +163,21 @@
                     </ul>
                 </nav><!-- /.navbar collapse-->
                 <div class="add-your-property">
-                    <a href="submit.html" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">เพิ่มโครงการ</span></a>
+                    <?php if (isset($_SESSION['email'])) {
+                        if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'admin') {
+                            echo "<a href='submit.html' class='btn btn-default'><i class='fa fa-plus'></i><span class='text'>เพิ่มโครงการ</span></a>";
+                        }
+                    } ?>
                 </div>
             </header><!-- /.navbar -->
         </div><!-- /.container -->
     </div><!-- /.navigation -->
 
-    <div class="container">
+    <!-- <div class="container">
         <div class="geo-location-wrapper">
             <span class="btn geo-location"><i class="fa fa-map-marker"></i><span class="text">Find My Position</span></span>
         </div>
-    </div>
+    </div> -->
 
     <!-- Map -->
     <div id="map" class="has-parallax">

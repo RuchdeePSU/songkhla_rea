@@ -18,6 +18,12 @@
     // read all records
     $result = $property_type->readall();
 
+    if (isset($_GET['id'])) {
+        $property_type->prop_type_id = $_GET['id'];
+        if ($property_type->delete()) {
+            header("Location: property-types-listing.php");
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -134,17 +140,22 @@
                                     <tr>
                                         <th>ประเภทอสังหาริมทรัพย์</th>
                                         <th>สถานะ</th>
-                                        <th>จัดการ</th>
+                                        <th class="center">แก้ไขข้อมูล</th>
+                                        <th class="center">ลบข้อมูล</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php while ($row = mysqli_fetch_array($result)) { ?>
                                     <tr>
-                                        <td><?php echo $row['$prop_type_desc']; ?></td>
-                                        <td><?php echo $row['$prop_type_status']; ?></td>
-                                        <td class="actions">
-                                            <a href="#" class="edit"><i class="fa fa-pencil"></i>Edit</a>
-                                            <a href="#"><i class="delete fa fa-trash-o"></i></a>
+                                        <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_type_desc']; ?></td>
+                                        <td><?php if ($row['prop_type_status']) {
+                                            echo "ใช้งานปกติ";
+                                        } else { echo "ยกเลิกการใช้งาน"; } ?></td>
+                                        <td class="center">
+                                            <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
+                                        </td>
+                                        <td class="center">
+                                            <a href="#" class="delete" data-href="property-types-listing.php?id=<?php echo $row['prop_type_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <?php } ?>
@@ -220,6 +231,25 @@
     <!-- end Page Footer -->
 </div>
 
+<!-- Modal Dialog -->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">ยืนยันการลบข้อมูล</h4>
+        </div>
+        <div class="modal-body">
+          <p>แน่ใจว่าต้องการลบข้อมูลนี้?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+            <a class="btn btn-danger" id="confirm">ลบข้อมูล</a>
+        </div>
+    </div>
+</div>
+</div>
+
 <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -230,6 +260,11 @@
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
+<script>
+  $('#confirm-delete').on('show.bs.modal', function(e) {
+      $(this).find('#confirm').attr('href', $(e.relatedTarget).data('href'));
+  });
+</script>
 
 </body>
 </html>

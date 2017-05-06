@@ -5,18 +5,27 @@
         header("Location: index.php");
     }
 
-    include_once 'assets/php/dbconnect.php';
-    include_once 'assets/php/property_type.php';
+    // form is submitted
+    if (isset($_POST['property-type-submit'])) {
+        include_once 'assets/php/dbconnect.php';
+        include_once 'assets/php/property_type.php';
 
-    // get connection
-    $database = new Database();
-    $db = $database->getConnection();
+        // get connection
+        $database = new Database();
+        $db = $database->getConnection();
 
-    // pass connection to property_types table
-    $property_type = new Property_type($db);
+        // pass connection to property_types table
+        $property_type = new Property_type($db);
+        $property_type->prop_type_desc = $_POST['property-type-desc'];
+        $property_type->prop_type_status = $_POST['property-type-status'];
 
-    // read all records
-    $result = $property_type->readall();
+        // insert
+        if ($property_type->create()) {
+            $success = true;
+        } else {
+            $success = false;
+        }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -36,7 +45,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .btn { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn, label { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลประเภทอสังหาริมทรัพย์</title>
@@ -130,22 +139,33 @@
                         <div class="my-properties">
                           <div class="row">
                             <div class="col-md-6 col-sm-6">
-                              <form role="form" id="form-property-types" method="post" >
+                              <form role="form" id="property-types" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
                                 <div class="form-group">
-                                    <label for="form-property-type-desc">ชื่อเรียกประเภทอสังหาริมทรัพย์</label>
-                                    <input type="text" class="form-control" id="form-property-type-desc" name="form-property-type-desc" placeholder="Property Type">
+                                    <label for="property-type-desc">ชื่อเรียกประเภทอสังหาริมทรัพย์</label>
+                                    <input type="text" class="form-control" id="property-type-desc" name="property-type-desc" placeholder="Property Type">
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
-                                    <label for="form-property-type-status">สถานะการใช้งาน</label>
-                                    <select name="type" id="form-property-type-status">
+                                    <label for="property-type-status">สถานะการใช้งาน</label>
+                                    <select name="property-type-status" id="property-type-status">
                                         <option value="1" selected>ใช้งานปกติ</option>
                                         <option value="0">ยกเลิกการใช้งาน</option>
                                     </select>
                                 </div><!-- /.form-group -->
                                 <div class="form-group clearfix">
-                                    <button type="submit" class="btn pull-right btn-default" id="property-type-submit">เพิ่มข้อมูล</button>
+                                    <button type="submit" class="btn pull-right btn-default" id="property-type-submit" name="property-type-submit">เพิ่มข้อมูล</button>
                                 </div><!-- /.form-group -->
                               </form>
+                              <div class="center-block">
+                                  <?php
+                                    if (isset($success)) {
+                                        if ($success) {
+                                            echo "<div class='alert alert-success text-center'>บันทึกข้อมูลเรียบร้อยแล้ว</div>";
+                                        } else {
+                                            echo "<div class='alert alert-danger text-center'>พบข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลได้</div>";
+                                        }
+                                    }                                    
+                                  ?>
+                              </div>
                             </div>
                             <div class="col-md-offset-6 col-sm-offset-6">
                             </div>
