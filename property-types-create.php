@@ -125,7 +125,7 @@
                         <ul class="sidebar-navigation">
                           <li><a href="profile.php"><i class="fa fa-user"></i><span>ข้อมูลผู้ใช้งาน</span></a></li>
                           <li class="active"><a href="property-types-listing.php"><i class="fa fa-list"></i><span>ข้อมูลประเภทอสังหาริมทรัพย์</span></a></li>
-                          <li><a href="bookmarked.html"><i class="fa fa-list"></i><span>ข้อมูลเทศบาล</span></a></li>
+                          <li><a href="property-municipals-listing.php"><i class="fa fa-list"></i><span>ข้อมูลเทศบาล</span></a></li>
                           <li><a href="bookmarked.html"><i class="fa fa-home"></i><span>ข้อมูลโครงการ</span></a></li>
                         </ul>
                     </aside>
@@ -142,7 +142,7 @@
                               <form role="form" id="property-types" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
                                 <div class="form-group">
                                     <label for="property-type-desc">ชื่อเรียกประเภทอสังหาริมทรัพย์</label>
-                                    <input type="text" class="form-control" id="property-type-desc" name="property-type-desc" placeholder="Property Type">
+                                    <input type="text" class="form-control" id="property-type-desc" name="property-type-desc" placeholder="ใส่ชื่อเรียกประเภทอสังหาริมทรัพย์">
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
                                     <label for="property-type-status">สถานะการใช้งาน</label>
@@ -163,7 +163,7 @@
                                         } else {
                                             echo "<div class='alert alert-danger text-center'>พบข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลได้</div>";
                                         }
-                                    }                                    
+                                    }
                                   ?>
                               </div>
                             </div>

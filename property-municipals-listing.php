@@ -6,22 +6,22 @@
     }
 
     include_once 'assets/php/dbconnect.php';
-    include_once 'assets/php/property_type.php';
+    include_once 'assets/php/property_municipal.php';
 
     // get connection
     $database = new Database();
     $db = $database->getConnection();
 
     // pass connection to property_types table
-    $property_type = new Property_type($db);
+    $property_municipal = new Property_municipal($db);
 
     // read all records
-    $result = $property_type->readall();
+    $result = $property_municipal->readall();
 
     if (isset($_GET['id'])) {
-        $property_type->prop_type_id = $_GET['id'];
-        if ($property_type->delete()) {
-            header("Location: property-types-listing.php");
+        $property_municipal->prop_municipal_id = $_GET['id'];
+        if ($property_municipal->delete()) {
+            header("Location: property-municipals-listing.php");
         }
     }
 ?>
@@ -45,7 +45,7 @@
         h1, h2, h3, h4, h5, h6, legend, a, .btn { font-family: 'Pridi', serif; }
     </style>
 
-    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลประเภทอสังหาริมทรัพย์</title>
+    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลเทศบาล</title>
 
 </head>
 
@@ -94,7 +94,7 @@
                   </ul>
               </nav><!-- /.navbar collapse-->
               <div class="add-your-property">
-                  <a href="property-types-create.php" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">เพิ่มประเภทอสังหาริมทรัพย์</span></a>
+                  <a href="property-municipals-create.php" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">เพิ่มข้อมูลเทศบาล</span></a>
               </div>
           </header><!-- /.navbar -->
         </div><!-- /.container -->
@@ -121,9 +121,9 @@
                     <aside>
                         <ul class="sidebar-navigation">
                           <li><a href="profile.php"><i class="fa fa-user"></i><span>ข้อมูลผู้ใช้งาน</span></a></li>
-                          <li class="active"><a href="property-types-listing.php"><i class="fa fa-list"></i><span>ข้อมูลประเภทอสังหาริมทรัพย์</span></a></li>
-                          <li><a href="property-municipals-listing.php"><i class="fa fa-list"></i><span>ข้อมูลเทศบาล</span></a></li>
-                          <li><a href="#"><i class="fa fa-home"></i><span>ข้อมูลโครงการ</span></a></li>
+                          <li><a href="property-types-listing.php"><i class="fa fa-list"></i><span>ข้อมูลประเภทอสังหาริมทรัพย์</span></a></li>
+                          <li class="active"><a href="property-municipals-listing.php"><i class="fa fa-list"></i><span>ข้อมูลเทศบาล</span></a></li>
+                          <li><a href="bookmarked.html"><i class="fa fa-home"></i><span>ข้อมูลโครงการ</span></a></li>
                         </ul>
                     </aside>
                 </section><!-- /#sidebar -->
@@ -132,13 +132,13 @@
                 <!-- My Properties -->
                 <div class="col-md-9 col-sm-10">
                     <section id="my-properties">
-                        <header><h1>ประเภทอสังหาริมทรัพย์</h1></header>
+                        <header><h1>เทศบาล</h1></header>
                         <div class="my-properties">
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
                                     <tr>
-                                        <th>ประเภทอสังหาริมทรัพย์</th>
+                                        <th>ชื่อเทศบาล</th>
                                         <th>สถานะ</th>
                                         <th class="center">แก้ไขข้อมูล</th>
                                         <th class="center">ลบข้อมูล</th>
@@ -147,15 +147,15 @@
                                     <tbody>
                                     <?php while ($row = mysqli_fetch_array($result)) { ?>
                                     <tr>
-                                        <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_type_desc']; ?></td>
-                                        <td><?php if ($row['prop_type_status']) {
+                                        <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_municipal_desc']; ?></td>
+                                        <td><?php if ($row['prop_municipal_status']) {
                                             echo "ใช้งานปกติ";
                                         } else { echo "ยกเลิกการใช้งาน"; } ?></td>
                                         <td class="center">
                                             <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
                                         </td>
                                         <td class="center">
-                                            <a href="#" class="delete" data-href="property-types-listing.php?id=<?php echo $row['prop_type_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" class="delete" data-href="property-municipals-listing.php?id=<?php echo $row['prop_municipal_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <?php } ?>
