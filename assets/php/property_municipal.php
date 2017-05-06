@@ -23,7 +23,7 @@ class Property_municipal{
 
     // read one record
     function readone(){
-        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_id = " . $this->prop_municipal_id . " and prop_municipal_status = 1";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_id = " . $this->prop_municipal_id;
         $result = mysqli_query($this->conn, $query);
         return $result;
     }
@@ -45,11 +45,11 @@ class Property_municipal{
 
     // update record
     function update(){
-        $query = "UPDATE " . $this->table_name . " SET prop_municipal_desc = ?, prop_municipal_status = ?";
+        $query = "UPDATE " . $this->table_name . " SET prop_municipal_desc = ?, prop_municipal_status = ? WHERE prop_municipal_id = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ss', $this->prop_municipal_desc, $this->prop_municipal_status);
+        mysqli_stmt_bind_param($stmt, 'ss', $this->prop_municipal_desc, $this->prop_municipal_status, $this->prop_municipal_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {

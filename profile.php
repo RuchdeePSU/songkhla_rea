@@ -103,7 +103,7 @@
                             <li class="active"><a href="profile.php"><i class="fa fa-user"></i><span>ข้อมูลผู้ใช้งาน</span></a></li>
                             <li><a href="property-types-listing.php"><i class="fa fa-list"></i><span>ข้อมูลประเภทอสังหาริมทรัพย์</span></a></li>
                             <li><a href="property-municipals-listing.php"><i class="fa fa-list"></i><span>ข้อมูลเทศบาล</span></a></li>
-                            <li><a href="#"><i class="fa fa-home"></i><span>ข้อมูลโครงการ</span></a></li>
+                            <li><a href="properties-listing.php"><i class="fa fa-home"></i><span>ข้อมูลโครงการ</span></a></li>
                         </ul>
                     </aside>
                 </section><!-- /#sidebar -->

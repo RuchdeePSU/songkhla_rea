@@ -23,7 +23,7 @@ class Property_type{
 
     // read one record
     function readone(){
-        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_type_id = " . $this->prop_type_id . " and prop_type_status = 1";
+        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_type_id = " . $this->prop_type_id;
         $result = mysqli_query($this->conn, $query);
         return $result;
     }
@@ -45,11 +45,11 @@ class Property_type{
 
     // update record
     function update(){
-        $query = "UPDATE " . $this->table_name . " SET prop_type_desc = ?, prop_type_status = ?";
+        $query = "UPDATE " . $this->table_name . " SET prop_type_desc = ?, prop_type_status = ? WHERE prop_type_id = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ss', $this->prop_type_desc, $this->prop_type_status);
+        mysqli_stmt_bind_param($stmt, 'ss', $this->prop_type_desc, $this->prop_type_status, $this->prop_type_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
