@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2017 at 11:27 AM
+-- Generation Time: May 09, 2017 at 02:37 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -29,7 +29,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `properties` (
   `prop_id` int(11) NOT NULL,
   `prop_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `prop_address` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `prop_address_no` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `prop_address_moo` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `prop_address_road` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `prop_address_subdistrict` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `prop_address_district` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prop_type_id` int(11) NOT NULL,
   `prop_municipal_id` int(11) NOT NULL,
   `prop_lat` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
@@ -39,7 +43,8 @@ CREATE TABLE `properties` (
   `prop_icon_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `prop_min_price` decimal(10,0) NOT NULL DEFAULT '0',
   `prop_max_price` decimal(10,0) NOT NULL DEFAULT '0',
-  `prop_status` tinyint(1) NOT NULL DEFAULT '1'
+  `prop_status` tinyint(1) NOT NULL DEFAULT '1',
+  `prop_created_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -50,9 +55,19 @@ CREATE TABLE `properties` (
 
 CREATE TABLE `property_municipals` (
   `prop_municipal_id` int(11) NOT NULL,
-  `prop_municipal_desc` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prop_municipal_desc` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `prop_municipal_status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `property_municipals`
+--
+
+INSERT INTO `property_municipals` (`prop_municipal_id`, `prop_municipal_desc`, `prop_municipal_status`) VALUES
+(1, 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 1),
+(2, 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 1),
+(4, 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 1),
+(5, 'à¸„à¸§à¸™à¸¥à¸±à¸‡', 1);
 
 -- --------------------------------------------------------
 
@@ -65,6 +80,14 @@ CREATE TABLE `property_types` (
   `prop_type_desc` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prop_type_status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `property_types`
+--
+
+INSERT INTO `property_types` (`prop_type_id`, `prop_type_desc`, `prop_type_status`) VALUES
+(1, 'à¸šà¹‰à¸²à¸™à¹€à¸”à¸µà¹ˆà¸¢à¸§', 1),
+(2, 'à¸šà¹‰à¸²à¸™à¹à¸à¸”', 1);
 
 -- --------------------------------------------------------
 
@@ -84,7 +107,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`email`, `passwd`, `name`, `status`) VALUES
-('ruchdee.bi@psu.ac.th', '25d55ad283aa400af464c76d713c07ad', 'Ruchdee Binmad', 1);
+('ruchdee.b@psu.ac.th', '25d55ad283aa400af464c76d713c07ad', 'Ruchdee Binmad', 1);
 
 --
 -- Indexes for dumped tables
@@ -128,12 +151,12 @@ ALTER TABLE `properties`
 -- AUTO_INCREMENT for table `property_municipals`
 --
 ALTER TABLE `property_municipals`
-  MODIFY `prop_municipal_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `prop_municipal_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `property_types`
 --
 ALTER TABLE `property_types`
-  MODIFY `prop_type_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `prop_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Constraints for dumped tables
 --
