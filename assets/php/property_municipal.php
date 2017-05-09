@@ -15,8 +15,13 @@ class Property_municipal{
     }
 
     // read all records
-    function readall(){
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_municipal_id";
+    function readall($act){
+        // only active - prop_municipal_status = 1
+        if ($act) {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_status = 1 ORDER BY prop_municipal_id";
+        } else {
+            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_municipal_id";
+        }
         $result = mysqli_query($this->conn, $query);
         return $result;
     }

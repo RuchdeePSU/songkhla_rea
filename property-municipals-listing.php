@@ -15,8 +15,10 @@
     // pass connection to property_types table
     $property_municipal = new Property_municipal($db);
 
+    $active = false;
+
     // read all records
-    $result = $property_municipal->readall();
+    $result = $property_municipal->readall($active);
 
     if (isset($_GET['id'])) {
         $property_municipal->prop_municipal_id = $_GET['id'];

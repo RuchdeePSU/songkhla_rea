@@ -15,8 +15,12 @@ class Property_type{
     }
 
     // read all records
-    function readall(){
-        $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_type_id";
+    function readall($act){
+        if ($act) {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_type_status = 1 ORDER BY prop_type_id";
+        } else {
+            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_type_id";
+        }
         $result = mysqli_query($this->conn, $query);
         return $result;
     }

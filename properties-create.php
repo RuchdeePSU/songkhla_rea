@@ -5,15 +5,27 @@
         header("Location: index.php");
     }
 
+    include_once 'assets/php/dbconnect.php';
+    include_once 'assets/php/property.php';
+    include_once 'assets/php/property_municipal.php';
+    include_once 'assets/php/property_type.php';
+
+    // get connection
+    $database = new Database();
+    $db = $database->getConnection();
+
+    $active = true;
+
+    // pass connection to property_municipal tabel
+    $prop_municipal = new Property_municipal($db);
+    $result_municipal = $prop_municipal->readall($active);
+
+    // pass connection to property_type table
+    $prop_type = new Property_type($db);
+    $result_type = $prop_type->readall($active);
+
     // form is submitted
     if (isset($_POST['property-submit'])) {
-        include_once 'assets/php/dbconnect.php';
-        include_once 'assets/php/property.php';
-
-        // get connection
-        $database = new Database();
-        $db = $database->getConnection();
-
         // pass connection to property_types table
         $property = new Property($db);
         // $property->prop_municipal_desc = $_POST['property-municipal-desc'];
@@ -149,16 +161,9 @@
                               <div class="form-group">
                                   <label for="property-type">ประเภทโครงการ</label>
                                   <select name="type" id="property-type">
-                                      <option value="1">หาดใหญ่</option>
-                                      <option value="2">คอหงส์</option>
-                                      <option value="3">ควนลัง</option>
-                                      <option value="4">คลองแห</option>
-                                      <option value="5">บ้านพรุ</option>
-                                      <option value="5">น้ำน้อย</option>
-                                      <option value="5">พะวง</option>
-                                      <option value="5">เขารูปช้าง</option>
-                                      <option value="5">ท่าข้าม</option>
-                                      <option value="5">เมืองสงขลา</option>
+                                      <?php while ($row_municipal = mysqli_fetch_array($result_type)) {
+                                          echo "<option value='" . $row_municipal['prop_type_id'] . "'>" . $row_municipal['prop_type_desc'] . "</option>";
+                                      } ?>
                                   </select>
                               </div><!-- /.form-group -->
                             </div>
@@ -186,16 +191,9 @@
                                 <div class="form-group">
                                     <label for="property-municipal">เทศบาลที่ตั้งโครงการ</label>
                                     <select name="type" id="property-municipal">
-                                        <option value="1">หาดใหญ่</option>
-                                        <option value="2">คอหงส์</option>
-                                        <option value="3">ควนลัง</option>
-                                        <option value="4">คลองแห</option>
-                                        <option value="5">บ้านพรุ</option>
-                                        <option value="5">น้ำน้อย</option>
-                                        <option value="5">พะวง</option>
-                                        <option value="5">เขารูปช้าง</option>
-                                        <option value="5">ท่าข้าม</option>
-                                        <option value="5">เมืองสงขลา</option>
+                                        <?php while ($row_municipal = mysqli_fetch_array($result_municipal)) {
+                                            echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
+                                        } ?>
                                     </select>
                                 </div><!-- /.form-group -->
                               </div><!-- /.col-md-4 -->

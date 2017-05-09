@@ -15,8 +15,10 @@
     // pass connection to property_types table
     $property_type = new Property_type($db);
 
+    $active = false;
+
     // read all records
-    $result = $property_type->readall();
+    $result = $property_type->readall($active);
 
     if (isset($_GET['id'])) {
         $property_type->prop_type_id = $_GET['id'];

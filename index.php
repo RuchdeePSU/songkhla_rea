@@ -9,13 +9,15 @@
     $database = new Database();
     $db = $database->getConnection();
 
+    $active = true;
+
     // pass connection to property_municipal tabel
     $prop_municipal = new Property_municipal($db);
-    $result_municipal = $prop_municipal->readall();
+    $result_municipal = $prop_municipal->readall($active);
 
     // pass connection to property_type table
     $prop_type = new Property_type($db);
-    $result_type = $prop_type->readall();
+    $result_type = $prop_type->readall($active);
 
 ?>
 <!DOCTYPE html>
