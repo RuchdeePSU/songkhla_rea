@@ -28,8 +28,9 @@
     if (isset($_POST['property-submit'])) {
         // pass connection to property_types table
         $property = new Property($db);
-        // $property->prop_municipal_desc = $_POST['property-municipal-desc'];
-        // $property_municipal->prop_municipal_status = $_POST['property-municipal-status'];
+        $property->prop_name = $_POST['property-title'];
+        $property->prop_name = $_POST['property-title'];
+
 
         // insert
         if ($property->create()) {
@@ -154,7 +155,7 @@
                             <div class="col-md-8 col-sm-8">
                                 <div class="form-group">
                                     <label for="property-title">ชื่อโครงการ</label>
-                                    <input type="text" class="form-control" id="property-title" name="property-title" required>
+                                    <input type="text" class="form-control" id="property-title" name="property-title" placeholder="ใส่ชื่อโครงการ" required>
                                 </div><!-- /.form-group -->
                             </div>
                             <div class="col-md-4 col-sm-4">
@@ -200,8 +201,24 @@
                           </div>
                           <div class="row">
                             <div class="col-md-4 col-sm-4">
+                              <div class="form-group">
+                                  <label for="property-subdistrict">ตำบล</label>
+                                  <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict">
+                              </div><!-- /.form-group -->
+                            </div>
+                            <div class="col-md-4 col-sm-4">
+                              <div class="form-group">
+                                  <label for="property-district">อำเภอ</label>
+                                  <input type="text" class="form-control" id="property-district" name="property-district">
+                              </div><!-- /.form-group -->
+                            </div>
+                            <div class="col-md-offset-4 col-sm-offset-4">
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4 col-sm-4">
                                 <div class="form-group">
-                                    <label for="submit-min_price">ราคาจำหน่ายต่ำสุด</label>
+                                    <label for="property-min-price">ราคาจำหน่ายต่ำสุด</label>
                                     <div class="input-group">
                                       <span class="input-group-addon">฿</span>
                                       <input type="number" class="form-control" id="property-min-price" name="property-min-price" pattern="\d*" placeholder="0" value="0" required>
@@ -210,7 +227,7 @@
                             </div><!-- /.col-md-4 -->
                             <div class="col-md-4 col-sm-4">
                                 <div class="form-group">
-                                    <label for="submit-max_price">ราคาจำหน่ายสูงสุด</label>
+                                    <label for="property-max-price">ราคาจำหน่ายสูงสุด</label>
                                     <div class="input-group">
                                       <span class="input-group-addon">฿</span>
                                       <input type="number" class="form-control" id="property-max-price" name="property-max-price" pattern="\d*" placeholder="0" value="0" required>
@@ -219,7 +236,7 @@
                             </div><!-- /.col-md-4 -->
                             <div class="col-md-4 col-sm-4">
                               <div class="form-group">
-                                  <label for="property-municipal-status">สถานะการใช้งาน</label>
+                                  <label for="property-status">สถานะการใช้งาน</label>
                                   <select name="property-status" id="property-status">
                                       <option value="1" selected>ใช้งานปกติ</option>
                                       <option value="0">ยกเลิกการใช้งาน</option>
