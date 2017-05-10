@@ -150,6 +150,55 @@ class Property{
             return false;
         }
     }
+
+    // write data from mysql to json file
+    function writejson() {
+        // json filename
+        $jsfile = "assets/js/locations8.js";
+        try {
+            //write to json file
+            $jsfp = fopen($jsfile, "w");
+            fwrite($jsfp, "var locations = [\n");
+
+            // read all records
+            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_id";
+            $result = mysqli_query($this->conn, $query);
+            $nor = mysqli_num_rows($result);
+            $cnt = 0;
+            while ($row = mysqli_fetch_array($result)) {
+                $cnt++;
+                $straddr = "";
+                if (!empty($row['prop_address_no'])) {
+                    $straddr .= $row['prop_address_no'] . " ";
+                }
+                if (!empty($row['prop_address_moo'])) {
+                    $straddr .= "ม." . $row['prop_address_moo'] . " ";
+                }
+                if (!empty($row['prop_address_road'])) {
+                    $straddr .= "ถ." . $row['prop_address_road'] . " ";
+                }
+                if (!empty($row['prop_address_subdistrict'])) {
+                    $straddr .= "ต." . $row['prop_address_subdistrict'] . " ";
+                }
+                if (!empty($row['prop_address_district'])) {
+                    $straddr .= "อ." . $row['prop_address_district'];
+                }
+
+                $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($row['prop_min_price']) . '-' . '฿' .  number_format($row['prop_max_price']) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '"' . ']';
+                if ($cnt == $nor) {
+                     $strdata .= "\n];";
+                 } else {
+                     $strdata .= ",\n";
+                 }
+                fwrite($jsfp, $strdata);
+            }
+            fclose($jsfp);
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+
+    }
 }
 
 ?>
