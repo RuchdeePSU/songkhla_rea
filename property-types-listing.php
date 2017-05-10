@@ -157,7 +157,7 @@
                                             <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
                                         </td>
                                         <td class="center">
-                                            <a href="#" class="delete" data-href="property-types-listing.php?id=<?php echo $row['prop_type_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" class="delete disabled" data-href="property-types-listing.php?id=<?php echo $row['prop_type_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <?php } ?>

@@ -29,8 +29,19 @@
         // pass connection to property_types table
         $property = new Property($db);
         $property->prop_name = $_POST['property-title'];
-        $property->prop_name = $_POST['property-title'];
-
+        $property->prop_address_no = $_POST['property-address-no'];
+        $property->prop_address_moo = $_POST['property-address-moo'];
+        $property->prop_address_road = $_POST['property-address-road'];
+        $property->prop_address_subdistrict = $_POST['property-subdistrict'];
+        $property->prop_address_district = $_POST['property-district'];
+        $property->prop_type_id = $_POST['property-type'];
+        $property->prop_municipal_id = $_POST['property_municipal'];
+        $property->prop_lat = $_POST['latitude'];
+        $property->prop_long = $_POST['longitude'];
+        $property->prop_min_price = $_POST['property-min-price'];
+        $property->prop_max_price = $_POST['property-max-price'];
+        $property->prop_status = $_POST['property-status'];
+        $property->prop_created_date = date("Y/m/d");
 
         // insert
         if ($property->create()) {
@@ -151,151 +162,167 @@
                     <section id="my-properties">
                         <header><h1>โครงการอสังหาริมทรัพย์</h1></header>
                         <div class="my-properties">
-                          <div class="row">
-                            <div class="col-md-8 col-sm-8">
-                                <div class="form-group">
-                                    <label for="property-title">ชื่อโครงการ</label>
-                                    <input type="text" class="form-control" id="property-title" name="property-title" placeholder="ใส่ชื่อโครงการ" required>
-                                </div><!-- /.form-group -->
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                              <div class="form-group">
-                                  <label for="property-type">ประเภทโครงการ</label>
-                                  <select name="type" id="property-type">
-                                      <?php while ($row_municipal = mysqli_fetch_array($result_type)) {
-                                          echo "<option value='" . $row_municipal['prop_type_id'] . "'>" . $row_municipal['prop_type_desc'] . "</option>";
-                                      } ?>
-                                  </select>
-                              </div><!-- /.form-group -->
-                            </div>
-                          </div>
-                          <div class="row">
-                              <div class="col-md-3 col-sm-3">
+                          <form role="form" id="property-municipals" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+                              <div class="row">
+                                <div class="col-md-8 col-sm-8">
+                                    <div class="form-group">
+                                        <label for="property-title">ชื่อโครงการ</label>
+                                        <input type="text" class="form-control" id="property-title" name="property-title" placeholder="ใส่ชื่อโครงการ" required>
+                                    </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
-                                      <label for="property-address-no">สถานที่ตั้ง เลขที่</label>
-                                      <input type="text" class="form-control" id="property-address-no" name="property-address-no">
+                                      <label for="property-type">ประเภทโครงการ</label>
+                                      <select id="property-type" name="property-type">
+                                          <?php while ($row_municipal = mysqli_fetch_array($result_type)) {
+                                              echo "<option value='" . $row_municipal['prop_type_id'] . "'>" . $row_municipal['prop_type_desc'] . "</option>";
+                                          } ?>
+                                      </select>
                                   </div><!-- /.form-group -->
-                              </div><!-- /.col-md-3 -->
-                              <div class="col-md-1 col-sm-1">
-                                  <div class="form-group">
-                                      <label for="property-address-moo">หมู่</label>
-                                      <input type="text" class="form-control" id="property-address-moo" name="property-address-moo">
-                                  </div><!-- /.form-group -->
-                              </div><!-- /.col-md-2 -->
-                              <div class="col-md-4 col-sm-4">
-                                  <div class="form-group">
-                                      <label for="property-address-road">ถนน</label>
-                                      <input type="text" class="form-control" id="property-address-road" name="property-address-road">
-                                  </div><!-- /.form-group -->
-                              </div><!-- /.col-md-3 -->
-                              <div class="col-md-4 col-sm-4">
-                                <div class="form-group">
-                                    <label for="property-municipal">เทศบาลที่ตั้งโครงการ</label>
-                                    <select name="type" id="property-municipal">
-                                        <?php while ($row_municipal = mysqli_fetch_array($result_municipal)) {
-                                            echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
-                                        } ?>
-                                    </select>
-                                </div><!-- /.form-group -->
-                              </div><!-- /.col-md-4 -->
-                          </div>
-                          <div class="row">
-                            <div class="col-md-4 col-sm-4">
-                              <div class="form-group">
-                                  <label for="property-subdistrict">ตำบล</label>
-                                  <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict">
-                              </div><!-- /.form-group -->
-                            </div>
-                            <div class="col-md-4 col-sm-4">
-                              <div class="form-group">
-                                  <label for="property-district">อำเภอ</label>
-                                  <input type="text" class="form-control" id="property-district" name="property-district">
-                              </div><!-- /.form-group -->
-                            </div>
-                            <div class="col-md-offset-4 col-sm-offset-4">
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-4 col-sm-4">
-                                <div class="form-group">
-                                    <label for="property-min-price">ราคาจำหน่ายต่ำสุด</label>
-                                    <div class="input-group">
-                                      <span class="input-group-addon">฿</span>
-                                      <input type="number" class="form-control" id="property-min-price" name="property-min-price" pattern="\d*" placeholder="0" value="0" required>
-                                    </div>
-                                </div><!-- /.form-group -->
-                            </div><!-- /.col-md-4 -->
-                            <div class="col-md-4 col-sm-4">
-                                <div class="form-group">
-                                    <label for="property-max-price">ราคาจำหน่ายสูงสุด</label>
-                                    <div class="input-group">
-                                      <span class="input-group-addon">฿</span>
-                                      <input type="number" class="form-control" id="property-max-price" name="property-max-price" pattern="\d*" placeholder="0" value="0" required>
-                                    </div>
-                                </div><!-- /.form-group -->
-                            </div><!-- /.col-md-4 -->
-                            <div class="col-md-4 col-sm-4">
-                              <div class="form-group">
-                                  <label for="property-status">สถานะการใช้งาน</label>
-                                  <select name="property-status" id="property-status">
-                                      <option value="1" selected>ใช้งานปกติ</option>
-                                      <option value="0">ยกเลิกการใช้งาน</option>
-                                  </select>
-                              </div><!-- /.form-group -->
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                              <section>
-                                  <div class="block clearfix">
-                                      <section id="place-on-map">
-                                          <label for="address-map">กำหนดตำแหน่งบนแผนที่</label>
-                                          <div id="submit-map"></div>
-                                          <div class="row">
-                                              <div class="col-md-5 col-sm-5">
-                                                  <div class="form-group">
-                                                      <input type="text" class="form-control" id="latitude" name="latitude" readonly>
-                                                  </div><!-- /.form-group -->
-                                              </div>
-                                              <div class="col-md-5 col-sm-5">
-                                                  <div class="form-group">
-                                                      <input type="text" class="form-control" id="longitude" name="longitude" readonly>
-                                                  </div><!-- /.form-group -->
-                                              </div>
-                                              <div class="col-md-2 col-sm-2">
-                                                <span class="link-arrow geo-location">ตำแหน่งปัจจุบัน</span>
-                                              </div>
-                                          </div>
-                                      </section><!-- /#place-on-map -->
-                                  </div><!-- /.block -->
-                              </section>
-                            </div>
-                          </div><!-- /.row -->
-                          <div class="row">
-                            <div class="col-md-12 col-sm-12">
-                              <section class="block" id="gallery">
-                                  <div class="center">
+                                </div>
+                              </div>
+                              <div class="row">
+                                  <div class="col-md-3 col-sm-3">
                                       <div class="form-group">
-                                          <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="เลือกรูปภาพ">
-                                      </div>
-                                  </div>
-                              </section>
-                              <hr />
-                            </div>
-                          </div><!-- /.row -->
-                          <div class="row">
-                              <div class="block">
-                                  <div class="col-md-12 col-sm-12">
+                                          <label for="property-address-no">สถานที่ตั้ง เลขที่</label>
+                                          <input type="text" class="form-control" id="property-address-no" name="property-address-no">
+                                      </div><!-- /.form-group -->
+                                  </div><!-- /.col-md-3 -->
+                                  <div class="col-md-1 col-sm-1">
+                                      <div class="form-group">
+                                          <label for="property-address-moo">หมู่</label>
+                                          <input type="text" class="form-control" id="property-address-moo" name="property-address-moo">
+                                      </div><!-- /.form-group -->
+                                  </div><!-- /.col-md-2 -->
+                                  <div class="col-md-4 col-sm-4">
+                                      <div class="form-group">
+                                          <label for="property-address-road">ถนน</label>
+                                          <input type="text" class="form-control" id="property-address-road" name="property-address-road">
+                                      </div><!-- /.form-group -->
+                                  </div><!-- /.col-md-3 -->
+                                  <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="property-municipal">เทศบาลที่ตั้งโครงการ</label>
+                                        <select name="property_municipal" id="property-municipal">
+                                            <?php while ($row_municipal = mysqli_fetch_array($result_municipal)) {
+                                                echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
+                                            } ?>
+                                        </select>
+                                    </div><!-- /.form-group -->
+                                  </div><!-- /.col-md-4 -->
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-subdistrict">ตำบล</label>
+                                      <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-district">อำเภอ</label>
+                                      <input type="text" class="form-control" id="property-district" name="property-district">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-offset-4 col-sm-offset-4">
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="property-min-price">ราคาจำหน่ายต่ำสุด</label>
+                                        <div class="input-group">
+                                          <span class="input-group-addon">฿</span>
+                                          <input type="number" class="form-control" id="property-min-price" name="property-min-price" pattern="\d*" placeholder="0" value="0" required>
+                                        </div>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col-md-4 -->
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="property-max-price">ราคาจำหน่ายสูงสุด</label>
+                                        <div class="input-group">
+                                          <span class="input-group-addon">฿</span>
+                                          <input type="number" class="form-control" id="property-max-price" name="property-max-price" pattern="\d*" placeholder="0" value="0" required>
+                                        </div>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col-md-4 -->
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-status">สถานะการใช้งาน</label>
+                                      <select name="property-status" id="property-status">
+                                          <option value="1" selected>ใช้งานปกติ</option>
+                                          <option value="0">ยกเลิกการใช้งาน</option>
+                                      </select>
+                                  </div><!-- /.form-group -->
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                  <section>
+                                      <div class="block clearfix">
+                                          <section id="place-on-map">
+                                              <label for="address-map">กำหนดตำแหน่งบนแผนที่</label>
+                                              <div id="submit-map"></div>
+                                              <div class="row">
+                                                  <div class="col-md-5 col-sm-5">
+                                                      <div class="form-group">
+                                                          <input type="text" class="form-control" id="latitude" name="latitude" readonly>
+                                                      </div><!-- /.form-group -->
+                                                  </div>
+                                                  <div class="col-md-5 col-sm-5">
+                                                      <div class="form-group">
+                                                          <input type="text" class="form-control" id="longitude" name="longitude" readonly>
+                                                      </div><!-- /.form-group -->
+                                                  </div>
+                                                  <div class="col-md-2 col-sm-2">
+                                                    <span class="link-arrow geo-location">ตำแหน่งปัจจุบัน</span>
+                                                  </div>
+                                              </div>
+                                          </section><!-- /#place-on-map -->
+                                      </div><!-- /.block -->
+                                  </section>
+                                </div>
+                              </div><!-- /.row -->
+                              <div class="row">
+                                <div class="col-md-12 col-sm-12">
+                                  <section class="block" id="gallery">
                                       <div class="center">
                                           <div class="form-group">
-                                              <button type="submit" class="btn btn-default large" name="property-submit">บันทึกโครงการ</button>
-                                          </div><!-- /.form-group -->
-                                          <!--<figure class="note block">By clicking the “Proceed to Payment” or “Submit” button you agree with our <a href="terms-conditions.html">Terms and conditions</a></figure>-->
+                                              <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="เลือกรูปภาพ">
+                                          </div>
+                                      </div>
+                                  </section>
+                                  <hr />
+                                </div>
+                              </div><!-- /.row -->
+                              <div class="row">
+                                  <div class="block">
+                                      <div class="col-md-12 col-sm-12">
+                                          <div class="center">
+                                              <div class="form-group">
+                                                  <button type="submit" class="btn btn-default large" name="property-submit">บันทึกโครงการ</button>
+                                              </div><!-- /.form-group -->
+                                              <!--<figure class="note block">By clicking the “Proceed to Payment” or “Submit” button you agree with our <a href="terms-conditions.html">Terms and conditions</a></figure>-->
+                                          </div>
                                       </div>
                                   </div>
                               </div>
+                          </form>
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="center-block">
+                                    <?php
+                                      if (isset($success)) {
+                                          if ($success) {
+                                              echo "<div class='alert alert-success text-center'>บันทึกข้อมูลเรียบร้อยแล้ว</div>";
+                                          } else {
+                                              echo "<div class='alert alert-danger text-center'>พบข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลได้</div>";
+                                          }
+                                      }
+                                    ?>
+                                </div>
+                            </div>
                           </div>
-
                         </div><!-- /.my-properties -->
                     </section><!-- /#my-properties -->
                 </div><!-- /.col-md-9 -->

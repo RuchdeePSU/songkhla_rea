@@ -7,6 +7,8 @@
 
     include_once 'assets/php/dbconnect.php';
     include_once 'assets/php/property.php';
+    include_once 'assets/php/property_type.php';
+    include_once 'assets/php/property_municipal.php';
 
     // get connection
     $database = new Database();
@@ -14,9 +16,12 @@
 
     // pass connection to property_types table
     $property = new Property($db);
+    $property_type = new Property_type($db);
+    $property_municipal = new Property_municipal($db);
 
     // read all records
-    $result = $property->readall();
+    $active = false;
+    $result = $property->readall($active);
 
     if (isset($_GET['id'])) {
         $property->prop_id = $_GET['id'];
@@ -149,15 +154,31 @@
                                     <tbody>
                                     <?php while ($row = mysqli_fetch_array($result)) { ?>
                                     <tr>
-                                        <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_municipal_desc']; ?></td>
-                                        <td><?php if ($row['prop_municipal_status']) {
+                                        <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_name']; ?></td>
+                                        <td>
+                                        <?php
+                                            $property_type->prop_type_id = $row['prop_type_id'];
+                                            $result_prop_type = $property_type->readone();
+                                            $row_prop_type = mysqli_fetch_array($result_prop_type);
+                                            echo $row_prop_type['prop_type_desc'];
+                                        ?>
+                                        </td>
+                                        <td>
+                                        <?php
+                                            $property_municipal->prop_municipal_id = $row['prop_municipal_id'];
+                                            $result_prop_municipal = $property_municipal->readone();
+                                            $row_prop_municipal = mysqli_fetch_array($result_prop_municipal);
+                                            echo $row_prop_municipal['prop_municipal_desc'];
+                                        ?>
+                                        </td>
+                                        <td><?php if ($row['prop_status']) {
                                             echo "ใช้งานปกติ";
                                         } else { echo "ยกเลิกการใช้งาน"; } ?></td>
                                         <td class="center">
                                             <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
                                         </td>
                                         <td class="center">
-                                            <a href="#" class="delete" data-href="property-municipals-listing.php?id=<?php echo $row['prop_municipal_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" class="delete" data-href="properties-listing.php?id=<?php echo $row['prop_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <?php } ?>
