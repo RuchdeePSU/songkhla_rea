@@ -121,11 +121,11 @@ class Property{
                 $this->prop_icon_type = "assets/img/property-types/single-family.png";
                 break;
         }
-        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_type_id = ?, prop_municipal_id = ?, prop_lat = ?, prop_long = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_icon_type = ?, prop_min_price = ?, prop_max_price = ?, prop_status = ?, prop_created_date = ?";
+        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_type_id = ?, prop_municipal_id = ?, prop_lat = ?, prop_long = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_icon_type = ?, prop_min_price = ?, prop_max_price = ?, prop_status = ? WHERE prop_id = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'sssssssssssssssss', $this->prop_name, $this->prop_address, $this->prop_type_id, $this->prop_municipal_id, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_min_price, $this->prop_max_price, $this->prop_status, $this->prop_created_date);
+        mysqli_stmt_bind_param($stmt, 'sssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_type_id, $this->prop_municipal_id, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_min_price, $this->prop_max_price, $this->prop_status, $this->prop_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {

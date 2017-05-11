@@ -23,8 +23,8 @@
     $active = false;
     $result = $property->readall($active);
 
-    if (isset($_GET['id'])) {
-        $property->prop_id = $_GET['id'];
+    if (isset($_GET['property_id'])) {
+        $property->prop_id = $_GET['property_id'];
         if ($property->delete()) {
             header("Location: properties-listing.php");
         }
@@ -175,10 +175,10 @@
                                             echo "ใช้งานปกติ";
                                         } else { echo "ยกเลิกการใช้งาน"; } ?></td>
                                         <td class="center">
-                                            <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="properties-update.php?property_id=<?php echo $row['prop_id']; ?>" class="edit"><i class="fa fa-pencil"></i></a>
                                         </td>
                                         <td class="center">
-                                            <a href="#" class="delete" data-href="properties-listing.php?id=<?php echo $row['prop_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" class="delete" data-href="properties-listing.php?property_id=<?php echo $row['prop_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <?php } ?>
