@@ -20,7 +20,7 @@ class Admin{
 
         // write statement
         $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (email, passwd, name, status) VALUES (?,?,?,?)");
-        mysqli_stmt_bind_param($stmt, 'ssss', $this->email, $this->passwd, $this->name, $this->status);
+        mysqli_stmt_bind_param($stmt, 'ssss', $this->email, md5($this->passwd), $this->name, $this->status);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -39,19 +39,42 @@ class Admin{
 
     // read one record
     function readone(){
-        $query = "SELECT * FROM " . $this->table_name . " WHERE email = " . $this->email . " and passwd = " . $this->passwd;
+        //$query = "SELECT * FROM " . $this->table_name . " WHERE email = " . $this->email . " and passwd = " . $this->passwd;
         $query = "SELECT * FROM " . $this->table_name . " WHERE email = '" . $this->email . "' and passwd = '" . md5($this->passwd) . "' and status = 1";
         $result = mysqli_query($this->conn, $query);
         return $result;
     }
 
-    // update record
-    function update(){
-        $query = "UPDATE " . $this->table_name . " SET passwd = ?, name = ?, status = ? WHERE email = ?";
+    // read one record for update
+    function readoneforupdate(){
+        $query = "SELECT * FROM " . $this->table_name . " WHERE email = '" . $this->email . "'";
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
+    // update record - account
+    function update_account(){
+        $query = "UPDATE " . $this->table_name . " SET name = ?, status = ? WHERE email = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ssss', $this->passwd, $this->name, $this->status, $this->email);
+        mysqli_stmt_bind_param($stmt, 'sss', $this->name, $this->status, $this->email);
+
+        /* execute prepared statement */
+        if (mysqli_stmt_execute($stmt)) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    // update record - password
+    function update_password(){
+        $query = "UPDATE " . $this->table_name . " SET passwd = ? WHERE email = ?";
+        // statement
+        $stmt = mysqli_prepare($this->conn, $query);
+        // bind parameters
+        mysqli_stmt_bind_param($stmt, 'ss', md5($this->passwd), $this->email);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {

@@ -4,6 +4,46 @@
     if (!isset($_SESSION['email'])) {
         header("Location: index.php");
     }
+
+    include_once 'assets/php/dbconnect.php';
+    include_once 'assets/php/admin.php';
+
+    // get connection
+    $database = new Database();
+    $db = $database->getConnection();
+
+    // pass connection to admin table
+    $admin = new Admin($db);
+    $admin->email = $_SESSION['email'];
+    $result = $admin->readoneforupdate();
+    $row = mysqli_fetch_array($result);
+
+    // form is submitted
+    if (isset($_POST['account-submit'])) {
+        $admin->name = $_POST['form-account-name'];
+        $admin->status = 1;
+        //$admin->email = $_POST['form-account-email'];
+
+        if ($admin->update_account()) {
+            $success_update_account = true;
+            $_SESSION['name'] = $_POST['form-account-name'];
+        } else {
+            $success_update_account = false;
+        }
+    }
+
+    // form is submitted
+    if (isset($_POST['form-password-submit'])) {
+        $admin->passwd = $_POST['form-password-new'];
+        //$admin->email = $_POST['form-account-email'];
+
+        if ($admin->update_password()) {
+            header("Location: assets/php/sign-out.php");
+        } else {
+            $success_update_passwd = false;
+        }
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -22,7 +62,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .btn { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn, strong, ul { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลผู้ใช้งาน</title>
@@ -119,23 +159,34 @@
                                     <img alt="" class="image" src="assets/img/agent-01.jpg">
                                 </div> -->
                                 <div class="col-md-6 col-sm-6">
-                                    <form role="form" id="form-account-profile" method="post" >
+                                    <form role="form" id="form-account-profile" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
                                         <section id="contact">
                                             <div class="form-group">
                                                 <label for="form-account-email">อีเมล</label>
-                                                <input type="text" class="form-control" id="form-account-email" name="form-account-phone" placeholder="email@example.com" value="<?php echo $_SESSION['email']; ?>" readonly>
+                                                <input type="text" class="form-control" id="form-account-email" name="form-account-email" placeholder="email@example.com" value="<?php echo $_SESSION['email']; ?>" readonly>
                                             </div><!-- /.form-group -->
                                             <div class="form-group">
                                                 <label for="form-account-name">ชื่อผู้ใช้งาน</label>
-                                                <input type="text" class="form-control" id="form-account-name" name="form-account-name" required placeholder="Your name" value="<?php echo $_SESSION['name']; ?>">
+                                                <input type="text" class="form-control" id="form-account-name" name="form-account-name" required placeholder="Your name" value="<?php echo $_SESSION['name']; ?>" required>
                                             </div><!-- /.form-group -->
                                             <div class="form-group clearfix">
-                                                <button type="submit" class="btn pull-right btn-default" id="account-submit">บันทึกการแก้ไข</button>
+                                                <button type="submit" class="btn pull-right btn-default" id="account-submit" name="account-submit">บันทึกการแก้ไข</button>
                                             </div><!-- /.form-group -->
                                         </section>
                                     </form><!-- /#form-contact -->
                                 </div><!-- /.col-md-9 -->
-                                <div class="col-md-offset-6 col-sm-offset-6">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="center-block">
+                                        <?php
+                                          if (isset($success_update_account)) {
+                                              if ($success_update_account) {
+                                                  echo "<div class='alert alert-success text-center'>บันทึกข้อมูลเรียบร้อยแล้ว</div>";
+                                              } else {
+                                                  echo "<div class='alert alert-danger text-center'>พบข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลได้</div>";
+                                              }
+                                          }
+                                        ?>
+                                    </div>
                                 </div>
                             </div><!-- /.row -->
                             <div class="row">
@@ -144,29 +195,41 @@
                                     <header><h2>แก้ไขรหัสผ่าน</h2></header>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
-                                            <form role="form" id="form-account-password" method="post" >
+                                            <form role="form" id="form-password" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
                                                 <div class="form-group">
-                                                    <label for="form-account-password-current">รหัสผ่านปัจจุบัน</label>
-                                                    <input type="password" class="form-control" id="form-account-password-current" name="form-account-password-current">
+                                                    <label for="form-password-current">รหัสผ่านปัจจุบัน</label>
+                                                    <input type="password" class="form-control" id="form-password-current" name="form-password-current" maxlength="16" onkeyup="validateCurrentPass('<?php echo $row['passwd']; ?>')" required>
                                                 </div><!-- /.form-group -->
                                                 <div class="form-group">
-                                                    <label for="form-account-password-new">รหัสผ่านใหม่</label>
-                                                    <input type="password" class="form-control" id="form-account-password-new" name="form-account-password-new">
+                                                    <label for="form-password-new">รหัสผ่านใหม่</label>
+                                                    <input type="password" class="form-control" id="form-password-new" name="form-password-new" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" maxlength="16" required>
                                                 </div><!-- /.form-group -->
                                                 <div class="form-group">
-                                                    <label for="form-account-password-confirm-new">ยืนยันรหัสผ่านใหม่</label>
-                                                    <input type="password" class="form-control" id="form-account-password-confirm-new" name="form-account-password-confirm-new">
+                                                    <label for="form-password-confirm">ยืนยันรหัสผ่านใหม่</label>
+                                                    <input type="password" class="form-control" id="form-password-confirm" name="form-password-confirm" maxlength="16" required>
                                                 </div><!-- /.form-group -->
                                                 <div class="form-group clearfix">
-                                                    <button type="submit" class="btn btn-default" id="form-account-password-submit">บันทึกรหัสผ่านใหม่</button>
+                                                    <button type="submit" class="btn btn-default" id="form-password-submit" name="form-password-submit">บันทึกรหัสผ่านใหม่</button>
                                                 </div><!-- /.form-group -->
                                             </form><!-- /#form-account-password -->
                                         </div>
                                         <div class="col-md-6 col-sm-6">
-                                            <strong>คำแนะนำ:</strong>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui
-                                                vestibulum, bibendum purus sit amet, vulputate mauris.
-                                            </p>
+                                            <strong>คำแนะนำ: รหัสผ่านต้องประกอบด้วย</strong>
+                                            <ul>
+                                                <li>ตัวเลขอย่างน้อย 1 ตัว</li>
+                                                <li>ตัวอักษรภาษาอังกฤษตัวใหญ่อย่างน้อย 1 ตัว</li>
+                                                <li>ตัวอักษรภาษาอังกฤษตัวเล็กอย่างน้อย 1 ตัว</li>
+                                                <li>รหัสผ่านต้องมีความยาวไม่น้อยกว่า 8 ตัวอักษร</li>
+                                            </ul>
+                                            <div class="center-block">
+                                                <?php
+                                                  if (isset($success_update_passwd)) {
+                                                      if (!$success_update_passwd) {
+                                                          echo "<div class='alert alert-danger text-center'>พบข้อผิดพลาด! ไม่สามารถบันทึกรหัสผ่านใหม่ได้</div>";
+                                                      }
+                                                  }
+                                                ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </section>
@@ -248,9 +311,34 @@
 <script type="text/javascript" src="assets/js/icheck.min.js"></script>
 <script type="text/javascript" src="assets/js/retina-1.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/custom.js"></script>
+<script type="text/javascript" src="assets/js/md5.min.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
+<script>
+    var password = document.getElementById("form-password-new"),
+        confirm_password = document.getElementById("form-password-confirm");
+
+    function validatePassword(){
+      if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("ยืนยันรหัสผ่านไม่ตรงกัน!");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+
+    function validateCurrentPass(cpassword1) {
+        var cpassword2 = document.getElementById("form-password-current");
+        if (cpassword1 != md5(cpassword2.value)) {
+            cpassword2.setCustomValidity("รหัสผ่านปัจจุบันไม่ถูกต้อง!");
+        } else {
+            cpassword2.setCustomValidity("");
+        }
+    }
+</script>
 
 </body>
 </html>

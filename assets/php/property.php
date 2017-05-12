@@ -185,6 +185,7 @@ class Property{
                 }
 
                 $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($row['prop_min_price']) . '-' . '฿' .  number_format($row['prop_max_price']) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '"' . ']';
+
                 if ($cnt == $nor) {
                      $strdata .= "\n];";
                  } else {

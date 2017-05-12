@@ -6,7 +6,7 @@
       //session_unset();
       unset($_SESSION['email']);
       unset($_SESSION['name']);
-      header("Location: ../../index.php");
+      header("Location: ../../sign-in.php");
     } else {
       header("Location: ../../index.php");
     }
