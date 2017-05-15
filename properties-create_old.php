@@ -71,28 +71,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
         h1, h2, h3, h4, h5, h6, legend, a, .btn, label, .geo-location, ul { font-family: 'Pridi', serif; }
-
-        .form-group input[type="checkbox"] {
-    display: none;
-}
-
-.form-group input[type="checkbox"] + .btn-group > label span {
-    width: 20px;
-}
-
-.form-group input[type="checkbox"] + .btn-group > label span:first-child {
-    display: none;
-}
-.form-group input[type="checkbox"] + .btn-group > label span:last-child {
-    display: inline-block;
-}
-
-.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
-    display: inline-block;
-}
-.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
-    display: none;
-}
     </style>
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลโครงการ</title>
 
@@ -304,79 +282,6 @@
                                   </section>
                                 </div>
                               </div><!-- /.row -->
-
-
-
-                              <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                  <section id="property-type-details">
-                                      <header><h2>ประเภทโครงการ</h2></header>
-                                      <div class="row">
-                                          <div class="col-md-12 col-sm-12">
-                                              <div class="form-group">
-                                                  <label data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                                  <input type="checkbox" name="fancy-checkbox-primary" id="fancy-checkbox-primary" autocomplete="off" />
-                                                  <div class="btn-group">
-                                                    <label for="fancy-checkbox-primary" class="btn btn-primary">
-                                                        <span class="glyphicon glyphicon-ok"></span>
-                                                        <span> </span>
-                                                    </label>
-                                                    <label for="fancy-checkbox-primary" class="btn btn-default active">บ้านเดี่ยว</label>
-                                                  </div>
-                                              </div>
-                                              <div id="collapseOne" aria-expanded="false" class="collapse">
-                                                <div class="col-md-4 col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="property-min-price">ราคาจำหน่ายต่ำสุด</label>
-                                                        <div class="input-group">
-                                                          <span class="input-group-addon">฿</span>
-                                                          <input type="number" class="form-control" id="property-min-price" name="property-min-price" pattern="\d*" placeholder="0">
-                                                        </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
-                                                <div class="col-md-4 col-sm-4">
-                                                    <div class="form-group">
-                                                        <label for="property-max-price">ราคาจำหน่ายสูงสุด</label>
-                                                        <div class="input-group">
-                                                          <span class="input-group-addon">฿</span>
-                                                          <input type="number" class="form-control" id="property-max-price" name="property-max-price" pattern="\d*" placeholder="0">
-                                                        </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
-                                                <div class="col-md-offset-4 col-sm-offset-4">
-                                                </div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                      <div class="row well-sm">
-                                          <div class="col-md-12 col-sm-12">
-                                              <div class="form-group">
-                                                  <div class="checkbox">
-                                                    <label data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                      <input type="checkbox"/> บ้านเดี่ยว
-                                                    </label>
-                                                  </div>
-                                              </div>
-                                              <div id="collapseTwo" aria-expanded="false" class="collapse">
-                                                <div class="well">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe ut molestias eius, nam neque esse eos modi corrupti harum fugit, hic recusandae praesentium, minima ipsa eligendi architecto at! Culpa, explicabo.</div>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </section><!-- /#place-on-map -->
-                                </div>
-                              </div><!-- /.row -->
-
-
-
-
-
-
-
-
-
-
-
-
                               <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                   <section class="block" id="gallery">
@@ -485,9 +390,7 @@
 <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
-<!--
 <script type="text/javascript" src="assets/js/icheck.min.js"></script>
--->
 <script type="text/javascript" src="assets/js/retina-1.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript" src="assets/js/fileinput.min.js"></script>

@@ -98,7 +98,7 @@ function createHomepageGoogleMap(_latitude,_longitude){
                         // markerCluster.setMap(map);
                     } else {
                         // newMarkers[i].setVisible(false); // <- Uncomment this line to use dynamic displaying of markers
-                         
+
                         // newMarkers[i].setMap(null);
                         // markerCluster.setMap(null);
                     }
