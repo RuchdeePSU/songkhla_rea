@@ -23,6 +23,8 @@
     // pass connection to property_type table
     $prop_type = new Property_type($db);
     $result_type = $prop_type->readall($active);
+    $result_type2 = $prop_type->readall($active);
+    $result_type3 = $prop_type->readall($active);
 
     // form is submitted
     if (isset($_POST['property-submit'])) {
@@ -71,28 +73,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
         h1, h2, h3, h4, h5, h6, legend, a, .btn, label, .geo-location, ul { font-family: 'Pridi', serif; }
-
-        .form-group input[type="checkbox"] {
-    display: none;
-}
-
-.form-group input[type="checkbox"] + .btn-group > label span {
-    width: 20px;
-}
-
-.form-group input[type="checkbox"] + .btn-group > label span:first-child {
-    display: none;
-}
-.form-group input[type="checkbox"] + .btn-group > label span:last-child {
-    display: inline-block;
-}
-
-.form-group input[type="checkbox"]:checked + .btn-group > label span:first-child {
-    display: inline-block;
-}
-.form-group input[type="checkbox"]:checked + .btn-group > label span:last-child {
-    display: none;
-}
     </style>
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลโครงการ</title>
 
@@ -195,8 +175,8 @@
                                   <div class="form-group">
                                       <label for="property-type">ประเภทโครงการ</label>
                                       <select id="property-type" name="property-type">
-                                          <?php while ($row_municipal = mysqli_fetch_array($result_type)) {
-                                              echo "<option value='" . $row_municipal['prop_type_id'] . "'>" . $row_municipal['prop_type_desc'] . "</option>";
+                                          <?php while ($row_type = mysqli_fetch_array($result_type)) {
+                                              echo "<option value='" . $row_type['prop_type_id'] . "'>" . $row_type['prop_type_desc'] . "</option>";
                                           } ?>
                                       </select>
                                   </div><!-- /.form-group -->
@@ -311,6 +291,7 @@
                                 <div class="col-md-12 col-sm-12">
                                   <section id="property-type-details">
                                       <header><h2>ประเภทโครงการ</h2></header>
+                                      <!--
                                       <div class="row">
                                           <div class="col-md-12 col-sm-12">
                                               <div class="form-group">
@@ -332,8 +313,8 @@
                                                           <span class="input-group-addon">฿</span>
                                                           <input type="number" class="form-control" id="property-min-price" name="property-min-price" pattern="\d*" placeholder="0">
                                                         </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
+                                                    </div
+                                                </div>
                                                 <div class="col-md-4 col-sm-4">
                                                     <div class="form-group">
                                                         <label for="property-max-price">ราคาจำหน่ายสูงสุด</label>
@@ -341,8 +322,8 @@
                                                           <span class="input-group-addon">฿</span>
                                                           <input type="number" class="form-control" id="property-max-price" name="property-max-price" pattern="\d*" placeholder="0">
                                                         </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
+                                                    </div>
+                                                </div>
                                                 <div class="col-md-offset-4 col-sm-offset-4">
                                                 </div>
                                               </div>
@@ -362,18 +343,65 @@
                                               </div>
                                           </div>
                                       </div>
-                                  </section><!-- /#place-on-map -->
+                                      -->
+                                      <ul class="nav nav-tabs">
+                                        <?php
+                                            $cnt = 0;
+                                            while ($row_type2 = mysqli_fetch_array($result_type2)) {
+                                                $cnt += 1;
+                                                if ($cnt == 1) {
+                                                    echo "<li class='active'><a data-toggle='tab' href='#tab" . $row_type2['prop_type_id'] . "'>" . $row_type2['prop_type_desc'] . "</a></li>";
+                                                } else {
+                                                    echo "<li><a data-toggle='tab' href='#tab" . $row_type2['prop_type_id'] . "'>" . $row_type2['prop_type_desc'] . "</a></li>";
+                                                }
+                                            }
+                                        ?>
+                                      </ul>
+
+                                      <div class="tab-content">
+                                        <?php $cnt = 0; ?>
+                                        <?php while ($row_type3 = mysqli_fetch_array($result_type3)) { ?>
+                                            <?php $cnt++; ?>
+                                            <div id="<?php echo "tab" . $row_type3['prop_type_id']; ?>" class="<?php if ($cnt == 1) {
+                                                    echo "tab-pane fade in active";
+                                                } else {
+                                                    echo "tab-pane fade";
+                                                } ?>">
+                                              <div class="row"><br />
+                                                <div class="col-md-4 col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="property-min-price">ราคาจำหน่ายต่ำสุด</label>
+                                                        <div class="input-group">
+                                                          <span class="input-group-addon">฿</span>
+                                                          <input type="number" class="form-control" id="property-min-price" name="property-min-price" pattern="\d*" placeholder="0">
+                                                        </div>
+                                                    </div><!-- /.form-group -->
+                                                </div><!-- /.col-md-4 -->
+                                                <div class="col-md-4 col-sm-4">
+                                                    <div class="form-group">
+                                                        <label for="property-max-price">ราคาจำหน่ายสูงสุด</label>
+                                                        <div class="input-group">
+                                                          <span class="input-group-addon">฿</span>
+                                                          <input type="number" class="form-control" id="property-max-price" name="property-max-price" pattern="\d*" placeholder="0">
+                                                        </div>
+                                                    </div><!-- /.form-group -->
+                                                </div><!-- /.col-md-4 -->
+                                                <div class="col-md-4 col-sm-4">
+                                                  <div class="form-group">
+                                                      <label for="property-status">สถานะการใช้งาน</label>
+                                                      <select name="property-status" id="property-status">
+                                                          <option value="1" selected>ใช้งานปกติ</option>
+                                                          <option value="0">ยกเลิกการใช้งาน</option>
+                                                      </select>
+                                                  </div><!-- /.form-group -->
+                                                </div>
+                                              </div><hr />
+                                            </div>
+                                        <?php } ?>
+                                      </div>
+                                  </section>
                                 </div>
-                              </div><!-- /.row -->
-
-
-
-
-
-
-
-
-
+                              </div>
 
 
 
