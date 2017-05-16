@@ -53,7 +53,7 @@ class Property_type{
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ss', $this->prop_type_desc, $this->prop_type_status, $this->prop_type_id);
+        mysqli_stmt_bind_param($stmt, 'sss', $this->prop_type_desc, $this->prop_type_status, $this->prop_type_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {

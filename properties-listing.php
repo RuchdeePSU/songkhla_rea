@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email'])) {
-        header("Location: index.php");
+        header("Location: sign-in.php");
     }
 
     include_once 'assets/php/dbconnect.php';

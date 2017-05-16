@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email'])) {
-        header("Location: index.php");
+        header("Location: sign-in.php");
     }
 
     include_once 'assets/php/dbconnect.php';
@@ -20,8 +20,8 @@
     // read all records
     $result = $property_type->readall($active);
 
-    if (isset($_GET['id'])) {
-        $property_type->prop_type_id = $_GET['id'];
+    if (isset($_GET['type_id'])) {
+        $property_type->prop_type_id = $_GET['type_id'];
         if ($property_type->delete()) {
             header("Location: property-types-listing.php");
         }
@@ -154,10 +154,10 @@
                                             echo "ใช้งานปกติ";
                                         } else { echo "ยกเลิกการใช้งาน"; } ?></td>
                                         <td class="center">
-                                            <a href="#" class="edit"><i class="fa fa-pencil"></i></a>
+                                            <a href="property-types-update.php?type_id=<?php echo $row['prop_type_id']; ?>" class="edit"><i class="fa fa-pencil"></i></a>
                                         </td>
                                         <td class="center">
-                                            <a href="#" class="delete disabled" data-href="property-types-listing.php?id=<?php echo $row['prop_type_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+                                            <a href="#" class="delete disabled" data-href="property-types-listing.php?type_id=<?php echo $row['prop_type_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
                                         </td>
                                     </tr>
                                     <?php } ?>

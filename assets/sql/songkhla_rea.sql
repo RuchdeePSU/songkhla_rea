@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 09, 2017 at 02:37 PM
+-- Generation Time: May 16, 2017 at 01:53 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -34,17 +34,33 @@ CREATE TABLE `properties` (
   `prop_address_road` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prop_address_subdistrict` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prop_address_district` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `prop_type_id` int(11) NOT NULL,
   `prop_municipal_id` int(11) NOT NULL,
   `prop_lat` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `prop_long` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `prop_detail_link` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `prop_thumbnail_img` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `prop_icon_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `prop_min_price` decimal(10,0) NOT NULL DEFAULT '0',
-  `prop_max_price` decimal(10,0) NOT NULL DEFAULT '0',
   `prop_status` tinyint(1) NOT NULL DEFAULT '1',
   `prop_created_date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `property_details`
+--
+
+CREATE TABLE `property_details` (
+  `prop_id` int(11) NOT NULL,
+  `prop_type_id` int(11) NOT NULL,
+  `total_units` smallint(6) NOT NULL,
+  `units_sold` smallint(6) NOT NULL,
+  `units_sold_avg` smallint(6) NOT NULL,
+  `units_unsold` smallint(6) NOT NULL,
+  `time_unsold_avg` tinyint(4) NOT NULL,
+  `units_new_6m` smallint(6) NOT NULL,
+  `prop_min_price` int(11) NOT NULL,
+  `prop_max_price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -86,8 +102,16 @@ CREATE TABLE `property_types` (
 --
 
 INSERT INTO `property_types` (`prop_type_id`, `prop_type_desc`, `prop_type_status`) VALUES
-(1, 'à¸šà¹‰à¸²à¸™à¹€à¸”à¸µà¹ˆà¸¢à¸§', 1),
-(2, 'à¸šà¹‰à¸²à¸™à¹à¸à¸”', 1);
+(1, 'à¸šà¹‰à¸²à¸™à¹€à¸”à¸µà¹ˆà¸¢à¸§ 1 à¸Šà¸±à¹‰à¸™', 1),
+(2, 'à¸šà¹‰à¸²à¸™à¹€à¸”à¸µà¹ˆà¸¢à¸§ 2 à¸Šà¸±à¹‰à¸™', 1),
+(3, 'à¸šà¹‰à¸²à¸™à¹à¸à¸” 1 à¸Šà¸±à¹‰à¸™', 1),
+(4, 'à¸šà¹‰à¸²à¸™à¹à¸à¸” 2 à¸Šà¸±à¹‰à¸™', 1),
+(5, 'à¸—à¸²à¸§à¸™à¹Œà¹€à¸®à¸²à¸ªà¹Œ+à¸—à¸²à¸§à¸™à¹Œà¹‚à¸®à¸¡ 2 à¸Šà¸±à¹‰à¸™', 1),
+(6, 'à¸—à¸²à¸§à¸™à¹Œà¹€à¸®à¸²à¸ªà¹Œ+à¸—à¸²à¸§à¸™à¹Œà¹‚à¸®à¸¡ à¸¡à¸²à¸à¸à¸§à¹ˆà¸² 2 à¸Šà¸±à¹‰à¸™', 1),
+(7, 'à¸­à¸²à¸„à¸²à¸£à¸žà¸²à¸“à¸´à¸Šà¸¢à¹Œ 2 à¸Šà¸±à¹‰à¸™', 1),
+(8, 'à¸­à¸²à¸„à¸²à¸£à¸žà¸²à¸“à¸´à¸Šà¸¢à¹Œ à¸¡à¸²à¸à¸à¸§à¹ˆà¸² 2 à¸Šà¸±à¹‰à¸™', 1),
+(9, 'à¸„à¸­à¸™à¹‚à¸”à¸¡à¸´à¹€à¸™à¸µà¸¢à¸¡', 1),
+(10, 'à¸­à¸·à¹ˆà¸™à¹†', 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +131,7 @@ CREATE TABLE `tbl_admin` (
 --
 
 INSERT INTO `tbl_admin` (`email`, `passwd`, `name`, `status`) VALUES
-('ruchdee.b@psu.ac.th', '25d55ad283aa400af464c76d713c07ad', 'Ruchdee Binmad', 1);
+('psu.songkhlarea@gmail.com', '25d55ad283aa400af464c76d713c07ad', 'Songkhla REA', 1);
 
 --
 -- Indexes for dumped tables
@@ -117,7 +141,13 @@ INSERT INTO `tbl_admin` (`email`, `passwd`, `name`, `status`) VALUES
 -- Indexes for table `properties`
 --
 ALTER TABLE `properties`
-  ADD PRIMARY KEY (`prop_id`),
+  ADD PRIMARY KEY (`prop_id`);
+
+--
+-- Indexes for table `property_details`
+--
+ALTER TABLE `property_details`
+  ADD KEY `prop_id` (`prop_id`),
   ADD KEY `prop_type_id` (`prop_type_id`);
 
 --
@@ -156,16 +186,17 @@ ALTER TABLE `property_municipals`
 -- AUTO_INCREMENT for table `property_types`
 --
 ALTER TABLE `property_types`
-  MODIFY `prop_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `prop_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `properties`
+-- Constraints for table `property_details`
 --
-ALTER TABLE `properties`
-  ADD CONSTRAINT `properties_ibfk_1` FOREIGN KEY (`prop_type_id`) REFERENCES `property_types` (`prop_type_id`);
+ALTER TABLE `property_details`
+  ADD CONSTRAINT `property_details_ibfk_1` FOREIGN KEY (`prop_id`) REFERENCES `properties` (`prop_id`),
+  ADD CONSTRAINT `property_details_ibfk_2` FOREIGN KEY (`prop_type_id`) REFERENCES `property_types` (`prop_type_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

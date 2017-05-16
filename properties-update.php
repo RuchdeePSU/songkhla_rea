@@ -2,7 +2,7 @@
     session_start();
 
     if (!isset($_SESSION['email'])) {
-        header("Location: index.php");
+        header("Location: sign-in.php");
     }
 
     if (isset($_GET['property_id'])) {
@@ -49,7 +49,7 @@
           $property->prop_status = $_POST['property-status'];
           $property->prop_id = $_GET['property_id'];
 
-          // insert
+          // update
           if ($property->update()) {
               //$success = true;
               header("Location: properties-listing.php");
