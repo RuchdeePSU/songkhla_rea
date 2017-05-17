@@ -144,8 +144,9 @@
                                     <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th>
-                                        <th>ประเภทโครงการ</th>
                                         <th>เทศบาล</th>
+                                        <th>อำเภอ</th>
+                                        <th>วันที่บันทึกข้อมูล</th>
                                         <th>สถานะ</th>
                                         <th class="center">แก้ไขข้อมูล</th>
                                         <th class="center">ลบข้อมูล</th>
@@ -157,20 +158,14 @@
                                         <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_name']; ?></td>
                                         <td>
                                         <?php
-                                            $property_type->prop_type_id = $row['prop_type_id'];
-                                            $result_prop_type = $property_type->readone();
-                                            $row_prop_type = mysqli_fetch_array($result_prop_type);
-                                            echo $row_prop_type['prop_type_desc'];
-                                        ?>
-                                        </td>
-                                        <td>
-                                        <?php
                                             $property_municipal->prop_municipal_id = $row['prop_municipal_id'];
                                             $result_prop_municipal = $property_municipal->readone();
                                             $row_prop_municipal = mysqli_fetch_array($result_prop_municipal);
                                             echo $row_prop_municipal['prop_municipal_desc'];
                                         ?>
                                         </td>
+                                        <td><?php echo $row['prop_address_district']; ?></td>
+                                        <td><?php echo $row['prop_created_date']; ?></td>
                                         <td><?php if ($row['prop_status']) {
                                             echo "ใช้งานปกติ";
                                         } else { echo "ยกเลิกการใช้งาน"; } ?></td>

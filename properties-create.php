@@ -7,6 +7,7 @@
 
     include_once 'assets/php/dbconnect.php';
     include_once 'assets/php/property.php';
+    include_once 'assets/php/property_detail.php';
     include_once 'assets/php/property_municipal.php';
     include_once 'assets/php/property_type.php';
 
@@ -25,6 +26,7 @@
     $result_type = $prop_type->readall($active);
     $result_type2 = $prop_type->readall($active);
     $result_type3 = $prop_type->readall($active);
+    $result_type4 = $prop_type->readall($active);
 
     // form is submitted
     if (isset($_POST['property-submit'])) {
@@ -36,18 +38,39 @@
         $property->prop_address_road = $_POST['property-address-road'];
         $property->prop_address_subdistrict = $_POST['property-subdistrict'];
         $property->prop_address_district = $_POST['property-district'];
-        $property->prop_type_id = $_POST['property-type'];
         $property->prop_municipal_id = $_POST['property_municipal'];
         $property->prop_lat = $_POST['latitude'];
         $property->prop_long = $_POST['longitude'];
-        $property->prop_min_price = $_POST['property-min-price'];
-        $property->prop_max_price = $_POST['property-max-price'];
         $property->prop_status = $_POST['property-status'];
         $property->prop_created_date = date("Y/m/d");
 
-        // insert
+        // insert into properties table
         if ($property->create()) {
-            $success = true;
+            // pass connection to property_details table
+            $property_detail = new Property_detail($db);
+            // get last prop_id
+            $property_detail->prop_id = $property->getlastproperty_id();
+
+            while ($row_type4 = mysqli_fetch_array($result_type4)) {
+                $property_detail->prop_type_id = $row_type4['prop_type_id'];
+                $property_detail->units_total = $_POST['units-total-' . $row_type4['prop_type_id']];
+                $property_detail->units_sold = $_POST['units-sold-' . $row_type4['prop_type_id']];
+                $property_detail->units_sold_avg = $_POST['units-sold-avg-' . $row_type4['prop_type_id']];
+                $property_detail->units_unsold = $_POST['units-unsold-' . $row_type4['prop_type_id']];
+                $property_detail->time_unsold_avg = $_POST['time-unsold-avg-' . $row_type4['prop_type_id']];
+                $property_detail->units_new_6m = $_POST['units-new-6m-' . $row_type4['prop_type_id']];
+                $property_detail->prop_min_price = $_POST['min-price-' . $row_type4['prop_type_id']];
+                $property_detail->prop_max_price = $_POST['max-price-' . $row_type4['prop_type_id']];
+
+                // insert into property_details table
+                if ($property_detail->create()) {
+                    $success = true;
+                }else {
+                    $success = false;
+                    break;
+                }
+            }
+
         } else {
             $success = false;
         }
@@ -283,10 +306,10 @@
                                               <div class="row"><br />
                                                 <div class="col-md-3 col-sm-3">
                                                     <div class="form-group">
-                                                        <label for="<?php echo "total-units-" . $row_type3['prop_type_id']; ?>">จำนวนยูนิตทั้งหมดของโครงการ</label>
+                                                        <label for="<?php echo "units-total-" . $row_type3['prop_type_id']; ?>">จำนวนยูนิตทั้งหมดของโครงการ</label>
                                                         <div class="input-group">
                                                           <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                                          <input type="number" class="form-control" id="<?php echo "total-units-" . $row_type3['prop_type_id']; ?>" name="<?php echo "total-units-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
+                                                          <input type="number" class="form-control" id="<?php echo "units-total-" . $row_type3['prop_type_id']; ?>" name="<?php echo "units-total-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
                                                         </div>
                                                     </div><!-- /.form-group -->
                                                 </div><!-- /.col-md-4 -->

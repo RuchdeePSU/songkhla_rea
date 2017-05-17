@@ -35,6 +35,17 @@ class Property_detail
 
     // create property_details data
     function create(){
+        // write statement
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_id, prop_type_id, units_total, units_sold, units_sold_avg, units_unsold, time_unsold_avg, units_new_6m, prop_min_price, prop_max_price) VALUES (?,?,?,?,?,?,?,?,?,?)");
+        // bind parameters
+        mysqli_stmt_bind_param($stmt, 'ssssssssss', $this->prop_id, $this->prop_type_id, $this->units_total, $this->units_sold, $this->units_sold_avg, $this->units_unsold, $this->time_unsold_avg, $this->units_new_6m, $this->prop_min_price, $this->prop_max_price);
+
+        /* execute prepared statement */
+        if (mysqli_stmt_execute($stmt)) {
+            return true;
+        }else {
+            return false;
+        }
 
     }
 

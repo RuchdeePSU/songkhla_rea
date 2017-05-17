@@ -4,6 +4,7 @@ class Property{
     // database connection and table name
     private $conn;
     private $table_name = "properties";
+    private $last_prop_id;
 
     // object properties
     public $prop_id;
@@ -56,26 +57,28 @@ class Property{
         1-บ้านเดียว, 2-บ้านแฝด, 3-ทาวน์เฮาส์+ทาวน์โฮม, 4-คอนโดมิเนียม, 5-อาคารพานิชย์, 6-อื่นๆ
         */
         // prop_icon_type
-        switch ($this->prop_type_id) {
-            case 1:
-                $this->prop_icon_type = "assets/img/property-types/single-family.png";
-                break;
-            case 2:
-                $this->prop_icon_type = "assets/img/property-types/single-family.png";
-                break;
-            case 3:
-                $this->prop_icon_type = "assets/img/property-types/villa.png";
-                break;
-            case 4:
-                $this->prop_icon_type = "assets/img/property-types/condominium.png";
-                break;
-            case 5:
-                $this->prop_icon_type = "assets/img/property-types/warehouse.png";
-                break;
-            default:
-                $this->prop_icon_type = "assets/img/property-types/single-family.png";
-                break;
-        }
+        $this->prop_icon_type = "assets/img/property-types/single-family.png";
+        // switch ($this->prop_type_id) {
+        //     case 1:
+        //         $this->prop_icon_type = "assets/img/property-types/single-family.png";
+        //         break;
+        //     case 2:
+        //         $this->prop_icon_type = "assets/img/property-types/single-family.png";
+        //         break;
+        //     case 3:
+        //         $this->prop_icon_type = "assets/img/property-types/villa.png";
+        //         break;
+        //     case 4:
+        //         $this->prop_icon_type = "assets/img/property-types/condominium.png";
+        //         break;
+        //     case 5:
+        //         $this->prop_icon_type = "assets/img/property-types/warehouse.png";
+        //         break;
+        //     default:
+        //         $this->prop_icon_type = "assets/img/property-types/single-family.png";
+        //         break;
+        // }
+        
         // write statement
         $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_lat, prop_long, prop_detail_link, prop_thumbnail_img, prop_icon_type, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         // bind parameters
@@ -83,11 +86,17 @@ class Property{
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
+            $this->last_prop_id = mysqli_stmt_insert_id($stmt);
             return true;
         }else {
             return false;
         }
     }  // function create()
+
+    // get last prop_id
+    function getlastproperty_id(){
+        return $this->last_prop_id;
+    }
 
     // update record
     function update(){
