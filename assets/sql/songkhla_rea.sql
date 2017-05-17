@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.5.2
--- https://www.phpmyadmin.net/
+-- version 4.5.2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: May 16, 2017 at 01:53 PM
--- Server version: 10.1.21-MariaDB
--- PHP Version: 7.1.1
+-- Host: localhost
+-- Generation Time: May 17, 2017 at 03:50 AM
+-- Server version: 10.1.19-MariaDB
+-- PHP Version: 5.6.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -41,7 +41,8 @@ CREATE TABLE `properties` (
   `prop_thumbnail_img` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `prop_icon_type` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `prop_status` tinyint(1) NOT NULL DEFAULT '1',
-  `prop_created_date` date NOT NULL
+  `prop_created_date` date NOT NULL,
+  `prop_updated_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -53,7 +54,7 @@ CREATE TABLE `properties` (
 CREATE TABLE `property_details` (
   `prop_id` int(11) NOT NULL,
   `prop_type_id` int(11) NOT NULL,
-  `total_units` smallint(6) NOT NULL,
+  `units_total` smallint(6) NOT NULL,
   `units_sold` smallint(6) NOT NULL,
   `units_sold_avg` smallint(6) NOT NULL,
   `units_unsold` smallint(6) NOT NULL,

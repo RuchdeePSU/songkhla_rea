@@ -28,7 +28,7 @@
 
     // form is submitted
     if (isset($_POST['property-submit'])) {
-        // pass connection to property_types table
+        // pass connection to properties table
         $property = new Property($db);
         $property->prop_name = $_POST['property-title'];
         $property->prop_address_no = $_POST['property-address-no'];

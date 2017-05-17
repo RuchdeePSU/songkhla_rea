@@ -13,17 +13,15 @@ class Property{
     public $prop_address_road;
     public $prop_address_subdistrict;
     public $prop_address_district;
-    public $prop_type_id;
     public $prop_municipal_id;
     public $prop_lat;
     public $prop_long;
     public $prop_detail_link;
     public $prop_thumbnail_img;
     public $prop_icon_type;
-    public $prop_min_price;
-    public $prop_max_price;
     public $prop_status;
     public $prop_created_date;
+    public $prop_updated_date;
 
     public function __construct($db){
         $this->conn = $db;
@@ -47,7 +45,7 @@ class Property{
         return $result;
     }
 
-    // create contact information
+    // create property data
     function create(){
         // prop_detail_link
         $this->prop_detail_link = "properties-detail.php";
@@ -79,9 +77,9 @@ class Property{
                 break;
         }
         // write statement
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_type_id, prop_municipal_id, prop_lat, prop_long, prop_detail_link, prop_thumbnail_img, prop_icon_type, prop_min_price, prop_max_price, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_lat, prop_long, prop_detail_link, prop_thumbnail_img, prop_icon_type, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'sssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_type_id, $this->prop_municipal_id, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_min_price, $this->prop_max_price, $this->prop_status, $this->prop_created_date);
+        mysqli_stmt_bind_param($stmt, 'ssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_created_date);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -121,11 +119,11 @@ class Property{
                 $this->prop_icon_type = "assets/img/property-types/single-family.png";
                 break;
         }
-        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_type_id = ?, prop_municipal_id = ?, prop_lat = ?, prop_long = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_icon_type = ?, prop_min_price = ?, prop_max_price = ?, prop_status = ? WHERE prop_id = ?";
+        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_municipal_id = ?, prop_lat = ?, prop_long = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_icon_type = ?, prop_status = ?, prop_updated_date = ? WHERE prop_id = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'sssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_type_id, $this->prop_municipal_id, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_min_price, $this->prop_max_price, $this->prop_status, $this->prop_id);
+        mysqli_stmt_bind_param($stmt, 'ssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_updated_date, $this->prop_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -154,7 +152,7 @@ class Property{
     // write data from mysql to json file
     function writejson() {
         // json filename
-        $jsfile = "assets/js/locations8.js";
+        $jsfile = "assets/js/locations.js";
         try {
             //write to json file
             $jsfp = fopen($jsfile, "w");
