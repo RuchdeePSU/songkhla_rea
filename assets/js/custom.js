@@ -86,11 +86,11 @@ $(document).ready(function($) {
     var $priceSlider = $("#price-input");
     if($priceSlider.length > 0) {
         $priceSlider.slider({
-            from: 1000,
-            to: 299000,
-            step: 1000,
+            from: 500000,
+            to: 20000000,
+            step: 100000,
             round: 1,
-            format: { format: '$ ###,###', locale: 'en' }
+            format: { format: '฿ ###,###,###', locale: 'en' }
         });
     }
 
@@ -207,7 +207,7 @@ $(document).ready(function($) {
             bookmarkButton.removeClass('bookmark-added');
         }
     });
-	
+
     if ($('body').hasClass('navigation-fixed-bottom')){
         $('#page-content').css('padding-top',$('.navigation').height());
     }
