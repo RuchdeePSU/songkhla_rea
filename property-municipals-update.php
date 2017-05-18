@@ -5,27 +5,35 @@
         header("Location: sign-in.php");
     }
 
-    include_once 'assets/php/dbconnect.php';
-    include_once 'assets/php/property_municipal.php';
-
-    // get connection
-    $database = new Database();
-    $db = $database->getConnection();
-
-    // pass connection to property_types table
-    $property_municipal = new Property_municipal($db);
-
-    $active = false;
-
-    // read all records
-    $result = $property_municipal->readall($active);
-
+    // check municipal id
     if (isset($_GET['municipal_id'])) {
+        include_once 'assets/php/dbconnect.php';
+        include_once 'assets/php/property_municipal.php';
+
+        // get connection
+        $database = new Database();
+        $db = $database->getConnection();
+
+        // pass connection to property_types table
+        $property_municipal = new Property_municipal($db);
         $property_municipal->prop_municipal_id = $_GET['municipal_id'];
-        if ($property_municipal->delete()) {
-            header("Location: property-municipals-listing.php");
+        $result_municipal = $property_municipal->readone();
+        $row_municipal = mysqli_fetch_array($result_municipal);
+
+        // form is submitted
+        if (isset($_POST['property-municipal-submit'])) {
+            $property_municipal->prop_municipal_desc = $_POST['property-municipal-desc'];
+            $property_municipal->prop_municipal_status = $_POST['property-municipal-status'];
+
+            // insert
+            if ($property_municipal->update()) {
+                header("Location: property-municipals-listing.php");
+            } else {
+                $success = false;
+            }
         }
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -44,7 +52,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .btn, ul { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn, label, ul { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลเทศบาล</title>
@@ -95,9 +103,9 @@
                       ?>
                   </ul>
               </nav><!-- /.navbar collapse-->
-              <div class="add-your-property">
-                  <a href="property-municipals-create.php" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">เพิ่มข้อมูลเทศบาล</span></a>
-              </div>
+              <!-- <div class="add-your-property">
+                  <a href="#" class="btn btn-default"><i class="fa fa-plus"></i><span class="text">เพิ่มประเภทอสังหาริมทรัพย์</span></a>
+              </div> -->
           </header><!-- /.navbar -->
         </div><!-- /.container -->
     </div><!-- /.navigation -->
@@ -136,44 +144,44 @@
                     <section id="my-properties">
                         <header><h1>เทศบาล</h1></header>
                         <div class="my-properties">
-                            <div class="table-responsive">
-                                <table class="table">
-                                    <thead>
-                                    <tr>
-                                        <th>ชื่อเทศบาล</th>
-                                        <th>สถานะ</th>
-                                        <th class="center">แก้ไขข้อมูล</th>
-                                        <th class="center">ลบข้อมูล</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php while ($row = mysqli_fetch_array($result)) { ?>
-                                    <tr>
-                                        <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_municipal_desc']; ?></td>
-                                        <td><?php if ($row['prop_municipal_status']) {
-                                            echo "ใช้งานปกติ";
-                                        } else { echo "ยกเลิกการใช้งาน"; } ?></td>
-                                        <td class="center">
-                                            <a href="property-municipals-update.php?municipal_id=<?php echo $row['prop_municipal_id']; ?>" class="edit"><i class="fa fa-pencil"></i></a>
-                                        </td>
-                                        <td class="center">
-                                            <a href="#" class="delete" data-href="property-municipals-listing.php?municipal_id=<?php echo $row['prop_municipal_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div><!-- /.table-responsive -->
-                            <!-- Pagination -->
-                            <div class="center">
-                                <ul class="pagination">
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                </ul><!-- /.pagination-->
-                            </div><!-- /.center-->
+                          <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                              <form role="form" id="property-municipals" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+                                <div class="form-group">
+                                    <label for="property-municipal-desc">ชื่อเทศบาล</label>
+                                    <input type="text" class="form-control" id="property-municipal-desc" name="property-municipal-desc" placeholder="ใส่ชื่อเทศบาล" value="<?php echo $row_municipal['prop_municipal_desc']; ?>">
+                                </div><!-- /.form-group -->
+                                <div class="form-group">
+                                    <label for="property-municipal-status">สถานะการใช้งาน</label>
+                                    <select name="property-municipal-status" id="property-municipal-status">
+                                        <option value="1" <?php if ($row_municipal['prop_municipal_status']) {
+                                          echo "selected";
+                                        } ?>>ใช้งานปกติ</option>
+                                        <option value="0" <?php if (!$row_municipal['prop_municipal_status']) {
+                                          echo "selected";
+                                        } ?>>ยกเลิกการใช้งาน</option>
+                                    </select>
+                                </div><!-- /.form-group -->
+                                <div class="form-group clearfix">
+                                    <button type="submit" class="btn pull-right btn-default" id="property-municipal-submit" name="property-municipal-submit">บันทึกข้อมูล</button>
+                                </div><!-- /.form-group -->
+                              </form>
+                              <div class="center-block">
+                                  <?php
+                                    if (isset($success)) {
+                                        if ($success) {
+                                            echo "<div class='alert alert-success text-center'>บันทึกข้อมูลเรียบร้อยแล้ว</div>";
+                                        } else {
+                                            echo "<div class='alert alert-danger text-center'>พบข้อผิดพลาด! ไม่สามารถบันทึกข้อมูลได้</div>";
+                                        }
+                                    }
+                                  ?>
+                              </div>
+                            </div>
+                            <div class="col-md-offset-6 col-sm-offset-6">
+                            </div>
+                          </div>
+
                         </div><!-- /.my-properties -->
                     </section><!-- /#my-properties -->
                 </div><!-- /.col-md-9 -->
@@ -233,25 +241,6 @@
     <!-- end Page Footer -->
 </div>
 
-<!-- Modal Dialog -->
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
-    <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">ยืนยันการลบข้อมูล</h4>
-        </div>
-        <div class="modal-body">
-          <p>แน่ใจว่าต้องการลบข้อมูลนี้?</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-            <a class="btn btn-danger" id="confirm">ลบข้อมูล</a>
-        </div>
-    </div>
-</div>
-</div>
-
 <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
 <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
@@ -262,11 +251,6 @@
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
-<script>
-  $('#confirm-delete').on('show.bs.modal', function(e) {
-      $(this).find('#confirm').attr('href', $(e.relatedTarget).data('href'));
-  });
-</script>
 
 </body>
 </html>

@@ -54,7 +54,7 @@ class Property_municipal{
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ss', $this->prop_municipal_desc, $this->prop_municipal_status, $this->prop_municipal_id);
+        mysqli_stmt_bind_param($stmt, 'sss', $this->prop_municipal_desc, $this->prop_municipal_status, $this->prop_municipal_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {

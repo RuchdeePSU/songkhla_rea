@@ -224,16 +224,14 @@
                                           <input type="text" class="form-control" id="property-address-road" name="property-address-road">
                                       </div><!-- /.form-group -->
                                   </div><!-- /.col-md-3 -->
-                                  <div class="col-md-offset-4 col-sm-offset-4">
+                                  <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="property-subdistrict">ตำบล</label>
+                                        <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict">
+                                    </div><!-- /.form-group -->
                                   </div>
                               </div>
                               <div class="row">
-                                <div class="col-md-4 col-sm-4">
-                                  <div class="form-group">
-                                      <label for="property-subdistrict">ตำบล</label>
-                                      <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict">
-                                  </div><!-- /.form-group -->
-                                </div>
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-district">อำเภอ</label>
@@ -242,12 +240,28 @@
                                 </div>
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
-                                      <label for="property-status">สถานะการใช้งาน</label>
+                                      <label for="property-district">เบอร์โทรศัพท์</label>
+                                      <input type="tel" class="form-control" id="property-phone-no" name="property-phone-no">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-district">อีเมล</label>
+                                      <input type="email" class="form-control" id="property-email" name="property-email">
+                                  </div><!-- /.form-group -->
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-status">สถานะการแสดงข้อมูล</label>
                                       <select name="property-status" id="property-status">
-                                          <option value="1" selected>ใช้งานปกติ</option>
-                                          <option value="0">ยกเลิกการใช้งาน</option>
+                                          <option value="1" selected>อนุญาตให้แสดงข้อมูล</option>
+                                          <option value="0">ไม่อนุญาตให้แสดงข้อมูล</option>
                                       </select>
                                   </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-offset-8 col-sm-offet-8">
                                 </div>
                               </div>
                               <div class="row">
