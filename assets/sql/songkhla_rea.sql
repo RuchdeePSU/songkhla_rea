@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.2
--- http://www.phpmyadmin.net
+-- version 4.7.0
+-- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 17, 2017 at 03:50 AM
--- Server version: 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Generation Time: May 19, 2017 at 03:55 AM
+-- Server version: 10.1.22-MariaDB
+-- PHP Version: 7.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -35,6 +37,8 @@ CREATE TABLE `properties` (
   `prop_address_subdistrict` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prop_address_district` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `prop_municipal_id` int(11) NOT NULL,
+  `prop_phone_no` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `prop_email` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `prop_lat` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `prop_long` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
   `prop_detail_link` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
@@ -198,6 +202,7 @@ ALTER TABLE `property_types`
 ALTER TABLE `property_details`
   ADD CONSTRAINT `property_details_ibfk_1` FOREIGN KEY (`prop_id`) REFERENCES `properties` (`prop_id`),
   ADD CONSTRAINT `property_details_ibfk_2` FOREIGN KEY (`prop_type_id`) REFERENCES `property_types` (`prop_type_id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

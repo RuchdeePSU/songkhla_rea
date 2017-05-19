@@ -26,6 +26,11 @@ class Property{
     public $prop_created_date;
     public $prop_updated_date;
 
+    // for searching property
+    public $prop_type_id;
+    public $prop_min_price;
+    public $prop_max_price;
+
     public function __construct($db){
         $this->conn = $db;
     }
@@ -213,6 +218,10 @@ class Property{
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    // search property
+    function search() {
 
     }
 }

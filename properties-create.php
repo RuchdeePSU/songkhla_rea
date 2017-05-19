@@ -39,6 +39,8 @@
         $property->prop_address_subdistrict = $_POST['property-subdistrict'];
         $property->prop_address_district = $_POST['property-district'];
         $property->prop_municipal_id = $_POST['property_municipal'];
+        $property->prop_phone_no = $_POST['property-phone-no'];
+        $Property->prop_email = $_POST['property-email'];
         $property->prop_lat = $_POST['latitude'];
         $property->prop_long = $_POST['longitude'];
         $property->prop_status = $_POST['property-status'];

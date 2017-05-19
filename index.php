@@ -22,8 +22,18 @@
 
     // pass connection to property table
     $property = new Property($db);
-    if (!$property->writejson()) {
-        header("Location: 500.html");
+
+    // perform search property data
+    if (isset($_POST['btn-search'])) {
+      $property->prop_municipal_id = $_POST['prop_municipal'];
+      $property->prop_type_id = $_POST['prop_type'];
+      $property->prop_min_price = substr($_POST['price'], 0, strpos($_POST['price'],';'));
+      $property->prop_max_price = substr($_POST['price'], strpos($_POST['price'],';')+1);
+      echo "<script>$('#confirm-delete').modal('show')</script>";
+    } else {
+      if (!$property->writejson()) {
+          header("Location: 500.html");
+      }
     }
 
 ?>
@@ -123,7 +133,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-4">
                         <div class="search-box map">
-                            <form role="form" id="form-map" class="form-map form-search">
+                            <form role="form" id="form-map" class="form-map form-search" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
                                 <!--<h2>Search Your Property</h2>-->
                                 <h2>ค้นหาอสังหาริมทรัพย์</h2>
                                 <div class="form-group">
@@ -144,11 +154,11 @@
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
                                     <div class="price-range">
-                                        <input id="price-input" type="text" name="price" value="500000;20000000">
+                                        <input id="price-input" type="text" name="price" id="price" value="500000;20000000">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default">ค้นหา</button>
+                                    <button type="submit" class="btn btn-default" id="btn-search"  name="btn-search">ค้นหา</button>
                                 </div><!-- /.form-group -->
                             </form><!-- /#form-map -->
                         </div><!-- /.search-box.map -->
@@ -575,5 +585,24 @@
         initializeOwl(false);
     });
 </script>
+
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">ยืนยันการลบข้อมูล</h4>
+        </div>
+        <div class="modal-body">
+          <p>แน่ใจว่าต้องการลบข้อมูลนี้?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
+            <a class="btn btn-danger" id="confirm">ลบข้อมูล</a>
+        </div>
+    </div>
+</div>
+</div>
+
 </body>
 </html>
