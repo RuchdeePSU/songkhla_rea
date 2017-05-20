@@ -34,6 +34,10 @@ class Property{
     public $srch_min_price;
     public $srch_max_price;
 
+    // for pagination
+    public $start;
+    public $perpage;
+
     public function __construct($db){
         $this->conn = $db;
     }
@@ -41,10 +45,17 @@ class Property{
     // read all records
     function readall($act){
         if ($act) {
-          $query = "SELECT * FROM " . $this->table_name . " WHERE prop_status = 1 ORDER BY prop_id";
+          $query = "SELECT * FROM " . $this->table_name . " WHERE prop_status = 1 ORDER BY prop_id DESC";
         } else {
-          $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_id";
+          $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_id DESC";
         }
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
+    // read all records
+    function readforpagination(){
+        $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_id DESC LIMIT " . $this->start . ", " . $this->perpage;
         $result = mysqli_query($this->conn, $query);
         return $result;
     }
@@ -211,7 +222,7 @@ class Property{
                     $straddr .= "อ." . $row['prop_address_district'];
                 }
 
-                $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($min_p) . '-' . '฿' .  number_format($max_p) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '"' . ']';
+                $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($min_p) . '-' . '฿' .  number_format($max_p) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '", "' . $row['prop_id'] . '"' .']';
 
                 if ($cnt == $nor) {
                      $strdata .= "\n];";
@@ -246,8 +257,6 @@ class Property{
                 $cnt = 0;
                 while ($row = mysqli_fetch_array($result)) {
 
-
-
                     $property_detail->prop_id = $row['prop_id'];
                     $property_detail->prop_type_id = $this->srch_type_id;
                     $property_detail->prop_min_price = $this->srch_min_price;
@@ -276,7 +285,7 @@ class Property{
                         $straddr .= "อ." . $row['prop_address_district'];
                     }
 
-                    $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($min_p) . '-' . '฿' .  number_format($max_p) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '"' . ']';
+                    $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($min_p) . '-' . '฿' .  number_format($max_p) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '", "' . $row['prop_id'] . '"' . ']';
 
                     if ($cnt == $no_prop) {
                          $strdata .= "\n];";
@@ -296,6 +305,13 @@ class Property{
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    // get number of total records
+    function getTotalRows(){
+        $query = "SELECT * FROM " . $this->table_name;
+        $result = mysqli_query($this->conn, $query);
+        return mysqli_num_rows($result);
     }
 }
 
