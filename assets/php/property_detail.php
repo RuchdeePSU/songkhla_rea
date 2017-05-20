@@ -28,7 +28,7 @@ class Property_detail
 
     // read one property
     function readone(){
-        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id;
+        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id . " AND prop_type_id = " . $this->prop_type_id;
         $result = mysqli_query($this->conn, $query);
         return $result;
     }
@@ -51,6 +51,18 @@ class Property_detail
 
     // update property_details data
     function update(){
+        $query = "UPDATE " . $this->table_name . " SET units_total = ?, units_sold = ?, units_sold_avg = ?, units_unsold = ?, time_unsold_avg = ?, units_new_6m = ?, prop_min_price = ?, prop_max_price = ? WHERE prop_id = ? AND prop_type_id = ?";
+        // statement
+        $stmt = mysqli_prepare($this->conn, $query);
+        // bind parameters
+        mysqli_stmt_bind_param($stmt, 'ssssssssss', $this->units_total, $this->units_sold, $this->units_sold_avg, $this->units_unsold, $this->time_unsold_avg, $this->units_new_6m, $this->prop_min_price, $this->prop_max_price, $this->prop_id, $this->prop_type_id);
+
+        /* execute prepared statement */
+        if (mysqli_stmt_execute($stmt)) {
+            return true;
+        }else {
+            return false;
+        }
 
     }
 
@@ -70,6 +82,33 @@ class Property_detail
         }
     }
 
+    // search
+    function search(){
+        $query = "SELECT prop_min_price, prop_max_price FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id . " AND prop_type_id = " . $this->prop_type_id . " AND prop_min_price >= " . $this->prop_min_price . " AND prop_max_price <= " . $this->prop_max_price;
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
+    // find max_price of a specific prop_id
+    function find_min_price(){
+        $query = "SELECT MIN(prop_min_price) as min_price FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id . " AND prop_min_price > 0";
+        $result = mysqli_query($this->conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_array($result);
+            return $row['min_price'];
+        } else {
+            return 0;
+        }
+
+    }
+
+    // find max_price of a specific prop_id
+    function find_max_price(){
+        $query = "SELECT MAX(prop_max_price) as max_price FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id;
+        $result = mysqli_query($this->conn, $query);
+        $row = mysqli_fetch_array($result);
+        return $row['max_price'];
+    }
 }
 
 ?>

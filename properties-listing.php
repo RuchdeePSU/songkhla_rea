@@ -147,7 +147,7 @@
                                         <th>เทศบาล</th>
                                         <th>อำเภอ</th>
                                         <th>วันที่บันทึกข้อมูล</th>
-                                        <th>สถานะ</th>
+                                        <th>สถานะการแสดงข้อมูล</th>
                                         <th class="center">แก้ไขข้อมูล</th>
                                         <th class="center">ลบข้อมูล</th>
                                     </tr>
@@ -167,8 +167,8 @@
                                         <td><?php echo $row['prop_address_district']; ?></td>
                                         <td><?php echo $row['prop_created_date']; ?></td>
                                         <td><?php if ($row['prop_status']) {
-                                            echo "ใช้งานปกติ";
-                                        } else { echo "ยกเลิกการใช้งาน"; } ?></td>
+                                            echo "อนุญาตให้แสดงข้อมูล";
+                                        } else { echo "ไม่อนุญาตให้แสดงข้อมูล"; } ?></td>
                                         <td class="center">
                                             <a href="properties-update.php?property_id=<?php echo $row['prop_id']; ?>" class="edit"><i class="fa fa-pencil"></i></a>
                                         </td>
