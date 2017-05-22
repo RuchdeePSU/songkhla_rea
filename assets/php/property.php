@@ -195,7 +195,7 @@ class Property{
             // read all records
             // $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_id";
             // $result = mysqli_query($this->conn, $query);
-            $active = false;
+            $active = true;
             $result = $this->readall($active);
             $nor = mysqli_num_rows($result);
             $cnt = 0;
@@ -212,13 +212,13 @@ class Property{
                 if (!empty($row['prop_address_moo'])) {
                     $straddr .= "ม." . $row['prop_address_moo'] . " ";
                 }
-                if (!empty($row['prop_address_road']) && strlen($straddr) < 90) {
+                if (!empty($row['prop_address_road']) && strlen($straddr) < 80) {
                     $straddr .= "ถ." . $row['prop_address_road'] . " ";
                 }
-                if (!empty($row['prop_address_subdistrict']) && strlen($straddr) < 90) {
+                if (!empty($row['prop_address_subdistrict']) && strlen($straddr) < 80) {
                     $straddr .= "ต." . $row['prop_address_subdistrict'] . " ";
                 }
-                if (!empty($row['prop_address_district']) && strlen($straddr) < 90) {
+                if (!empty($row['prop_address_district']) && strlen($straddr) < 80) {
                     $straddr .= "อ." . $row['prop_address_district'];
                 }
 
@@ -246,9 +246,9 @@ class Property{
             $jsfp = fopen($jsfile, "w");
             $strdata = "";
             if ($this->srch_municipal_id == "0") {
-                $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_id";
+                $query = "SELECT * FROM " . $this->table_name . " WHERE prop_status = 1 ORDER BY prop_id";
             } else {
-                $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_id = " . $this->srch_municipal_id;
+                $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_id = " . $this->srch_municipal_id . " AND prop_status = 1";
             }
             $result = mysqli_query($this->conn, $query);
             // number of records from properties table
@@ -283,7 +283,17 @@ class Property{
                                 $tmp_min_p = $min_p;
                             }
                             //find maximum price
-                            $max_p = 0;
+                            if ($tmp_max_p == 0) {
+                               $tmp_max_p = $row_prop_detail['prop_max_price'];
+                               $max_p = $tmp_max_p;
+                            } else {
+                                if ($tmp_max_p > $row_prop_detail['prop_max_price']) {
+                                    $max_p = $tmp_max_p;
+                                } else {
+                                    $max_p = $row_prop_detail['prop_max_price'];
+                                }
+                                $tmp_max_p = $max_p;
+                            }
                         }
 
                         $cnt++;
@@ -294,13 +304,13 @@ class Property{
                         if (!empty($row['prop_address_moo'])) {
                             $straddr .= "ม." . $row['prop_address_moo'] . " ";
                         }
-                        if (!empty($row['prop_address_road']) && strlen($straddr) < 90) {
+                        if (!empty($row['prop_address_road']) && strlen($straddr) < 80) {
                             $straddr .= "ถ." . $row['prop_address_road'] . " ";
                         }
-                        if (!empty($row['prop_address_subdistrict']) && strlen($straddr) < 90) {
+                        if (!empty($row['prop_address_subdistrict']) && strlen($straddr) < 80) {
                             $straddr .= "ต." . $row['prop_address_subdistrict'] . " ";
                         }
-                        if (!empty($row['prop_address_district']) && strlen($straddr) < 90) {
+                        if (!empty($row['prop_address_district']) && strlen($straddr) < 80) {
                             $straddr .= "อ." . $row['prop_address_district'];
                         }
 

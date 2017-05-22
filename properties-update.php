@@ -391,7 +391,7 @@
                                               <div class="row">
                                                 <div class="col-md-3 col-sm-3">
                                                     <div class="form-group">
-                                                        <label for="<?php echo "time-unsold-avg-" . $row_type3['prop_type_id']; ?>">ระยะเวลาคงค้างเฉลี่ย</label>
+                                                        <label for="<?php echo "time-unsold-avg-" . $row_type3['prop_type_id']; ?>">ระยะเวลาคงค้างเฉลี่ย (เดือน)</label>
                                                         <div class="input-group">
                                                           <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
                                                           <input type="number" class="form-control" id="<?php echo "time-unsold-avg-" . $row_type3['prop_type_id']; ?>" name="<?php echo "time-unsold-avg-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0" value="<?php echo $row_prop_detail['time_unsold_avg']; ?>">
