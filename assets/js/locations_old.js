@@ -56,11 +56,11 @@ var locations = [
 
   *["นีโอสมาร์ท บิ๊กซีเอ๊กซ์ตร้า", "ซ.ทุ่งรวงทอง ม.1 ต.คอหงส์ อ.หาดใหญ่", "฿3,500,000-฿4,100,000", 7.031108, 100.486528, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 3500000, 4100000],
 
-  ["ดิ แอทริบิว", "64/141 ซ.5 ถ.กาญจวนิช ต.คอหงส์ อ.หาดใหญ่", "฿990,000-฿4,590,000", 7.03500000, 100.50027778, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 990000, 4590000],
+  *["ดิ แอทริบิว", "64/141 ซ.5 ถ.กาญจวนิช ต.คอหงส์ อ.หาดใหญ่", "฿990,000-฿4,590,000", 7.03500000, 100.50027778, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 990000, 4590000],
 
-  ["ดิ โอทาวน์", "ถ.กาญจวนิช ต.บ้านพรุ อ.หาดใหญ่", "฿5,000,000-฿5,590,000", 6.92833333, 100.46861111, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 5000000, 5590000],
+  *["ดิ โอทาวน์", "ถ.กาญจวนิช ต.บ้านพรุ อ.หาดใหญ่", "฿5,000,000-฿5,590,000", 6.92833333, 100.46861111, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 5000000, 5590000],
 
-  ["บ้านสวนวังนนท์", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿2,900,000-฿7,300,000", 6.93444444, 100.45388889, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2900000, 7300000],
+  *["บ้านสวนวังนนท์", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿2,900,000-฿7,300,000", 6.93444444, 100.45388889, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2900000, 7300000],
 
   ["บ้านชมกรีนวิว", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿1,990,000-฿4,590,000", 6.93555556, 100.45611111, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 1990000, 4590000],
 

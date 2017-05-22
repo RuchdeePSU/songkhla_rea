@@ -23,14 +23,38 @@
     // pass connection to property table
     $property = new Property($db);
 
-    // perform search property data
-    if (!isset($_GET['searchresult'])) {
+    if (isset($_GET['btn-search'])) {
+        $property->srch_municipal_id = $_GET['prop_municipal'];
+        $property->srch_type_id = $_GET['prop_type'];
+        $property->srch_min_price = substr($_GET['price'], 0, strpos($_GET['price'],';'));
+        $property->srch_max_price = substr($_GET['price'], strpos($_GET['price'],';')+1);
+        if (!$property->search()) {
+            $searchresult = 0;
+            if (!$property->writejson()) {
+                header("Location: 500.html");
+            }
+        }
+    } else {
         if (!$property->writejson()) {
-            header("Location: 500.html");
+                 header("Location: 500.html");
         }
     }
 
+    // perform search property data
+    // if (!isset($_GET['searchresult'])) {
+    //     if (!$property->writejson()) {
+    //         header("Location: 500.html");
+    //     }
+    // } else {
+    //     if (!$_GET['searchresult']) {
+    //         if (!$property->writejson()) {
+    //             header("Location: 500.html");
+    //         }
+    //     }
+    // }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -127,20 +151,20 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-4">
                         <div class="search-box map">
-                            <form role="form" id="form-map" class="form-map form-search" method="post" action="assets/php/property_search.php">
+                            <form role="form" id="form-map" class="form-map form-search" method="get" action="index.php">
                                 <!--<h2>Search Your Property</h2>-->
                                 <h2>ค้นหาอสังหาริมทรัพย์</h2>
                                 <div class="form-group">
-                                    <select name="prop_municipal">
-                                        <option value="">ทำเลที่ตั้ง</option>
+                                    <select name="prop_municipal" id="prop_municipal">
+                                        <option value="0">ทำเลที่ตั้ง</option>
                                         <?php while ($row_municipal = mysqli_fetch_array($result_municipal)) {
                                             echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
                                         } ?>
                                     </select>
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
-                                    <select name="prop_type">
-                                        <option value="">ประเภทอสังหาริมทรัพย์</option>
+                                    <select name="prop_type" id="prop_type">
+                                        <option value="0">ประเภทอสังหาริมทรัพย์</option>
                                         <?php while ($row_type = mysqli_fetch_array($result_type)) {
                                             echo "<option value='" . $row_type[prop_type_id] . "'>" . $row_type['prop_type_desc'] . "</option>";
                                         } ?>
@@ -148,7 +172,7 @@
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
                                     <div class="price-range">
-                                        <input id="price-input" type="text" name="price" id="price" value="500000;20000000">
+                                        <input type="text" id="price-input" name="price"  value="500000;20000000">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -534,7 +558,7 @@
     <!-- end Page Footer -->
 </div>
 
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="search-notfound" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-sm">
     <div class="modal-content">
         <div class="modal-header">
@@ -597,7 +621,26 @@
     });
 </script>
 <script>
-    $('#confirm-delete').modal('show');
+    $.urlParam = function(name){
+      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      if (results==null){
+        return null;
+      }
+      else{
+        return results[1] || 0;
+      }
+    }
+    // if ($.urlParam('searchresult') == '0') {
+    //     $('#search-notfound').modal('show');
+    // }
+    var searchfound = <?php if (isset($searchresult)) {
+      echo $searchresult . ";";
+    } else {
+      echo 1 . ";";
+    } ?>
+    if (!searchfound) {
+        $('#search-notfound').modal('show');
+    }
 </script>
 
 </body>

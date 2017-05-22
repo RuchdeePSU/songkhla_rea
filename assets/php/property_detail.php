@@ -84,7 +84,11 @@ class Property_detail
 
     // search
     function search(){
-        $query = "SELECT prop_min_price, prop_max_price FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id . " AND prop_type_id = " . $this->prop_type_id . " AND prop_min_price >= " . $this->prop_min_price . " AND prop_max_price <= " . $this->prop_max_price;
+        if ($this->prop_type_id == "0") {
+            $query = "SELECT prop_min_price, prop_max_price FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id . " AND prop_min_price >= " . $this->prop_min_price . " AND prop_max_price <= " . $this->prop_max_price;
+        } else {
+            $query = "SELECT prop_min_price, prop_max_price FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id . " AND prop_type_id = " . $this->prop_type_id . " AND prop_min_price >= " . $this->prop_min_price . " AND prop_max_price <= " . $this->prop_max_price;
+        }
         $result = mysqli_query($this->conn, $query);
         return $result;
     }

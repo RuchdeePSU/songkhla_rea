@@ -13,8 +13,8 @@
     $property->srch_max_price = substr($_POST['price'], strpos($_POST['price'],';')+1);
 
     if ($property->search()) {
-      header("Location: ../../index.php?searchresult=true");
+      header("Location: ../../index.php?searchresult=1");
     } else {
-      header("Location: ../../index.php");
+      header("Location: ../../index.php?searchresult=0");
     }
 ?>

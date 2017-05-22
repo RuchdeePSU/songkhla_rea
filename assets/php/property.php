@@ -242,61 +242,90 @@ class Property{
     function search() {
         // json filename
         $jsfile = "assets/js/locations.js";
-        $jsfp = fopen($jsfile, "w");
-        $strdata = "";
-
         try {
-            $property_detail = new Property_detail($this->conn);
-
-            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_id = " . $this->srch_municipal_id;
+            $jsfp = fopen($jsfile, "w");
+            $strdata = "";
+            if ($this->srch_municipal_id == "0") {
+                $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_id";
+            } else {
+                $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_id = " . $this->srch_municipal_id;
+            }
             $result = mysqli_query($this->conn, $query);
+            // number of records from properties table
             $no_prop = mysqli_num_rows($result);
             if ($no_prop > 0) {
-                //write to json file
+                // write to json file
                 fwrite($jsfp, "var locations = [\n");
+                $property_detail = new Property_detail($this->conn);
                 $cnt = 0;
                 while ($row = mysqli_fetch_array($result)) {
-
                     $property_detail->prop_id = $row['prop_id'];
                     $property_detail->prop_type_id = $this->srch_type_id;
                     $property_detail->prop_min_price = $this->srch_min_price;
                     $property_detail->prop_max_price = $this->srch_max_price;
 
                     $result_prop_detail = $property_detail->search();
-                    while ($row_prop_detail = mysqli_fetch_array($result_prop_detail)) {
-                      # code...
-                    }
+                    $no_prop_detail = mysqli_num_rows($result_prop_detail);
+                    if ($no_prop_detail > 0) {
+                        $tmp_min_p = 0;
+                        $tmp_max_p = 0;
+                        while ($row_prop_detail = mysqli_fetch_array($result_prop_detail)) {
+                            // find minimum price
+                            if ($tmp_min_p == 0) {
+                               $tmp_min_p = $row_prop_detail['prop_min_price'];
+                               $min_p = $tmp_min_p;
+                            } else {
+                                if ($tmp_min_p < $row_prop_detail['prop_min_price']) {
+                                    $min_p = $tmp_min_p;
+                                } else {
+                                    $min_p = $row_prop_detail['prop_min_price'];
+                                }
+                                $tmp_min_p = $min_p;
+                            }
+                            //find maximum price
+                            $max_p = 0;
+                        }
 
-                    $cnt++;
-                    $straddr = "";
-                    if (!empty($row['prop_address_no'])) {
-                        $straddr .= $row['prop_address_no'] . " ";
-                    }
-                    if (!empty($row['prop_address_moo'])) {
-                        $straddr .= "ม." . $row['prop_address_moo'] . " ";
-                    }
-                    if (!empty($row['prop_address_road']) && strlen($straddr) < 90) {
-                        $straddr .= "ถ." . $row['prop_address_road'] . " ";
-                    }
-                    if (!empty($row['prop_address_subdistrict']) && strlen($straddr) < 90) {
-                        $straddr .= "ต." . $row['prop_address_subdistrict'] . " ";
-                    }
-                    if (!empty($row['prop_address_district']) && strlen($straddr) < 90) {
-                        $straddr .= "อ." . $row['prop_address_district'];
-                    }
+                        $cnt++;
+                        $straddr = "";
+                        if (!empty($row['prop_address_no'])) {
+                            $straddr .= $row['prop_address_no'] . " ";
+                        }
+                        if (!empty($row['prop_address_moo'])) {
+                            $straddr .= "ม." . $row['prop_address_moo'] . " ";
+                        }
+                        if (!empty($row['prop_address_road']) && strlen($straddr) < 90) {
+                            $straddr .= "ถ." . $row['prop_address_road'] . " ";
+                        }
+                        if (!empty($row['prop_address_subdistrict']) && strlen($straddr) < 90) {
+                            $straddr .= "ต." . $row['prop_address_subdistrict'] . " ";
+                        }
+                        if (!empty($row['prop_address_district']) && strlen($straddr) < 90) {
+                            $straddr .= "อ." . $row['prop_address_district'];
+                        }
 
-                    $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($min_p) . '-' . '฿' .  number_format($max_p) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '", "' . $row['prop_id'] . '"' . ']';
+                        $strdata = '[' . '"' . $row['prop_name'] . '", "' . $straddr . '", "' . '฿' . number_format($min_p) . '-' . '฿' .  number_format($max_p) . '", ' . $row['prop_lat'] . ', ' . $row['prop_long'] . ', "' . $row['prop_detail_link'] . '", "' . $row['prop_thumbnail_img'] . '", "' . $row['prop_icon_type'] . '", "' . $row['prop_id'] . '"' . ']';
+                        if ($cnt == $no_prop) {
+                             $strdata .= "\n];";
+                         } else {
+                             $strdata .= ",\n";
+                         }
+                        fwrite($jsfp, $strdata);
+                    } else {
+                        $no_prop -= 1;
+                        if ($cnt == $no_prop) {
+                             $strdata = "\n];";
+                             fwrite($jsfp, $strdata);
+                         }
+                    }    // if ($no_prop_detail > 0)
 
-                    if ($cnt == $no_prop) {
-                         $strdata .= "\n];";
-                     } else {
-                         $strdata .= ",\n";
-                     }
-                    fwrite($jsfp, $strdata);
-
-                }
+                }     // while ($row = mysqli_fetch_array($result))
                 fclose($jsfp);
-                return true;
+                if ($cnt == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
             } else {
                 fwrite($jsfp, $strdata);
                 fclose($jsfp);
