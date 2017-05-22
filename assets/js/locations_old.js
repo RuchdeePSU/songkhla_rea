@@ -32,11 +32,11 @@ var locations = [
 
   ["ฮาร์โมนีวิลล์ 3", "บ้านโป๊ะหมอ ต.บ้านพรุ อ.หาดใหญ่", "฿2,420,000-฿5,200,000", 6.9325, 100.46916667, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2420000, 5200000],
 
-  ["วิรากร คลาสสิค", "70 ถ.เอเชีย ต.บ้านพรุ อ.หาดใหญ่", "฿4,500,000", 6.986529, 100.504121, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 4500000, 4500000],
+  *["วิรากร คลาสสิค", "70 ถ.เอเชีย ต.บ้านพรุ อ.หาดใหญ่", "฿4,500,000", 6.986529, 100.504121, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 4500000, 4500000],
 
   ["ฉัตรทองพาวิลเลี่ยน 5 เฟส 2", "ต.บ้านพรุ อ.หาดใหญ่", "฿3,500,000-฿4,500,000", 6.91972222, 100.45861111, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 3500000, 4500000],
 
-  ["ดิ ออกซิเจน", "27 ถ.กาญจวนิช ต.ควนลัง อ.หาดใหญ่", "฿12,900,000-฿17,900,000", 6.98527778, 100.49250000, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "???", "5", 12900000, 17900000],
+  *["ดิ ออกซิเจน", "27 ถ.กาญจวนิช ต.ควนลัง อ.หาดใหญ่", "฿12,900,000-฿17,900,000", 6.98527778, 100.49250000, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "???", "5", 12900000, 17900000],
 
   ["อาเซียน ซิตี้ รีสอร์ท", "ถ.กาญจวนิช ต.หาดใหญ่ อ.หาดใหญ่", "฿1,900,000-฿4,700,000", 6.99472222, 100.48527778, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 1900000, 4700000],
 
@@ -48,19 +48,19 @@ var locations = [
 
   ["ปาล์มสปริงส์ 10", "ถ.พรุค้างคาว ต.บ้านพรุ อ.หาดใหญ่", "฿2,880,000-฿4,850,000", 6.91972222, 100.46444444, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2880000, 4850000],
 
-  ["นีโอสมาร์ท พรุธานี", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿5,500,000-฿15,100,000", 6.939991, 100.46805, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 5500000, 15100000],
+  *["นีโอสมาร์ท พรุธานี", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿5,500,000-฿15,100,000", 6.939991, 100.46805, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 5500000, 15100000],
 
-  ["นีโอสมาร์ท คลองหวะ", "ซ.อิสรภาพ 2 ต.คอหงส์ อ.หาดใหญ่", "฿2,500,000-฿4,500,000", 6.972639, 100.474699, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 2500000, 4500000],
+  *["นีโอสมาร์ท คลองหวะ", "ซ.อิสรภาพ 2 ต.คอหงส์ อ.หาดใหญ่", "฿2,500,000-฿4,500,000", 6.972639, 100.474699, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 2500000, 4500000],
 
-  ["นีโอสมาร์ท บ้านพรุ", "ถ.กาญจวนิช ต.บ้านพรุ อ.หาดใหญ่", "฿2,100,000-฿5,000,000", 6.9369332, 100.4683856, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2100000, 5000000],
+  *["นีโอสมาร์ท บ้านพรุ", "ถ.กาญจวนิช ต.บ้านพรุ อ.หาดใหญ่", "฿2,100,000-฿5,000,000", 6.9369332, 100.4683856, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2100000, 5000000],
 
-  ["นีโอสมาร์ท บิ๊กซีเอ๊กซ์ตร้า", "ซ.ทุ่งรวงทอง ม.1 ต.คอหงส์ อ.หาดใหญ่", "฿3,500,000-฿4,100,000", 7.031108, 100.486528, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 3500000, 4100000],
+  *["นีโอสมาร์ท บิ๊กซีเอ๊กซ์ตร้า", "ซ.ทุ่งรวงทอง ม.1 ต.คอหงส์ อ.หาดใหญ่", "฿3,500,000-฿4,100,000", 7.031108, 100.486528, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 3500000, 4100000],
 
-  ["ดิ แอทริบิว", "64/141 ซ.5 ถ.กาญจวนิช ต.คอหงส์ อ.หาดใหญ่", "฿990,000-฿4,590,000", 7.03500000, 100.50027778, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 990000, 4590000],
+  *["ดิ แอทริบิว", "64/141 ซ.5 ถ.กาญจวนิช ต.คอหงส์ อ.หาดใหญ่", "฿990,000-฿4,590,000", 7.03500000, 100.50027778, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "คอหงส์", "5", 990000, 4590000],
 
-  ["ดิ โอทาวน์", "ถ.กาญจวนิช ต.บ้านพรุ อ.หาดใหญ่", "฿5,000,000-฿5,590,000", 6.92833333, 100.46861111, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 5000000, 5590000],
+  *["ดิ โอทาวน์", "ถ.กาญจวนิช ต.บ้านพรุ อ.หาดใหญ่", "฿5,000,000-฿5,590,000", 6.92833333, 100.46861111, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 5000000, 5590000],
 
-  ["บ้านสวนวังนนท์", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿2,900,000-฿7,300,000", 6.93444444, 100.45388889, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2900000, 7300000],
+  *["บ้านสวนวังนนท์", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿2,900,000-฿7,300,000", 6.93444444, 100.45388889, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 2900000, 7300000],
 
   ["บ้านชมกรีนวิว", "ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿1,990,000-฿4,590,000", 6.93555556, 100.45611111, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "บ้านพรุ", "5", 1990000, 4590000],
 
@@ -108,7 +108,7 @@ var locations = [
 
   ["บ้านประกายทอง", "ต.ควนลัง อ.หาดใหญ่", "฿0-฿0", 6.99878, 100.42359, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "ควนลัง", "5", 1300000, 2000000],
 
-  ["กรีนเพลส ควนลัง", "182 ม.2 ถ.เพชรเกษม ต.ควนลัง อ.หาดใหญ่", "฿0-฿0", 6.99432, 100.42399, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "ควนลัง", "5", 1300000, 2000000]           
+  ["กรีนเพลส ควนลัง", "182 ม.2 ถ.เพชรเกษม ต.ควนลัง อ.หาดใหญ่", "฿0-฿0", 6.99432, 100.42399, "property-detail.html", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "ควนลัง", "5", 1300000, 2000000]
 
 
 

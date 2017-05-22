@@ -5,77 +5,59 @@
         header("Location: sign-in.php");
     }
 
-    include_once 'assets/php/dbconnect.php';
-    include_once 'assets/php/property.php';
-    include_once 'assets/php/property_detail.php';
-    include_once 'assets/php/property_municipal.php';
-    include_once 'assets/php/property_type.php';
+    if (isset($_GET['property_id'])) {
+      include_once 'assets/php/dbconnect.php';
+      include_once 'assets/php/property.php';
+      include_once 'assets/php/property_municipal.php';
+      include_once 'assets/php/property_type.php';
 
-    // get connection
-    $database = new Database();
-    $db = $database->getConnection();
+      // get connection
+      $database = new Database();
+      $db = $database->getConnection();
 
-    $active = true;
+      $active = true;
 
-    // pass connection to property_municipal tabel
-    $prop_municipal = new Property_municipal($db);
-    $result_municipal = $prop_municipal->readall($active);
+      // pass connection to property_municipal tabel
+      $prop_municipal = new Property_municipal($db);
+      $result_municipal = $prop_municipal->readall($active);
 
-    // pass connection to property_type table
-    $prop_type = new Property_type($db);
-    $result_type = $prop_type->readall($active);
-    $result_type2 = $prop_type->readall($active);
-    $result_type3 = $prop_type->readall($active);
-    $result_type4 = $prop_type->readall($active);
+      // pass connection to property_type table
+      $prop_type = new Property_type($db);
+      $result_type = $prop_type->readall($active);
 
-    // form is submitted
-    if (isset($_POST['property-submit'])) {
-        // pass connection to properties table
-        $property = new Property($db);
-        $property->prop_name = $_POST['property-title'];
-        $property->prop_address_no = $_POST['property-address-no'];
-        $property->prop_address_moo = $_POST['property-address-moo'];
-        $property->prop_address_road = $_POST['property-address-road'];
-        $property->prop_address_subdistrict = $_POST['property-subdistrict'];
-        $property->prop_address_district = $_POST['property-district'];
-        $property->prop_municipal_id = $_POST['property_municipal'];
-        $property->prop_phone_no = $_POST['property-phone-no'];
-        $property->prop_email = $_POST['property-email'];
-        $property->prop_lat = $_POST['latitude'];
-        $property->prop_long = $_POST['longitude'];
-        $property->prop_status = $_POST['property-status'];
-        $property->prop_created_date = date("Y/m/d");
+      // pass connection to property_types table
+      $property = new Property($db);
+      $property->prop_id = $_GET['property_id'];
+      $result_prop = $property->readone();
+      $row_prop = mysqli_fetch_array($result_prop);
 
-        // insert into properties table
-        if ($property->create()) {
-            // pass connection to property_details table
-            $property_detail = new Property_detail($db);
-            // get last prop_id
-            $property_detail->prop_id = $property->getlastproperty_id();
+      // form is submitted
+      if (isset($_POST['property-submit'])) {
 
-            while ($row_type4 = mysqli_fetch_array($result_type4)) {
-                $property_detail->prop_type_id = $row_type4['prop_type_id'];
-                $property_detail->units_total = $_POST['units-total-' . $row_type4['prop_type_id']];
-                $property_detail->units_sold = $_POST['units-sold-' . $row_type4['prop_type_id']];
-                $property_detail->units_sold_avg = $_POST['units-sold-avg-' . $row_type4['prop_type_id']];
-                $property_detail->units_unsold = $_POST['units-unsold-' . $row_type4['prop_type_id']];
-                $property_detail->time_unsold_avg = $_POST['time-unsold-avg-' . $row_type4['prop_type_id']];
-                $property_detail->units_new_6m = $_POST['units-new-6m-' . $row_type4['prop_type_id']];
-                $property_detail->prop_min_price = $_POST['min-price-' . $row_type4['prop_type_id']];
-                $property_detail->prop_max_price = $_POST['max-price-' . $row_type4['prop_type_id']];
+          $property->prop_name = $_POST['property-title'];
+          $property->prop_address_no = $_POST['property-address-no'];
+          $property->prop_address_moo = $_POST['property-address-moo'];
+          $property->prop_address_road = $_POST['property-address-road'];
+          $property->prop_address_subdistrict = $_POST['property-subdistrict'];
+          $property->prop_address_district = $_POST['property-district'];
+          $property->prop_type_id = $_POST['property-type'];
+          $property->prop_municipal_id = $_POST['property_municipal'];
+          $property->prop_lat = $_POST['latitude'];
+          $property->prop_long = $_POST['longitude'];
+          $property->prop_min_price = $_POST['property-min-price'];
+          $property->prop_max_price = $_POST['property-max-price'];
+          $property->prop_status = $_POST['property-status'];
+          $property->prop_id = $_GET['property_id'];
 
-                // insert into property_details table
-                if ($property_detail->create()) {
-                    $success = true;
-                }else {
-                    $success = false;
-                    break;
-                }
-            }
+          // update
+          if ($property->update()) {
+              //$success = true;
+              header("Location: properties-listing.php");
+          } else {
+              $success = false;
+          }
+      }
 
-        } else {
-            $success = false;
-        }
     }
 
 ?>
@@ -188,22 +170,27 @@
                     <section id="my-properties">
                         <header><h1>โครงการอสังหาริมทรัพย์</h1></header>
                         <div class="my-properties">
-                          <form role="form" id="property-municipals" method="post" action="<?php $_SERVER['PHP_SELF'] ?>" data-toggle="validator">
+                          <form role="form" id="property-municipals" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
                               <div class="row">
                                 <div class="col-md-8 col-sm-8">
                                     <div class="form-group">
-                                      <label for="property-title">ชื่อโครงการ</label>
-                                      <input type="text" class="form-control" id="property-title" name="property-title" placeholder="ใส่ชื่อโครงการ" data-error="กรุณใส่ชื่อโครงการ" required>
-                                      <div class="help-block with-errors"></div>
+                                        <label for="property-title">ชื่อโครงการ</label>
+                                        <input type="text" class="form-control" id="property-title" name="property-title" placeholder="ใส่ชื่อโครงการ" value="<?php echo $row_prop['prop_name'] ?>" required>
                                     </div><!-- /.form-group -->
                                 </div>
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
-                                      <label for="property-municipal">เทศบาลที่ตั้งโครงการ</label>
-                                      <select name="property_municipal" id="property-municipal">
-                                          <?php while ($row_municipal = mysqli_fetch_array($result_municipal)) {
-                                            echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
-                                          } ?>
+                                      <label for="property-type">ประเภทโครงการ</label>
+                                      <select id="property-type" name="property-type">
+                                          <?php
+                                            while ($row_type = mysqli_fetch_array($result_type)) {
+                                              if ($row_prop['prop_type_id'] == $row_type['prop_type_id']) {
+                                                echo "<option value='" . $row_type['prop_type_id'] . "' selected>" . $row_type['prop_type_desc'] . "</option>";
+                                              } else {
+                                                echo "<option value='" . $row_type['prop_type_id'] . "'>" . $row_type['prop_type_desc'] . "</option>";
+                                              }
+                                            }
+                                          ?>
                                       </select>
                                   </div><!-- /.form-group -->
                                 </div>
@@ -212,62 +199,85 @@
                                   <div class="col-md-3 col-sm-3">
                                       <div class="form-group">
                                           <label for="property-address-no">สถานที่ตั้ง เลขที่</label>
-                                          <input type="text" class="form-control" id="property-address-no" name="property-address-no">
+                                          <input type="text" class="form-control" id="property-address-no" name="property-address-no" value="<?php echo $row_prop['prop_address_no'] ?>">
                                       </div><!-- /.form-group -->
                                   </div><!-- /.col-md-3 -->
                                   <div class="col-md-1 col-sm-1">
                                       <div class="form-group">
                                           <label for="property-address-moo">หมู่</label>
-                                          <input type="text" class="form-control" id="property-address-moo" name="property-address-moo" maxlength="2" pattern="^[0-9]{1,}$" data-error="หมู่ที่ต้องเป็นตัวเลข">
-                                          <div class="help-block with-errors"></div>
+                                          <input type="text" class="form-control" id="property-address-moo" name="property-address-moo" value="<?php echo $row_prop['prop_address_moo'] ?>">
                                       </div><!-- /.form-group -->
                                   </div><!-- /.col-md-2 -->
                                   <div class="col-md-4 col-sm-4">
                                       <div class="form-group">
                                           <label for="property-address-road">ถนน</label>
-                                          <input type="text" class="form-control" id="property-address-road" name="property-address-road">
+                                          <input type="text" class="form-control" id="property-address-road" name="property-address-road" value="<?php echo $row_prop['prop_address_road'] ?>">
                                       </div><!-- /.form-group -->
                                   </div><!-- /.col-md-3 -->
                                   <div class="col-md-4 col-sm-4">
                                     <div class="form-group">
-                                        <label for="property-subdistrict">ตำบล</label>
-                                        <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict" maxlength="100">
+                                        <label for="property-municipal">เทศบาลที่ตั้งโครงการ</label>
+                                        <select name="property_municipal" id="property-municipal">
+                                            <?php
+                                              while ($row_municipal = mysqli_fetch_array($result_municipal)) {
+                                                if ($row_prop['prop_municipal_id'] == $row_municipal['prop_municipal_id']) {
+                                                  echo "<option value='" . $row_municipal['prop_municipal_id'] . "' selected>" . $row_municipal['prop_municipal_desc'] . "</option>";
+                                                } else {
+                                                  echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
+                                                }
+                                              }
+                                            ?>
+                                        </select>
                                     </div><!-- /.form-group -->
-                                  </div>
+                                  </div><!-- /.col-md-4 -->
                               </div>
                               <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-subdistrict">ตำบล</label>
+                                      <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict" value="<?php echo $row_prop['prop_address_subdistrict'] ?>">
+                                  </div><!-- /.form-group -->
+                                </div>
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-district">อำเภอ</label>
-                                      <input type="text" class="form-control" id="property-district" name="property-district" maxlength="100">
+                                      <input type="text" class="form-control" id="property-district" name="property-district" value="<?php echo $row_prop['prop_address_district'] ?>">
                                   </div><!-- /.form-group -->
                                 </div>
-                                <div class="col-md-4 col-sm-4">
-                                  <div class="form-group">
-                                      <label for="property-district">เบอร์โทรศัพท์</label>
-                                      <input type="tel" class="form-control" id="property-phone-no" name="property-phone-no" pattern="^[0-9]{1,}$" data-error="เบอร์โทรศัพท์ต้องเป็นตัวเลข" maxlength="30">
-                                      <div class="help-block with-errors"></div>
-                                  </div><!-- /.form-group -->
-                                </div>
-                                <div class="col-md-4 col-sm-4">
-                                  <div class="form-group">
-                                      <label for="property-district">อีเมล</label>
-                                      <input type="email" class="form-control" id="property-email" name="property-email" data-error="อีเมลไม่ถูกต้อง" maxlength="50">
-                                      <div class="help-block with-errors"></div>
-                                  </div><!-- /.form-group -->
+                                <div class="col-md-offset-4 col-sm-offset-4">
                                 </div>
                               </div>
                               <div class="row">
                                 <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="property-min-price">ราคาจำหน่ายต่ำสุด</label>
+                                        <div class="input-group">
+                                          <span class="input-group-addon">฿</span>
+                                          <input type="number" class="form-control" id="property-min-price" name="property-min-price" pattern="\d*" placeholder="0" value="<?php echo $row_prop['prop_min_price'] ?>">
+                                        </div>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col-md-4 -->
+                                <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="property-max-price">ราคาจำหน่ายสูงสุด</label>
+                                        <div class="input-group">
+                                          <span class="input-group-addon">฿</span>
+                                          <input type="number" class="form-control" id="property-max-price" name="property-max-price" pattern="\d*" placeholder="0" value="<?php echo $row_prop['prop_max_price'] ?>">
+                                        </div>
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col-md-4 -->
+                                <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
-                                      <label for="property-status">สถานะการแสดงข้อมูล</label>
+                                      <label for="property-status">สถานะการใช้งาน</label>
                                       <select name="property-status" id="property-status">
-                                          <option value="1" selected>อนุญาตให้แสดงข้อมูล</option>
-                                          <option value="0">ไม่อนุญาตให้แสดงข้อมูล</option>
+                                          <option value="1" <?php if ($row_prop['prop_status']) {
+                                            echo "selected";
+                                          } ?>>ใช้งานปกติ</option>
+                                          <option value="0" <?php if (!$row_prop['prop_status']) {
+                                            echo "selected";
+                                          } ?>>ยกเลิกการใช้งาน</option>
                                       </select>
                                   </div><!-- /.form-group -->
-                                </div>
-                                <div class="col-md-offset-8 col-sm-offet-8">
                                 </div>
                               </div>
                               <div class="row">
@@ -280,14 +290,12 @@
                                               <div class="row">
                                                   <div class="col-md-5 col-sm-5">
                                                       <div class="form-group">
-                                                          <input type="text" maxlength="20"  class="form-control" id="latitude" name="latitude" data-error="กรุณาใส่ตำแหน่งละติจูด" required>
-                                                          <div class="help-block with-errors"></div>
+                                                          <input type="text" class="form-control" id="latitude" name="latitude" value="<?php echo $row_prop['prop_lat'] ?>">
                                                       </div><!-- /.form-group -->
                                                   </div>
                                                   <div class="col-md-5 col-sm-5">
                                                       <div class="form-group">
-                                                          <input type="text" maxlength="20" class="form-control" id="longitude" name="longitude" data-error="กรุณาใส่ตำแหน่งลองจิจูด" required>
-                                                          <div class="help-block with-errors"></div>
+                                                          <input type="text" class="form-control" id="longitude" name="longitude" value="<?php echo $row_prop['prop_long'] ?>">
                                                       </div><!-- /.form-group -->
                                                   </div>
                                                   <div class="col-md-2 col-sm-2">
@@ -299,115 +307,6 @@
                                   </section>
                                 </div>
                               </div><!-- /.row -->
-                              <div class="row">
-                                <div class="col-md-12 col-sm-12">
-                                  <section id="property-type-details">
-                                      <header><h2>ประเภทโครงการ</h2></header>
-                                      <ul class="nav nav-pills">
-                                        <?php
-                                            $cnt = 0;
-                                            while ($row_type2 = mysqli_fetch_array($result_type2)) {
-                                                $cnt += 1;
-                                                if ($cnt == 1) {
-                                                    echo "<li class='active'><a data-toggle='pill' href='#tab" . $row_type2['prop_type_id'] . "'>" . $row_type2['prop_type_desc'] . "</a></li>";
-                                                } else {
-                                                    echo "<li><a data-toggle='tab' href='#tab" . $row_type2['prop_type_id'] . "'>" . $row_type2['prop_type_desc'] . "</a></li>";
-                                                }
-                                            }
-                                        ?>
-                                      </ul>
-                                      <div class="tab-content">
-                                        <?php $cnt = 0; ?>
-                                        <?php while ($row_type3 = mysqli_fetch_array($result_type3)) { ?>
-                                            <?php $cnt++; ?>
-                                            <div id="<?php echo "tab" . $row_type3['prop_type_id']; ?>" class="<?php if ($cnt == 1) {
-                                                    echo "tab-pane fade in active";
-                                                } else {
-                                                    echo "tab-pane fade";
-                                                } ?>">
-                                              <div class="row"><br />
-                                                <div class="col-md-3 col-sm-3">
-                                                    <div class="form-group">
-                                                        <label for="<?php echo "units-total-" . $row_type3['prop_type_id']; ?>">จำนวนยูนิตทั้งหมดของโครงการ</label>
-                                                        <div class="input-group">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                                          <input type="number" class="form-control" id="<?php echo "units-total-" . $row_type3['prop_type_id']; ?>" name="<?php echo "units-total-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                        </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
-                                                <div class="col-md-3 col-sm-3">
-                                                    <div class="form-group">
-                                                        <label for="<?php echo "units-sold-" . $row_type3['prop_type_id']; ?>">จำนวนยูนิตที่จำหน่ายแล้ว</label>
-                                                        <div class="input-group">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                                          <input type="number" class="form-control" id="<?php echo "units-sold-" . $row_type3['prop_type_id']; ?>" name="<?php echo "units-sold-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                        </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
-                                                <div class="col-md-3 col-sm-3">
-                                                  <div class="form-group">
-                                                      <label for="<?php echo "units-sold-avg-" . $row_type3['prop_type_id']; ?>">จำนวนยูนิตที่จำหน่ายเฉลี่ย/เดือน</label>
-                                                      <div class="input-group">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                                        <input type="number" class="form-control" id="<?php echo "units-sold-avg-" . $row_type3['prop_type_id']; ?>" name="<?php echo "units-sold-avg-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                    </div>
-                                                  </div><!-- /.form-group -->
-                                                </div>
-                                                <div class="col-md-3 col-sm-3">
-                                                  <div class="form-group">
-                                                      <label for="<?php echo "units-unsold-" . $row_type3['prop_type_id']; ?>">จำนวนยูนิตคงค้าง ณ ปัจจุบัน</label>
-                                                      <div class="input-group">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                                        <input type="number" class="form-control" id="<?php echo "units-unsold-" . $row_type3['prop_type_id']; ?>" name="<?php echo "units-unsold-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                    </div>
-                                                  </div><!-- /.form-group -->
-                                                </div>
-                                              </div>
-                                              <div class="row">
-                                                <div class="col-md-3 col-sm-3">
-                                                    <div class="form-group">
-                                                        <label for="<?php echo "time-unsold-avg-" . $row_type3['prop_type_id']; ?>">ระยะเวลาคงค้างเฉลี่ย</label>
-                                                        <div class="input-group">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                                          <input type="number" class="form-control" id="<?php echo "time-unsold-avg-" . $row_type3['prop_type_id']; ?>" name="<?php echo "time-unsold-avg-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                        </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
-                                                <div class="col-md-3 col-sm-3">
-                                                    <div class="form-group">
-                                                        <label for="<?php echo "units-new-6m-" . $row_type3['prop_type_id']; ?>">จำนวนยูนิตที่จะสร้างเพิ่ม (6 เดือน)</label>
-                                                        <div class="input-group">
-                                                          <span class="input-group-addon"><i class="glyphicon glyphicon-stats"></i></span>
-                                                          <input type="number" class="form-control" id="<?php echo "units-new-6m-" . $row_type3['prop_type_id']; ?>" name="<?php echo "units-new-6m-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                        </div>
-                                                    </div><!-- /.form-group -->
-                                                </div><!-- /.col-md-4 -->
-                                                <div class="col-md-3 col-sm-3">
-                                                  <div class="form-group">
-                                                      <label for="<?php echo "min-price-" . $row_type3['prop_type_id']; ?>">ราคาจำหน่ายต่ำสุด</label>
-                                                      <div class="input-group">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                                        <input type="number" class="form-control" id="<?php echo "min-price-" . $row_type3['prop_type_id']; ?>" name="<?php echo "min-price-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                    </div>
-                                                  </div><!-- /.form-group -->
-                                                </div>
-                                                <div class="col-md-3 col-sm-3">
-                                                  <div class="form-group">
-                                                      <label for="<?php echo "max-price-" . $row_type3['prop_type_id']; ?>">ราคาจำหน่ายสูงสุด</label>
-                                                      <div class="input-group">
-                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-                                                        <input type="number" class="form-control" id="<?php echo "max-price-" . $row_type3['prop_type_id']; ?>" name="<?php echo "max-price-" . $row_type3['prop_type_id']; ?>" pattern="\d*" placeholder="0">
-                                                    </div>
-                                                  </div><!-- /.form-group -->
-                                                </div>
-                                              </div><hr />
-                                            </div>
-                                        <?php } ?>
-                                      </div>
-                                  </section>
-                                </div>
-                              </div>
-
                               <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                   <section class="block" id="gallery">
@@ -425,7 +324,7 @@
                                       <div class="col-md-12 col-sm-12">
                                           <div class="center">
                                               <div class="form-group">
-                                                  <button type="submit" class="btn btn-default large" name="property-submit">บันทึกโครงการ</button>
+                                                  <button type="submit" class="btn btn-default large" name="property-submit">แก้ไขโครงการ</button>
                                               </div><!-- /.form-group -->
                                               <!--<figure class="note block">By clicking the “Proceed to Payment” or “Submit” button you agree with our <a href="terms-conditions.html">Terms and conditions</a></figure>-->
                                           </div>
@@ -516,27 +415,24 @@
 <script type="text/javascript" src="assets/js/owl.carousel.min.js"></script>
 <script type="text/javascript" src="assets/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery.validate.min.js"></script>
-<!--
 <script type="text/javascript" src="assets/js/icheck.min.js"></script>
--->
 <script type="text/javascript" src="assets/js/retina-1.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery.magnific-popup.min.js"></script>
 <script type="text/javascript" src="assets/js/fileinput.min.js"></script>
 <script type="text/javascript" src="assets/js/custom-map.js"></script>
 <script type="text/javascript" src="assets/js/custom.js"></script>
-<script type="text/javascript" src="assets/js/validator.min.js"></script>
 <script>
     // var _latitude = 48.87;
     // var _longitude = 2.29;
 
-    _latitude = 7.006474666769294;
-    _longitude = 100.47486183575438;
+    _latitude = <?php echo $row_prop['prop_lat']; ?>;
+    _longitude = <?php echo $row_prop['prop_long']; ?>;
 
     google.maps.event.addDomListener(window, 'load', initSubmitMap(_latitude,_longitude));
     function initSubmitMap(_latitude,_longitude){
         var mapCenter = new google.maps.LatLng(_latitude,_longitude);
         var mapOptions = {
-            zoom: 16,
+            zoom: 15,
             center: mapCenter,
             disableDefaultUI: false,
             //scrollwheel: false,

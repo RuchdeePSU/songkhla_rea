@@ -19,9 +19,16 @@
     $property_type = new Property_type($db);
     $property_municipal = new Property_municipal($db);
 
-    // read all records
-    $active = false;
-    $result = $property->readall($active);
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 1;
+    }
+    $property->perpage = 10;
+    $property->start = ($page - 1) * $property->perpage;
+    $result = $property->readforpagination();
+    $total_rows = $property->getTotalRows();
+    $total_pages = ceil($total_rows / $property->perpage);
 
     if (isset($_GET['property_id'])) {
         $property->prop_id = $_GET['property_id'];
@@ -147,7 +154,7 @@
                                         <th>เทศบาล</th>
                                         <th>อำเภอ</th>
                                         <th>วันที่บันทึกข้อมูล</th>
-                                        <th>สถานะ</th>
+                                        <th>สถานะการแสดงข้อมูล</th>
                                         <th class="center">แก้ไขข้อมูล</th>
                                         <th class="center">ลบข้อมูล</th>
                                     </tr>
@@ -167,8 +174,8 @@
                                         <td><?php echo $row['prop_address_district']; ?></td>
                                         <td><?php echo $row['prop_created_date']; ?></td>
                                         <td><?php if ($row['prop_status']) {
-                                            echo "ใช้งานปกติ";
-                                        } else { echo "ยกเลิกการใช้งาน"; } ?></td>
+                                            echo "อนุญาตให้แสดงข้อมูล";
+                                        } else { echo "ไม่อนุญาตให้แสดงข้อมูล"; } ?></td>
                                         <td class="center">
                                             <a href="properties-update.php?property_id=<?php echo $row['prop_id']; ?>" class="edit"><i class="fa fa-pencil"></i></a>
                                         </td>
@@ -183,11 +190,13 @@
                             <!-- Pagination -->
                             <div class="center">
                                 <ul class="pagination">
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
+                                    <?php for ($i=1; $i <= $total_pages; $i++) {
+                                        if ($page == $i) {
+                                            echo "<li class='active'><a href='properties-listing.php?page=" . $i . "'>" . $i . "</a></li>";
+                                        } else {
+                                            echo "<li><a href='properties-listing.php?page=" . $i . "'>" . $i . "</a></li>";
+                                        }
+                                    } ?>
                                 </ul><!-- /.pagination-->
                             </div><!-- /.center-->
                         </div><!-- /.my-properties -->

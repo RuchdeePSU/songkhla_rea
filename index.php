@@ -23,20 +23,38 @@
     // pass connection to property table
     $property = new Property($db);
 
-    // perform search property data
-    if (isset($_POST['btn-search'])) {
-      $property->prop_municipal_id = $_POST['prop_municipal'];
-      $property->prop_type_id = $_POST['prop_type'];
-      $property->prop_min_price = substr($_POST['price'], 0, strpos($_POST['price'],';'));
-      $property->prop_max_price = substr($_POST['price'], strpos($_POST['price'],';')+1);
-      echo "<script>$('#confirm-delete').modal('show')</script>";
+    if (isset($_GET['btn-search'])) {
+        $property->srch_municipal_id = $_GET['prop_municipal'];
+        $property->srch_type_id = $_GET['prop_type'];
+        $property->srch_min_price = substr($_GET['price'], 0, strpos($_GET['price'],';'));
+        $property->srch_max_price = substr($_GET['price'], strpos($_GET['price'],';')+1);
+        if (!$property->search()) {
+            $searchresult = 0;
+            if (!$property->writejson()) {
+                header("Location: 500.html");
+            }
+        }
     } else {
-      if (!$property->writejson()) {
-          header("Location: 500.html");
-      }
+        if (!$property->writejson()) {
+                 header("Location: 500.html");
+        }
     }
 
+    // perform search property data
+    // if (!isset($_GET['searchresult'])) {
+    //     if (!$property->writejson()) {
+    //         header("Location: 500.html");
+    //     }
+    // } else {
+    //     if (!$_GET['searchresult']) {
+    //         if (!$property->writejson()) {
+    //             header("Location: 500.html");
+    //         }
+    //     }
+    // }
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
@@ -52,7 +70,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, ul { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, ul, p, button { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น</title>
@@ -133,20 +151,20 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-4">
                         <div class="search-box map">
-                            <form role="form" id="form-map" class="form-map form-search" method="post" action="<?php $_SERVER['PHP_SELF'] ?>">
+                            <form role="form" id="form-map" class="form-map form-search" method="get" action="index.php">
                                 <!--<h2>Search Your Property</h2>-->
                                 <h2>ค้นหาอสังหาริมทรัพย์</h2>
                                 <div class="form-group">
-                                    <select name="prop_municipal">
-                                        <option value="">ทำเลที่ตั้ง</option>
+                                    <select name="prop_municipal" id="prop_municipal">
+                                        <option value="0">ทำเลที่ตั้ง</option>
                                         <?php while ($row_municipal = mysqli_fetch_array($result_municipal)) {
                                             echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
                                         } ?>
                                     </select>
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
-                                    <select name="prop_type">
-                                        <option value="">ประเภทอสังหาริมทรัพย์</option>
+                                    <select name="prop_type" id="prop_type">
+                                        <option value="0">ประเภทอสังหาริมทรัพย์</option>
                                         <?php while ($row_type = mysqli_fetch_array($result_type)) {
                                             echo "<option value='" . $row_type[prop_type_id] . "'>" . $row_type['prop_type_desc'] . "</option>";
                                         } ?>
@@ -154,7 +172,7 @@
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
                                     <div class="price-range">
-                                        <input id="price-input" type="text" name="price" id="price" value="500000;20000000">
+                                        <input type="text" id="price-input" name="price"  value="500000;20000000">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -540,6 +558,23 @@
     <!-- end Page Footer -->
 </div>
 
+<div class="modal fade" id="search-notfound" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-sm">
+    <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">ผลการค้นหาโครงการอสังหาริมทรัพย์</h4>
+        </div>
+        <div class="modal-body">
+          <p>ไม่พบข้อมูล! ระบบจะแสดงข้อมูลโครงการอสังหาริมทรัพย์ทั้งหมดในแผนที่ </p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">ปิดหน้าต่าง</button>
+        </div>
+    </div>
+</div>
+</div>
+
 <script type="text/javascript" src="assets/js/jquery-2.1.0.min.js"></script>
 <!--add key #Ruchdee -->
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&key=AIzaSyCI9elmy3zkfLaXKTjO8rp8h9sZ1JPQD3o"></script>
@@ -585,24 +620,28 @@
         initializeOwl(false);
     });
 </script>
-
-<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-sm">
-    <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">ยืนยันการลบข้อมูล</h4>
-        </div>
-        <div class="modal-body">
-          <p>แน่ใจว่าต้องการลบข้อมูลนี้?</p>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">ยกเลิก</button>
-            <a class="btn btn-danger" id="confirm">ลบข้อมูล</a>
-        </div>
-    </div>
-</div>
-</div>
+<script>
+    $.urlParam = function(name){
+      var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+      if (results==null){
+        return null;
+      }
+      else{
+        return results[1] || 0;
+      }
+    }
+    // if ($.urlParam('searchresult') == '0') {
+    //     $('#search-notfound').modal('show');
+    // }
+    var searchfound = <?php if (isset($searchresult)) {
+      echo $searchresult . ";";
+    } else {
+      echo 1 . ";";
+    } ?>
+    if (!searchfound) {
+        $('#search-notfound').modal('show');
+    }
+</script>
 
 </body>
 </html>
