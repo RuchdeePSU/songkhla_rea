@@ -52,6 +52,7 @@
     <link rel="stylesheet" href="assets/css/jquery.slider.min.css" type="text/css">
     <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/css/datatables.css"/> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
         h1, h2, h3, h4, h5, h6, legend, a, .btn, ul { font-family: 'Pridi', serif; }
@@ -146,8 +147,9 @@
                     <section id="my-properties">
                         <header><h1>โครงการอสังหาริมทรัพย์</h1></header>
                         <div class="my-properties">
+                            <h3><span class="label label-primary">จำนวนโครงการทั้งหมด <?php echo  $total_rows; ?> โครงการ</span></h3>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table" id="property-listing">
                                     <thead>
                                     <tr>
                                         <th>ชื่อโครงการ</th>
@@ -284,10 +286,18 @@
 <script type="text/javascript" src="assets/js/bootstrap-select.min.js"></script>
 <script type="text/javascript" src="assets/js/retina-1.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/custom.js"></script>
+<!-- <script type="text/javascript" src="assets/js/datatables.min.js"></script> -->
+
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->
 <script>
+  // $(document).ready(function() {
+  //   $('#property-listing').DataTable({
+  //     paging: false
+  //   });
+  // });
+
   $('#confirm-delete').on('show.bs.modal', function(e) {
       $(this).find('#confirm').attr('href', $(e.relatedTarget).data('href'));
   });
