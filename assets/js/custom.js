@@ -87,7 +87,7 @@ $(document).ready(function($) {
     if($priceSlider.length > 0) {
         $priceSlider.slider({
             from: 500000,
-            to: 20000000,
+            to: 30000000,
             step: 100000,
             round: 1,
             format: { format: '฿ ###,###,###', locale: 'en' }
