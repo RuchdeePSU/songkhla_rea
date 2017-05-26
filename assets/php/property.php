@@ -27,6 +27,17 @@ class Property{
     public $prop_status;
     public $prop_created_date;
     public $prop_updated_date;
+    //
+    public $prop_size1;
+    public $prop_size2;
+    public $prop_size3;
+    public $prop_regist_no;
+    public $prop_owner_name;
+    public $prop_membership;
+    public $prop_corporation;
+    public $prop_started_date;
+    public $prop_contact_person;
+    public $prop_website;
 
     // for searching property
     public $srch_municipal_id;

@@ -104,7 +104,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .btn, label, .geo-location, ul { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn, label, .geo-location, ul, input { font-family: 'Pridi', serif; }
     </style>
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลโครงการ</title>
 
@@ -255,6 +255,69 @@
                                       <input type="text" class="form-control" id="property-district" name="property-district" maxlength="100"  value="<?php echo $row_prop['prop_address_district'] ?>">
                                   </div><!-- /.form-group -->
                                 </div>
+                                <div class="col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <label for="property-size1">ขนาดพื้นที่ ไร่</label>
+                                        <input type="number" class="form-control" id="property-size1" name="property-size1">
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col-md-3 -->
+                                <div class="col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <label for="property-size2">งาน</label>
+                                        <input type="number" class="form-control" id="property-size2" name="property-size2">
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col-md-2 -->
+                                <div class="col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <label for="property-size3">ตร.วา</label>
+                                        <input type="number" class="form-control" id="property-size3" name="property-size3">
+                                    </div><!-- /.form-group -->
+                                </div><!-- /.col-md-3 -->
+                                <div class="col-md-2 col-sm-2">
+                                  <div class="form-group">
+                                      <label for="property-regist-no">เลขที่ใบอนุญาต</label>
+                                      <input type="text" class="form-control" id="property-regist-no" name="property-regist-no" maxlength="20">
+                                  </div><!-- /.form-group -->
+                                </div>                                                            
+                              </div>
+                              <div class="row">
+                                <div class="col-md-8 col-sm-8">
+                                  <div class="form-group">
+                                      <label for="property-owner">ชื่อผู้ประกอบการเจ้าของโครงการ</label>
+                                      <input type="text" class="form-control" id="property-owner" name="property-owner"  maxlength="100">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-membership">สถานะสมาชิก</label>
+                                      <select name="property-membership" id="property-membership">
+                                          <option value="1" selected>เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
+                                          <option value="0">ไม่เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
+                                      </select>
+                                  </div><!-- /.form-group -->
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-corporation">ชื่อนิติบุคคลบริหารโครงการ</label>
+                                      <input type="text" class="form-control" id="property-corporation" name="property-corporation"  maxlength="100">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-started-date">วันที่เริ่มดำเนินโครงการ</label>
+                                      <input type="date" class="form-control" id="property-started-date" name="property-started-date">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-contact-person">ชื่อ-สกุลผู้ติดต่อของโครงการ</label>
+                                      <input type="text" class="form-control" id="property-contact-person" name="property-contact-person"  maxlength="50">
+                                  </div><!-- /.form-group -->
+                                </div>
+                              </div>
+                              <div class="row">
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-district">เบอร์โทรศัพท์</label>
@@ -267,6 +330,12 @@
                                       <label for="property-district">อีเมล</label>
                                       <input type="email" class="form-control" id="property-email" name="property-email" data-error="อีเมลไม่ถูกต้อง" maxlength="50"  value="<?php echo $row_prop['prop_email'] ?>">
                                       <div class="help-block with-errors"></div>
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-website">เว็บไซต์ของโครงการ</label>
+                                      <input type="text" class="form-control" id="property-website" name="property-website" maxlength="50">
                                   </div><!-- /.form-group -->
                                 </div>
                               </div>

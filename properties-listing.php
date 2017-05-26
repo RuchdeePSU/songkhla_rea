@@ -170,7 +170,7 @@
                                   <div class="form-group">
                                     <div class="input-group">
                                       <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
-                                      <input type="text" class="form-control" id="property-search" name="property-search" maxlength="100" placeholder="ค้นหาชื่อโครงการ" required oninvalid="this.setCustomValidity('ใส่ชื่อโครงการก่อนทำการค้นหา!')" onchange="this.setCustomValidity('')">
+                                      <input type="search" class="form-control" id="property-search" name="property-search" maxlength="100" placeholder="ค้นหาชื่อโครงการ" required oninvalid="this.setCustomValidity('ใส่ชื่อโครงการก่อนทำการค้นหา!')" onchange="this.setCustomValidity('')">
                                     </div>
                                   </div>
                                   <button type="submit" class="btn btn-default" name="btn-search">ค้นหา</button>

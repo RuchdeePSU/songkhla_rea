@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2017 at 12:07 PM
+-- Generation Time: May 26, 2017 at 01:20 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -53,27 +53,27 @@ CREATE TABLE `properties` (
 
 INSERT INTO `properties` (`prop_id`, `prop_name`, `prop_address_no`, `prop_address_moo`, `prop_address_road`, `prop_address_subdistrict`, `prop_address_district`, `prop_municipal_id`, `prop_phone_no`, `prop_email`, `prop_lat`, `prop_long`, `prop_detail_link`, `prop_thumbnail_img`, `prop_icon_type`, `prop_status`, `prop_created_date`, `prop_updated_date`) VALUES
 (1, 'à¸›à¸´à¸¢à¸°à¸—à¸£à¸±à¸žà¸¢à¹Œ à¸šà¹‰à¸²à¸™à¹„à¸£à¹ˆ', '88/5', '8', 'à¸šà¹‰à¸²à¸™à¹„à¸£à¹ˆ-à¸—à¸¸à¹ˆà¸‡à¸‚à¸¡à¸´à¹‰à¸™', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0815998653', 'pookhingkant@gmail.com', '6.896111', '100.476111', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-20'),
-(2, 'à¸®à¸²à¸£à¹Œà¹‚à¸¡à¸™à¸µà¸šà¸´à¸‹', '', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0887929825', '', '6.97166667', '100.475', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-20'),
-(3, 'à¸®à¸²à¸£à¹Œà¹‚à¸¡à¸™à¸µà¸§à¸´à¸¥à¸¥à¹Œ 1', '', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '074216178', 'nattaao.555@hotmail.com', '6.98055556', '100.47527778', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '0000-00-00'),
-(4, 'à¸®à¸²à¸£à¹Œà¹‚à¸¡à¸™à¸µà¸§à¸´à¸¥à¸¥à¹Œ 3', '', '', 'à¸šà¹‰à¸²à¸™à¹‚à¸›à¹Šà¸°à¸«à¸¡à¸­', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0887929825', '', '6.9325', '100.46916667', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '0000-00-00'),
-(5, 'à¸‰à¸±à¸•à¸£à¸—à¸­à¸‡à¸žà¸²à¸§à¸´à¸¥à¹€à¸¥à¸µà¹ˆà¸¢à¸™ 5 à¹€à¸Ÿà¸ª 2', '', '', 'à¹€à¸¢à¸·à¹‰à¸­à¸‡à¸ªà¸™à¸²à¸¡à¸à¸µà¸¬à¸²à¸žà¸£à¸¸à¸„à¹‰à¸²à¸‡à¸„à¸²à¸§', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0842662228', 'homjiao@gmail.com', '6.91972222', '100.45861111', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '0000-00-00'),
+(2, 'à¸®à¸²à¸£à¹Œà¹‚à¸¡à¸™à¸µà¸šà¸´à¸‹', '', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0887929825', '', '6.966122', '100.475611', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-26'),
+(3, 'à¸®à¸²à¸£à¹Œà¹‚à¸¡à¸™à¸µà¸§à¸´à¸¥à¸¥à¹Œ 1', '', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '074216178', 'nattaao.555@hotmail.com', '6.963813', '100.475182', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-26'),
+(4, 'à¸®à¸²à¸£à¹Œà¹‚à¸¡à¸™à¸µà¸§à¸´à¸¥à¸¥à¹Œ 3', '', '', 'à¸šà¹‰à¸²à¸™à¹‚à¸›à¹Šà¸°à¸«à¸¡à¸­', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0887929825', '', '6.932496', '100.469295', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-26'),
+(5, 'à¸‰à¸±à¸•à¸£à¸—à¸­à¸‡à¸žà¸²à¸§à¸´à¸¥à¹€à¸¥à¸µà¹ˆà¸¢à¸™ 5 à¹€à¸Ÿà¸ª 2', '', '', 'à¹€à¸¢à¸·à¹‰à¸­à¸‡à¸ªà¸™à¸²à¸¡à¸à¸µà¸¬à¸²à¸žà¸£à¸¸à¸„à¹‰à¸²à¸‡à¸„à¸²à¸§', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0842662228', 'homjiao@gmail.com', '6.919672', '100.459116', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-26'),
 (6, 'à¸­à¸²à¹€à¸‹à¸µà¸¢à¸™ à¸‹à¸´à¸•à¸µà¹‰ à¸£à¸µà¸ªà¸­à¸£à¹Œà¸—', '', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 1, '074801769', 'hatyainakarin@yahoo.com', '6.99421639292247', '100.48569084018823', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-22'),
 (7, 'à¹€à¸šà¸à¸ˆà¸žà¸£ à¸„à¸¥à¸­à¸‡à¸«à¸§à¸°', '', '', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ-à¸›à¸±à¸•à¸•à¸²à¸™à¸µ', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0862914401', 'vilairut.bj@gmail.com', '6.97265833', '100.48944444', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-20'),
-(8, 'à¸›à¸²à¸¥à¹Œà¸¡à¸ªà¸›à¸£à¸´à¸‡à¸ªà¹Œ 8', '', '', 'à¸„à¸¥à¸­à¸‡à¸¢à¸²à¹€à¸«à¸™à¸·à¸­ 9', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0815419507', 'hatyainakarin@yahoo.com', '6.94611111', '100.47888889', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '0000-00-00'),
-(9, 'à¸›à¸²à¸¥à¹Œà¸¡à¸ªà¸›à¸£à¸´à¸‡à¸ªà¹Œ 9', '', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '074801761', 'hatyainakarin@yahoo.com', '6.93916667', '100.46861111', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '0000-00-00'),
-(10, 'à¸›à¸²à¸¥à¹Œà¸¡à¸ªà¸›à¸£à¸´à¸‡à¸ªà¹Œ 10', '', '', 'à¸žà¸£à¸¸à¸„à¹‰à¸²à¸‡à¸„à¸²à¸§', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '074800806', 'hatyainakarin@yahoo.com', '6.91972222', '100.46444444', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '0000-00-00'),
+(8, 'à¸›à¸²à¸¥à¹Œà¸¡à¸ªà¸›à¸£à¸´à¸‡à¸ªà¹Œ 8', '', '', 'à¸„à¸¥à¸­à¸‡à¸¢à¸²à¹€à¸«à¸™à¸·à¸­ 9', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0815419507', 'hatyainakarin@yahoo.com', '6.946448', '100.478788', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-26'),
+(9, 'à¸›à¸²à¸¥à¹Œà¸¡à¸ªà¸›à¸£à¸´à¸‡à¸ªà¹Œ 9', '', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '074801761', 'hatyainakarin@yahoo.com', '6.937516', '100.470499', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-26'),
+(10, 'à¸›à¸²à¸¥à¹Œà¸¡à¸ªà¸›à¸£à¸´à¸‡à¸ªà¹Œ 10', '', '', 'à¸žà¸£à¸¸à¸„à¹‰à¸²à¸‡à¸„à¸²à¸§', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '074800806', 'hatyainakarin@yahoo.com', '6.919888', '100.464337', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-26'),
 (11, 'à¸™à¸µà¹‚à¸­à¸ªà¸¡à¸²à¸£à¹Œà¸— à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0864983809', 'neosmartproperty@hotmail.com', '6.939991', '100.46805', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-22'),
 (12, 'à¸™à¸µà¹‚à¸­à¸ªà¸¡à¸²à¸£à¹Œà¸— à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', '', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0805454999', 'neosmartproperty@hotmail.com', '6.9369332', '100.4683856', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-22'),
 (13, 'à¸™à¸µà¹‚à¸­à¸ªà¸¡à¸²à¸£à¹Œà¸— à¸„à¸¥à¸­à¸‡à¸«à¸§à¸°', '', '', 'à¸­à¸´à¸ªà¸£à¸ à¸²à¸ž 2', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0805454999', 'neosmartproperty@hotmail.com', '6.972639', '100.474699', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-22'),
 (14, 'à¸™à¸µà¹‚à¸­à¸ªà¸¡à¸²à¸£à¹Œà¸— à¸šà¸´à¹Šà¸à¸‹à¸µà¹€à¸­à¹Šà¸à¸‹à¹Œà¸•à¸£à¹‰à¸²', '', '1', 'à¸—à¸¸à¹ˆà¸‡à¸£à¸§à¸‡à¸—à¸­à¸‡', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0805454888', 'neosmartproperty@hotmail.com', '7.031108', '100.486528', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-20', '2017-05-22'),
 (15, 'à¸”à¸´ à¹à¸­à¸—à¸£à¸´à¸šà¸´à¸§', '64/141', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0619941444', 'joystobejoy@gmail.com', '7.03500000', '100.50027778', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-21', '2017-05-22'),
-(16, 'à¸”à¸´ à¹‚à¸­à¸—à¸²à¸§à¸™à¹Œ', '', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0817662745', 'tanawat.poonsin@gmail.com', '6.92833333', '100.46861111', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-21', '2017-05-22'),
-(17, 'à¸šà¹‰à¸²à¸™à¸ªà¸§à¸™à¸§à¸±à¸‡à¸™à¸™à¸—à¹Œ', '269', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0536197828', '', '6.93444444', '100.45388889', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-21', '2017-05-22'),
+(16, 'à¸”à¸´ à¹‚à¸­à¸—à¸²à¸§à¸™à¹Œ', '', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0817662745', 'tanawat.poonsin@gmail.com', '6.928393', '100.468630', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-21', '2017-05-26'),
+(17, 'à¸šà¹‰à¸²à¸™à¸ªà¸§à¸™à¸§à¸±à¸‡à¸™à¸™à¸—à¹Œ', '269', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0536197828', '', '6.934608', '100.454071', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-21', '2017-05-26'),
 (18, 'à¸§à¸´à¸£à¸²à¸à¸£ à¸„à¸¥à¸²à¸ªà¸ªà¸´à¸„', '70', '', 'à¹€à¸­à¹€à¸Šà¸µà¸¢', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0862904078', '', '6.972065', '100.487543', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '2017-05-22'),
 (19, 'à¸”à¸´ à¸­à¸­à¸à¸‹à¸´à¹€à¸ˆà¸™', '27', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0817662745', 'tanawat.poonsin@gmail.com', '6.989862', '100.492297', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '2017-05-22'),
-(20, 'à¸šà¹‰à¸²à¸™à¸Šà¸¡à¸à¸£à¸µà¸™à¸§à¸´à¸§', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0945965454', 'baanchomgreenview@gmail.com', '6.93555556', '100.45611111', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '0000-00-00'),
-(21, 'à¸žà¸¤à¸à¸©à¸²à¸§à¸´à¸¥à¸¥à¹Œ', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0817662745', 'tanawat.poonsin@gmail.com', '6.93583333', '100.45861111', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '0000-00-00'),
-(22, 'à¸žà¸£à¸²à¸§à¸§à¸´à¸¥à¹€à¸¥à¸ˆ à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', '', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0910456556', 'proudvillage45@gmail.com', '6.96055556', '100.46583333', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '0000-00-00'),
+(20, 'à¸šà¹‰à¸²à¸™à¸Šà¸¡à¸à¸£à¸µà¸™à¸§à¸´à¸§', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0945965454', 'baanchomgreenview@gmail.com', '6.935882', '100.455796', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '2017-05-26'),
+(21, 'à¸žà¸¤à¸à¸©à¸²à¸§à¸´à¸¥à¸¥à¹Œ 3', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸à¸˜à¸²à¸™à¸µ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0817662745', 'tanawat.poonsin@gmail.com', '6.933924', '100.448861', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '2017-05-26'),
+(22, 'à¸žà¸£à¸²à¸§à¸§à¸´à¸¥à¹€à¸¥à¸ˆ à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', '', '', '', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0910456556', 'proudvillage45@gmail.com', '6.960466', '100.465812', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '2017-05-26'),
 (23, 'à¸šà¹‰à¸²à¸™à¹à¸à¸”à¹€à¸žà¸Šà¸£à¹„à¸žà¸¥à¸´à¸™', '', '7', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ-à¸ˆà¸°à¸™à¸°', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0868996363', 'wapiraya.ppl@gmail.com', '6.96944444', '100.49916667', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '2017-05-22'),
 (24, 'à¹€à¸”à¸­à¸° à¸„à¸²à¹à¸™à¸¥à¸§à¸´à¸¥à¹€à¸¥à¸ˆ', '', '7', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ-à¸ˆà¸°à¸™à¸°', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0868996363', 'wapiraya.ppl@gmail.com', '6.96805556', '100.50305556', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-22', '0000-00-00'),
 (25, 'à¸”à¸µà¸„à¸­à¸™à¹‚à¸” à¸à¸²à¸à¸ˆà¸™à¸§à¸™à¸´à¸Šà¸¢à¹Œ', '9', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '', '', '6.97944444', '100.48444444', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 0, '2017-05-22', '0000-00-00'),
@@ -124,7 +124,13 @@ INSERT INTO `properties` (`prop_id`, `prop_name`, `prop_address_no`, `prop_addre
 (70, 'à¹„à¸žà¸£à¸§à¸´à¸¥à¹€à¸¥à¸ˆ (Privillage)', '', '', 'à¸™à¸§à¸¥à¹à¸à¹‰à¸§à¸­à¸¸à¸—à¸´à¸¨', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 1, '0914625698', 'jirat69@gmail.com', '7.028928', '100.485790', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-25', '0000-00-00'),
 (71, 'à¸žà¸¥à¸±à¸ªà¸„à¸­à¸™à¹‚à¸”à¸¡à¸´à¹€à¸™à¸µà¸¢à¸¡ à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ 1', 'à¸‹.à¹€à¸žà¸Šà¸£à¹€à¸à¸©', '', 'à¹€à¸žà¸Šà¸£à¹€à¸à¸©à¸¡', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 1, '074223444', 'info@sereneproperty.com', '7.0213', '100.4878', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-25', '0000-00-00'),
 (72, 'à¸žà¸¥à¸±à¸ªà¸„à¸­à¸™à¹‚à¸”à¸¡à¸´à¹€à¸™à¸µà¸¢à¸¡ à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ 2', '255', '', 'à¸£à¸²à¸©à¸Žà¸£à¹Œà¸­à¸¸à¸—à¸´à¸¨', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 1, '074223444', 'info@sereneproperty.com', '7.0042', '100.4612', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-25', '2017-05-25'),
-(73, 'à¸žà¸¥à¸±à¸ªà¸—à¸²à¸§à¸™à¹Œà¹‚à¸®à¸¡ à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', '96 à¸‹.10', '', 'à¹€à¸žà¸Šà¸£à¹€à¸à¸©à¸¡', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0898261131', 'kitisak@sereneproperty.com', '7.025818979366013', '100.4817126527787', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-25', '2017-05-25');
+(73, 'à¸žà¸¥à¸±à¸ªà¸—à¸²à¸§à¸™à¹Œà¹‚à¸®à¸¡ à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', '96 à¸‹.10', '', 'à¹€à¸žà¸Šà¸£à¹€à¸à¸©à¸¡', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0898261131', 'kitisak@sereneproperty.com', '7.025818979366013', '100.4817126527787', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-25', '2017-05-25'),
+(74, 'à¸šà¹‰à¸²à¸™à¸ªà¸²à¸¢à¸Šà¸¥', '29/24', '', '', 'à¸—à¸¸à¹ˆà¸‡à¸•à¸³à¹€à¸ªà¸²', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 1, '0818986294', 'bansaichol@gmail.com', '6.940526', '100.399935', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-26', '0000-00-00'),
+(75, 'à¸§à¸­à¹€à¸•à¸­à¸£à¹Œ à¸Ÿà¸£à¸­à¸™à¸•à¹Œ à¸§à¸´à¸¥à¹€à¸¥à¸ˆ', '', '', '', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0808739494', '', '6.993509', '100.513197', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-26', '0000-00-00'),
+(76, 'à¸šà¹‰à¸²à¸™à¸—à¸²à¸™à¸•à¸°à¸§à¸±à¸™', '', '', 'à¸—à¸§à¸µà¸£à¸±à¸•à¸™à¹Œ', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0881159595', 'saw_thaveerat@hotmail.com', '6.994484', '100.504201', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-26', '2017-05-26'),
+(77, 'à¸à¸²à¸à¸ˆà¸™à¸—à¸£à¸±à¸žà¸¢à¹Œ', '', '', 'à¸à¸²à¸à¸ˆà¸™à¸§à¸“à¸´à¸Šà¸¢à¹Œ', 'à¸šà¹‰à¸²à¸™à¸žà¸£à¸¸', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 4, '0991919196', '', '6.919482', '100.469099', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-26', '0000-00-00'),
+(78, 'à¸›à¸¸à¸“à¸“à¸ªà¸´à¸£à¸´ à¹‚à¸®à¸¡à¹€à¸žà¸¥à¸ª', '', '', 'à¸›à¸¸à¸“à¸“à¸à¸±à¸“à¸‘à¹Œ', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0901797776', 'punnasiri_2010@hotmail.com', '6.999682', '100.506302', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-26', '0000-00-00'),
+(79, 'à¸›à¸¸à¸“à¸“à¸ªà¸´à¸£à¸´ à¹‚à¸®à¸¡à¹€à¸žà¸¥à¸ª2', '137', '', 'à¸›à¸¸à¸“à¸“à¸à¸±à¸“à¸‘à¹Œ', 'à¸„à¸­à¸«à¸‡à¸ªà¹Œ', 'à¸«à¸²à¸”à¹ƒà¸«à¸à¹ˆ', 2, '0937428885', 'punnasiri_2@hotmail.com', '6.998597', '100.510112', 'properties-detail.php', 'assets/img/properties/property-sample.jpg', 'assets/img/property-types/single-family.png', 1, '2017-05-26', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -879,7 +885,67 @@ INSERT INTO `property_details` (`prop_id`, `prop_type_id`, `units_total`, `units
 (73, 7, 0, 0, 0, 0, 0, 0, 0, 0),
 (73, 8, 0, 0, 0, 0, 0, 0, 0, 0),
 (73, 9, 0, 0, 0, 0, 0, 0, 0, 0),
-(73, 10, 0, 0, 0, 0, 0, 0, 0, 0);
+(73, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+(74, 1, 0, 0, 0, 5, 0, 0, 3200000, 3900000),
+(74, 2, 0, 0, 0, 3, 0, 0, 4600000, 6400000),
+(74, 3, 0, 0, 0, 0, 0, 0, 0, 0),
+(74, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+(74, 5, 0, 0, 0, 6, 0, 0, 2990000, 3200000),
+(74, 6, 0, 0, 0, 0, 0, 0, 0, 0),
+(74, 7, 0, 0, 0, 0, 0, 0, 0, 0),
+(74, 8, 0, 0, 0, 0, 0, 0, 0, 0),
+(74, 9, 0, 0, 0, 0, 0, 0, 0, 0),
+(74, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 2, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 3, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 5, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 6, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 7, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 8, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 9, 0, 0, 0, 0, 0, 0, 0, 0),
+(75, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 2, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 3, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 5, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 6, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 7, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 8, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 9, 0, 0, 0, 0, 0, 0, 0, 0),
+(76, 10, 20, 17, 0, 15, 0, 8, 1990000, 22000000),
+(77, 1, 19, 19, 0, 0, 0, 0, 3600000, 5200000),
+(77, 2, 10, 6, 0, 4, 12, 0, 5900000, 6900000),
+(77, 3, 0, 0, 0, 0, 0, 0, 0, 0),
+(77, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+(77, 5, 24, 20, 0, 4, 12, 0, 2890000, 3690000),
+(77, 6, 0, 0, 0, 0, 0, 0, 0, 0),
+(77, 7, 20, 20, 0, 0, 0, 0, 3790000, 4000000),
+(77, 8, 0, 0, 0, 0, 0, 0, 0, 0),
+(77, 9, 0, 0, 0, 0, 0, 0, 0, 0),
+(77, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 2, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 3, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 5, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 6, 36, 36, 0, 0, 0, 0, 3900000, 4900000),
+(78, 7, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 8, 8, 8, 0, 0, 0, 0, 7300000, 7500000),
+(78, 9, 0, 0, 0, 0, 0, 0, 0, 0),
+(78, 10, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 1, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 2, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 3, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 4, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 5, 32, 24, 0, 8, 0, 0, 4500000, 6980000),
+(79, 6, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 7, 11, 11, 0, 0, 0, 0, 7500000, 8580000),
+(79, 8, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 9, 0, 0, 0, 0, 0, 0, 0, 0),
+(79, 10, 0, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -995,7 +1061,7 @@ ALTER TABLE `tbl_admin`
 -- AUTO_INCREMENT for table `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `prop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `prop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 --
 -- AUTO_INCREMENT for table `property_municipals`
 --
