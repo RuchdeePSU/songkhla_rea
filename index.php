@@ -172,7 +172,7 @@
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
                                     <div class="price-range">
-                                        <input type="text" id="price-input" name="price"  value="500000;20000000">
+                                        <input type="text" id="price-input" name="price"  value="500000;30000000">
                                     </div>
                                 </div>
                                 <div class="form-group">

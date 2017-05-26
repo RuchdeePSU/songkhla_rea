@@ -26,8 +26,25 @@
     }
     $property->perpage = 10;
     $property->start = ($page - 1) * $property->perpage;
-    $result = $property->readforpagination();
-    $total_rows = $property->getTotalRows();
+    //$total_rows = $property->getTotalRows();
+    //$total_pages = ceil($total_rows / $property->perpage);
+
+    $notfound = false;
+    if (isset($_POST['btn-search'])) {
+        if (!empty($_POST['property-search'])) {
+            $property->srch_prop_name = $_POST['property-search'];
+            $result = $property->search_listing();
+            if (mysqli_num_rows($result) <= 0) {
+                $notfound = true;
+                $total_rows = 0;
+            } else {
+                $total_rows = mysqli_num_rows($result);
+            }
+        }
+    } else {
+        $result = $property->readforpagination();
+        $total_rows = $property->getTotalRows();
+    }
     $total_pages = ceil($total_rows / $property->perpage);
 
     if (isset($_GET['property_id'])) {
@@ -55,7 +72,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/datatables.css"/> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .btn, ul { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn, ul, th, td, input[type='text'], .alert { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลโครงการ</title>
@@ -147,60 +164,89 @@
                     <section id="my-properties">
                         <header><h1>โครงการอสังหาริมทรัพย์</h1></header>
                         <div class="my-properties">
-                            <h3><span class="label label-primary">จำนวนโครงการทั้งหมด <?php echo  $total_rows; ?> โครงการ</span></h3>
-                            <div class="table-responsive">
-                                <table class="table" id="property-listing">
-                                    <thead>
-                                    <tr>
-                                        <th>ชื่อโครงการ</th>
-                                        <th>เทศบาล</th>
-                                        <th>อำเภอ</th>
-                                        <th>วันที่บันทึกข้อมูล</th>
-                                        <th>สถานะการแสดงข้อมูล</th>
-                                        <th class="center">แก้ไขข้อมูล</th>
-                                        <th class="center">ลบข้อมูล</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <?php while ($row = mysqli_fetch_array($result)) { ?>
-                                    <tr>
-                                        <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_name']; ?></td>
-                                        <td>
-                                        <?php
-                                            $property_municipal->prop_municipal_id = $row['prop_municipal_id'];
-                                            $result_prop_municipal = $property_municipal->readone();
-                                            $row_prop_municipal = mysqli_fetch_array($result_prop_municipal);
-                                            echo $row_prop_municipal['prop_municipal_desc'];
-                                        ?>
-                                        </td>
-                                        <td><?php echo $row['prop_address_district']; ?></td>
-                                        <td><?php echo $row['prop_created_date']; ?></td>
-                                        <td><?php if ($row['prop_status']) {
-                                            echo "อนุญาตให้แสดงข้อมูล";
-                                        } else { echo "ไม่อนุญาตให้แสดงข้อมูล"; } ?></td>
-                                        <td class="center">
-                                            <a href="properties-update.php?property_id=<?php echo $row['prop_id']; ?>" class="edit"><i class="fa fa-pencil"></i></a>
-                                        </td>
-                                        <td class="center">
-                                            <a href="#" class="delete" data-href="properties-listing.php?property_id=<?php echo $row['prop_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
-                                        </td>
-                                    </tr>
-                                    <?php } ?>
-                                    </tbody>
-                                </table>
-                            </div><!-- /.table-responsive -->
-                            <!-- Pagination -->
-                            <div class="center">
-                                <ul class="pagination">
-                                    <?php for ($i=1; $i <= $total_pages; $i++) {
-                                        if ($page == $i) {
-                                            echo "<li class='active'><a href='properties-listing.php?page=" . $i . "'>" . $i . "</a></li>";
-                                        } else {
-                                            echo "<li><a href='properties-listing.php?page=" . $i . "'>" . $i . "</a></li>";
-                                        }
-                                    } ?>
-                                </ul><!-- /.pagination-->
-                            </div><!-- /.center-->
+                          <div class="row">
+                              <div class="col-md-12 col-sm-12">
+                                <form class="form-inline" method="post" action="<?php echo $_SERVER['PHP_SELF'] ?>">
+                                  <div class="form-group">
+                                    <div class="input-group">
+                                      <span class="input-group-addon"><i class="glyphicon glyphicon-search"></i></span>
+                                      <input type="text" class="form-control" id="property-search" name="property-search" maxlength="100" placeholder="ค้นหาชื่อโครงการ" required oninvalid="this.setCustomValidity('ใส่ชื่อโครงการก่อนทำการค้นหา!')" onchange="this.setCustomValidity('')">
+                                    </div>
+                                  </div>
+                                  <button type="submit" class="btn btn-default" name="btn-search">ค้นหา</button>
+                                  <button type="button" class="btn btn-success" onclick="return window.location='properties-listing.php';">แสดงข้อมูลทั้งหมด <span class="badge"><?php echo $property->getTotalRows(); ?> โครงการ</span></button>
+                                </form>
+                              </div>
+                          </div>
+                          <br />
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                              <div class="table-responsive">
+                                  <table class="table" id="property-listing">
+                                      <thead>
+                                      <tr>
+                                          <th>ชื่อโครงการ</th>
+                                          <th>เทศบาล</th>
+                                          <th>อำเภอ</th>
+                                          <th>วันที่บันทึกข้อมูล</th>
+                                          <th>สถานะการแสดงข้อมูล</th>
+                                          <th class="center">แก้ไขข้อมูล</th>
+                                          <th class="center">ลบข้อมูล</th>
+                                      </tr>
+                                      </thead>
+                                      <tbody>
+                                      <?php while ($row = mysqli_fetch_array($result)) { ?>
+                                      <tr>
+                                          <td>&nbsp;&nbsp;&nbsp;<?php echo $row['prop_name']; ?></td>
+                                          <td>
+                                          <?php
+                                              $property_municipal->prop_municipal_id = $row['prop_municipal_id'];
+                                              $result_prop_municipal = $property_municipal->readone();
+                                              $row_prop_municipal = mysqli_fetch_array($result_prop_municipal);
+                                              echo $row_prop_municipal['prop_municipal_desc'];
+                                          ?>
+                                          </td>
+                                          <td><?php echo $row['prop_address_district']; ?></td>
+                                          <td><?php echo $row['prop_created_date']; ?></td>
+                                          <td><?php if ($row['prop_status']) {
+                                              echo "อนุญาตให้แสดงข้อมูล";
+                                          } else { echo "ไม่อนุญาตให้แสดงข้อมูล"; } ?></td>
+                                          <td class="center">
+                                              <a href="properties-update.php?property_id=<?php echo $row['prop_id']; ?>" class="edit"><i class="fa fa-pencil"></i></a>
+                                          </td>
+                                          <td class="center">
+                                              <a href="#" class="delete" data-href="properties-listing.php?property_id=<?php echo $row['prop_id']; ?>" data-toggle="modal" data-target="#confirm-delete"><i class="fa fa-trash-o"></i></a>
+                                          </td>
+                                      </tr>
+                                      <?php } ?>
+                                      </tbody>
+                                  </table>
+                              </div><!-- /.table-responsive -->
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12 col-sm-12">
+                                <div class="center-block">
+                                    <?php
+                                      if (isset($notfound) && $notfound) {
+                                          echo "<div class='alert alert-danger text-center'>ไม่พบข้อมูล</div>";
+                                      }
+                                    ?>
+                                </div>
+                            </div>
+                          </div>
+                          <!-- Pagination -->
+                          <div class="center">
+                              <ul class="pagination">
+                                  <?php for ($i=1; $i <= $total_pages; $i++) {
+                                      if ($page == $i) {
+                                          echo "<li class='active'><a href='properties-listing.php?page=" . $i . "'>" . $i . "</a></li>";
+                                      } else {
+                                          echo "<li><a href='properties-listing.php?page=" . $i . "'>" . $i . "</a></li>";
+                                      }
+                                  } ?>
+                              </ul><!-- /.pagination-->
+                          </div><!-- /.center-->
                         </div><!-- /.my-properties -->
                     </section><!-- /#my-properties -->
                 </div><!-- /.col-md-9 -->

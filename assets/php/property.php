@@ -38,6 +38,9 @@ class Property{
     public $start;
     public $perpage;
 
+    // for search in properties-listing.php
+    public $srch_prop_name;
+
     public function __construct($db){
         $this->conn = $db;
     }
@@ -351,6 +354,13 @@ class Property{
         $query = "SELECT * FROM " . $this->table_name;
         $result = mysqli_query($this->conn, $query);
         return mysqli_num_rows($result);
+    }
+
+    // search property in properties-listing.php
+    function search_listing(){
+        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_name LIKE '%" . $this->srch_prop_name . "%' ORDER BY prop_id DESC LIMIT " . $this->start . ", " . $this->perpage;
+        $result = mysqli_query($this->conn, $query);
+        return $result;
     }
 }
 

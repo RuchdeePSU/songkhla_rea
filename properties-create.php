@@ -258,6 +258,33 @@
                                 </div>
                               </div>
                               <div class="row">
+                                  <div class="col-md-2 col-sm-2">
+                                      <div class="form-group">
+                                          <label for="property-address-no">ขนาดพื้นที่ ไร่</label>
+                                          <input type="text" class="form-control" id="property-address-no" name="property-address-no">
+                                      </div><!-- /.form-group -->
+                                  </div><!-- /.col-md-3 -->
+                                  <div class="col-md-2 col-sm-2">
+                                      <div class="form-group">
+                                          <label for="property-address-moo">งาน</label>
+                                          <input type="text" class="form-control" id="property-address-moo" name="property-address-moo" maxlength="2" pattern="^[0-9]{1,}$" data-error="หมู่ที่ต้องเป็นตัวเลข">
+                                          <div class="help-block with-errors"></div>
+                                      </div><!-- /.form-group -->
+                                  </div><!-- /.col-md-2 -->
+                                  <div class="col-md-2 col-sm-2">
+                                      <div class="form-group">
+                                          <label for="property-address-road">ตารางวา</label>
+                                          <input type="text" class="form-control" id="property-address-road" name="property-address-road">
+                                      </div><!-- /.form-group -->
+                                  </div><!-- /.col-md-3 -->
+                                  <div class="col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <label for="property-subdistrict">เลขที่ใบอนุญาตจัดสรร</label>
+                                        <input type="text" class="form-control" id="property-subdistrict" name="property-subdistrict" maxlength="100">
+                                    </div><!-- /.form-group -->
+                                  </div>
+                              </div>
+                              <div class="row">
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-status">สถานะการแสดงข้อมูล</label>
@@ -267,7 +294,48 @@
                                       </select>
                                   </div><!-- /.form-group -->
                                 </div>
-                                <div class="col-md-offset-8 col-sm-offet-8">
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-district">ชื่อ-สกุลผู้ติดต่อของโครงการ</label>
+                                      <input type="text" class="form-control" id="property-contact-person" name="property-contact-person"  maxlength="50">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-district">เว็บไซต์ของโครงการ</label>
+                                      <input type="text" class="form-control" id="property-website" name="property-website" maxlength="50">
+                                  </div><!-- /.form-group -->
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-8 col-sm-8">
+                                  <div class="form-group">
+                                      <label for="property-district">ชื่อผู้ประกอบการเจ้าของโครงการ</label>
+                                      <input type="text" class="form-control" id="property-owner" name="property-owner"  maxlength="100">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-status">สถานะสมาชิก</label>
+                                      <select name="property-membership" id="property-membership">
+                                          <option value="1" selected>เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
+                                          <option value="0">ไม่เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
+                                      </select>
+                                  </div><!-- /.form-group -->
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-8 col-sm-8">
+                                  <div class="form-group">
+                                      <label for="property-district">ชื่อนิติบุคคลบริหารโครงการ</label>
+                                      <input type="text" class="form-control" id="property-corporation" name="property-corporation"  maxlength="100">
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-district">วันที่เริ่มดำเนินโครงการ</label>
+                                      <input type="text" class="form-control" id="property-started-date" name="property-started-date">
+                                  </div><!-- /.form-group -->
                                 </div>
                               </div>
                               <div class="row">
