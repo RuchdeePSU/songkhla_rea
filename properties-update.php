@@ -51,6 +51,16 @@
             $property->prop_email = $_POST['property-email'];
             $property->prop_lat = $_POST['latitude'];
             $property->prop_long = $_POST['longitude'];
+            $property->prop_size1 = $_POST['property-size1'];
+            $property->prop_size2 = $_POST['property-size2'];
+            $property->prop_size3 = $_POST['property-size3'];
+            $property->prop_regist_no = $_POST['property-regist-no'];
+            $property->prop_owner_name = $_POST['property-owner'];
+            $property->prop_membership = $_POST['property-membership'];
+            $property->prop_corporation = $_POST['property-corporation'];
+            $property->prop_started_date = $_POST['property-started-date'];
+            $property->prop_contact_person = $_POST['property-contact-person'];
+            $property->prop_website = $_POST['property-website'];
             $property->prop_status = $_POST['property-status'];
             $property->prop_updated_date = date("Y/m/d");
 
@@ -258,41 +268,45 @@
                                 <div class="col-md-2 col-sm-2">
                                     <div class="form-group">
                                         <label for="property-size1">ขนาดพื้นที่ ไร่</label>
-                                        <input type="number" class="form-control" id="property-size1" name="property-size1">
+                                        <input type="number" class="form-control" id="property-size1" name="property-size1" min="0" placeholder="0" value="<?php echo $row_prop['prop_size1'] ?>">
                                     </div><!-- /.form-group -->
                                 </div><!-- /.col-md-3 -->
                                 <div class="col-md-2 col-sm-2">
                                     <div class="form-group">
                                         <label for="property-size2">งาน</label>
-                                        <input type="number" class="form-control" id="property-size2" name="property-size2">
+                                        <input type="number" class="form-control" id="property-size2" name="property-size2" min="0" placeholder="0" value="<?php echo $row_prop['prop_size2'] ?>">
                                     </div><!-- /.form-group -->
                                 </div><!-- /.col-md-2 -->
                                 <div class="col-md-2 col-sm-2">
                                     <div class="form-group">
                                         <label for="property-size3">ตร.วา</label>
-                                        <input type="number" class="form-control" id="property-size3" name="property-size3">
+                                        <input type="number" class="form-control" id="property-size3" name="property-size3" min="0" placeholder="0" value="<?php echo $row_prop['prop_size3'] ?>">
                                     </div><!-- /.form-group -->
                                 </div><!-- /.col-md-3 -->
                                 <div class="col-md-2 col-sm-2">
                                   <div class="form-group">
                                       <label for="property-regist-no">เลขที่ใบอนุญาต</label>
-                                      <input type="text" class="form-control" id="property-regist-no" name="property-regist-no" maxlength="20">
+                                      <input type="text" class="form-control" id="property-regist-no" name="property-regist-no" maxlength="30" value="<?php echo $row_prop['prop_regist_no'] ?>">
                                   </div><!-- /.form-group -->
-                                </div>                                                            
+                                </div>
                               </div>
                               <div class="row">
                                 <div class="col-md-8 col-sm-8">
                                   <div class="form-group">
                                       <label for="property-owner">ชื่อผู้ประกอบการเจ้าของโครงการ</label>
-                                      <input type="text" class="form-control" id="property-owner" name="property-owner"  maxlength="100">
+                                      <input type="text" class="form-control" id="property-owner" name="property-owner"  maxlength="100" value="<?php echo $row_prop['prop_owner_name'] ?>">
                                   </div><!-- /.form-group -->
                                 </div>
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-membership">สถานะสมาชิก</label>
                                       <select name="property-membership" id="property-membership">
-                                          <option value="1" selected>เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
-                                          <option value="0">ไม่เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
+                                          <option value="1" <?php if ($row_prop['prop_membership']) {
+                                            echo "selected";
+                                          } ?>>เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
+                                          <option value="0" <?php if (!$row_prop['prop_membership']) {
+                                            echo "selected";
+                                          } ?>>ไม่เป็นสมาชิกสมาคมอสังหาริมทรัพย์</option>
                                       </select>
                                   </div><!-- /.form-group -->
                                 </div>
@@ -301,19 +315,19 @@
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-corporation">ชื่อนิติบุคคลบริหารโครงการ</label>
-                                      <input type="text" class="form-control" id="property-corporation" name="property-corporation"  maxlength="100">
+                                      <input type="text" class="form-control" id="property-corporation" name="property-corporation" maxlength="100" value="<?php echo $row_prop['prop_corporation'] ?>">
                                   </div><!-- /.form-group -->
                                 </div>
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-started-date">วันที่เริ่มดำเนินโครงการ</label>
-                                      <input type="date" class="form-control" id="property-started-date" name="property-started-date">
+                                      <input type="date" class="form-control" id="property-started-date" name="property-started-date" value="<?php echo $row_prop['prop_started_date'] ?>">
                                   </div><!-- /.form-group -->
                                 </div>
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-contact-person">ชื่อ-สกุลผู้ติดต่อของโครงการ</label>
-                                      <input type="text" class="form-control" id="property-contact-person" name="property-contact-person"  maxlength="50">
+                                      <input type="text" class="form-control" id="property-contact-person" name="property-contact-person"  maxlength="100" value="<?php echo $row_prop['prop_contact_person'] ?>">
                                   </div><!-- /.form-group -->
                                 </div>
                               </div>
@@ -335,7 +349,7 @@
                                 <div class="col-md-4 col-sm-4">
                                   <div class="form-group">
                                       <label for="property-website">เว็บไซต์ของโครงการ</label>
-                                      <input type="text" class="form-control" id="property-website" name="property-website" maxlength="50">
+                                      <input type="text" class="form-control" id="property-website" name="property-website" maxlength="50" value="<?php echo $row_prop['prop_website'] ?>">
                                   </div><!-- /.form-group -->
                                 </div>
                               </div>

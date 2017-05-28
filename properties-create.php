@@ -43,6 +43,16 @@
         $property->prop_email = $_POST['property-email'];
         $property->prop_lat = $_POST['latitude'];
         $property->prop_long = $_POST['longitude'];
+        $property->prop_size1 = $_POST['property-size1'];
+        $property->prop_size2 = $_POST['property-size2'];
+        $property->prop_size3 = $_POST['property-size3'];
+        $property->prop_regist_no = $_POST['property-regist-no'];
+        $property->prop_owner_name = $_POST['property-owner'];
+        $property->prop_membership = $_POST['property-membership'];
+        $property->prop_corporation = $_POST['property-corporation'];
+        $property->prop_started_date = $_POST['property-started-date'];
+        $property->prop_contact_person = $_POST['property-contact-person'];
+        $property->prop_website = $_POST['property-website'];
         $property->prop_status = $_POST['property-status'];
         $property->prop_created_date = date("Y/m/d");
 

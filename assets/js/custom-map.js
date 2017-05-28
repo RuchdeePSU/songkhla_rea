@@ -1,7 +1,7 @@
 var mapStyles = [{featureType:'water',elementType:'all',stylers:[{hue:'#d7ebef'},{saturation:-5},{lightness:54},{visibility:'on'}]},{featureType:'landscape',elementType:'all',stylers:[{hue:'#eceae6'},{saturation:-49},{lightness:22},{visibility:'on'}]},{featureType:'poi.park',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-81},{lightness:34},{visibility:'on'}]},{featureType:'poi.medical',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-80},{lightness:-2},{visibility:'on'}]},{featureType:'poi.school',elementType:'all',stylers:[{hue:'#c8c6c3'},{saturation:-91},{lightness:-7},{visibility:'on'}]},{featureType:'landscape.natural',elementType:'all',stylers:[{hue:'#c8c6c3'},{saturation:-71},{lightness:-18},{visibility:'on'}]},{featureType:'road.highway',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-92},{lightness:60},{visibility:'on'}]},{featureType:'poi',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-81},{lightness:34},{visibility:'on'}]},{featureType:'road.arterial',elementType:'all',stylers:[{hue:'#dddbd7'},{saturation:-92},{lightness:37},{visibility:'on'}]},{featureType:'transit',elementType:'geometry',stylers:[{hue:'#c8c6c3'},{saturation:4},{lightness:10},{visibility:'on'}]}];
 
 $.ajaxSetup({
-    cache: false
+    cache: true
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -50,13 +50,13 @@ function createHomepageGoogleMap(_latitude,_longitude){
                 newMarkers.push(marker);
                 boxText.innerHTML =
                     '<div class="infobox-inner">' +
-                        '<a href="' + locations[i][5] + '">' +
+                        '<a href="' + locations[i][5] + "?prop_id=" + locations[i][8] + '">' +
                         '<div class="infobox-image" style="position: relative">' +
                         '<img src="' + locations[i][6] + '">' + '<div><span class="infobox-price">' + locations[i][2] + '</span></div>' +
                         '</div>' +
                         '</a>' +
                         '<div class="infobox-description">' +
-                        '<div class="infobox-title"><a href="'+ locations[i][5] +'">' + locations[i][0] + '</a></div>' +
+                        '<div class="infobox-title"><a href="'+ locations[i][5] + "?prop_id=" + locations[i][8] +'">' + locations[i][0] + '</a></div>' +
                         '<div class="infobox-location">' + locations[i][1] + '</div>' +
                         '</div>' +
                         '</div>';
@@ -134,7 +134,8 @@ function success(position) {
 // Google Map - Property Detail
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function initMap(propertyId) {
+// old initMap(propertyId)
+function initMap(_latitude, _longitude, _pictureLabel) {
     $.getScript("assets/js/locations.js", function(){
         var subtractPosition = 0;
         var mapWrapper = $('#property-detail-map.float');
@@ -152,15 +153,15 @@ function initMap(propertyId) {
             subtractPosition = 0;
         }
 
-        var mapCenter = new google.maps.LatLng(locations[propertyId][3],locations[propertyId][4]);
+        var mapCenter = new google.maps.LatLng(_latitude, _longitude);
 
         if ( $("#property-detail-map").hasClass("float") ) {
-            mapCenter = new google.maps.LatLng(locations[propertyId][3],locations[propertyId][4] - subtractPosition);
+            mapCenter = new google.maps.LatLng(_latitude, _longitude - subtractPosition);
             mapWrapper.css('width', mapWrapper.width() + mapWrapper.offset().left )
         }
 
         var mapOptions = {
-            zoom: 15,
+            zoom: 14,
             center: mapCenter,
             disableDefaultUI: false,
             scrollwheel: false,
@@ -170,8 +171,9 @@ function initMap(propertyId) {
         var map = new google.maps.Map(mapElement, mapOptions);
 
         var pictureLabel = document.createElement("img");
-        pictureLabel.src = locations[propertyId][7];
-        var markerPosition = new google.maps.LatLng(locations[propertyId][3],locations[propertyId][4]);
+        // pictureLabel.src = locations[propertyId][7];
+        pictureLabel.src = _pictureLabel;
+        var markerPosition = new google.maps.LatLng(_latitude, _longitude);
         var marker = new MarkerWithLabel({
             position: markerPosition,
             map: map,

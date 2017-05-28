@@ -195,6 +195,11 @@
                     <!--
                     <h1 class="no-bottom-margin no-border">Zoner Is Fully Loaded Real Estate Template with <a href="#" class="text-underline">Tons of Features</a>!</h1>
                     -->
+                        <h2 class="no-border">[ จำนวนโครงการทั้งสิ้น ]</h2>
+                        <div class="number-wrapper">
+                            <h1 class="number" data-from="1" data-to="136">136</h1>
+                        </div><!-- /.number-wrapper -->
+
                 </div>
             </div>
         </section><!-- /#banner -->
@@ -602,6 +607,8 @@
 <script type="text/javascript" src="assets/js/markerclusterer_packed.js"></script>
 <script type="text/javascript" src="assets/js/custom-map.js"></script>
 <script type="text/javascript" src="assets/js/custom.js"></script>
+<script type="text/javascript" src="assets/js/jquery.countTo.js"></script>
+<script type="text/javascript" src="assets/js/waypoints.min.js"></script>
 <!--[if gt IE 8]>
 <script type="text/javascript" src="assets/js/ie.js"></script>
 <![endif]-->

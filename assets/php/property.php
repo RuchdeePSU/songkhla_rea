@@ -115,9 +115,9 @@ class Property{
         // }
 
         // write statement
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_phone_no, prop_email, prop_lat, prop_long, prop_detail_link, prop_thumbnail_img, prop_icon_type, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_phone_no, prop_email, prop_lat, prop_long, prop_size1, prop_size2, prop_size3, prop_regist_no, prop_owner_name, prop_membership, prop_corporation, prop_started_date, prop_contact_person, prop_website, prop_detail_link, prop_thumbnail_img, prop_icon_type, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_created_date);
+        mysqli_stmt_bind_param($stmt, 'ssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_created_date);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -165,11 +165,11 @@ class Property{
         //         break;
         // }
 
-        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_municipal_id = ?, prop_phone_no = ?, prop_email = ?, prop_lat = ?, prop_long = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_icon_type = ?, prop_status = ?, prop_updated_date = ? WHERE prop_id = ?";
+        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_municipal_id = ?, prop_phone_no = ?, prop_email = ?, prop_lat = ?, prop_long = ?, prop_size1 = ?, prop_size2 = ?, prop_size3 = ?, prop_regist_no = ?, prop_owner_name = ?, prop_membership = ?, prop_corporation = ?, prop_started_date = ?, prop_contact_person = ?, prop_website = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_icon_type = ?, prop_status = ?, prop_updated_date = ? WHERE prop_id = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'sssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_updated_date, $this->prop_id);
+        mysqli_stmt_bind_param($stmt, 'sssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_updated_date, $this->prop_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -181,16 +181,22 @@ class Property{
 
     // delete record
     function delete() {
-        $query = "DELETE FROM " . $this->table_name . " WHERE prop_id = ?";
-        // statement
-        $stmt = mysqli_prepare($this->conn, $query);
-        // bind parameter
-        mysqli_stmt_bind_param($stmt, 's', $this->prop_id);
-
-        /* execute prepared statement */
-        if (mysqli_stmt_execute($stmt)) {
-            return true;
-        }else {
+        // first delete property data in property_detail
+        $property_detail = new Property_detail($this->conn);
+        $property_detail->prop_id = $this->prop_id;
+        if ($property_detail->delete()) {
+            $query = "DELETE FROM " . $this->table_name . " WHERE prop_id = ?";
+            // statement
+            $stmt = mysqli_prepare($this->conn, $query);
+            // bind parameter
+            mysqli_stmt_bind_param($stmt, 's', $this->prop_id);
+            /* execute prepared statement */
+            if (mysqli_stmt_execute($stmt)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
     }
