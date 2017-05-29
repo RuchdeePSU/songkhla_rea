@@ -9,15 +9,17 @@
     include_once 'assets/php/property.php';
     include_once 'assets/php/property_type.php';
     include_once 'assets/php/property_municipal.php';
+    include_once 'assets/php/property_detail.php';
 
     // get connection
     $database = new Database();
     $db = $database->getConnection();
 
-    // pass connection to property_types table
+    // pass connection to tables
     $property = new Property($db);
     $property_type = new Property_type($db);
     $property_municipal = new Property_municipal($db);
+    $property_detail = new Property_detail($db);
 
     $property->prop_id = $_GET['prop_id'];
     $result_prop = $property->readone();
@@ -39,6 +41,21 @@
     if (!empty($row_prop['prop_address_district'])) {
         $straddr .= "อ." . $row_prop['prop_address_district'];
     }
+
+    $strsize = "";
+    if (!empty($row_prop['prop_size1']) && $row_prop['prop_size1'] != 0) {
+        $strsize .= $row_prop['prop_size1'] . " ไร่ ";
+    }
+    if (!empty($row_prop['prop_size2']) && $row_prop['prop_size2'] != 0) {
+        $strsize .= $row_prop['prop_size2'] . " งาน ";
+    }
+    if (!empty($row_prop['prop_size3']) && $row_prop['prop_size3'] != 0) {
+        $strsize .= $row_prop['prop_size3'] . " ตารางวา";
+    }
+
+    $property_municipal->prop_municipal_id = $row_prop['prop_municipal_id'];
+    $result_municipal = $property_municipal->readone();
+    $row_municipal = mysqli_fetch_array($result_municipal);
 
     $nodata = "[ไม่มีข้อมูล]";
 
@@ -198,45 +215,48 @@
                             <div class="col-md-8 col-sm-12">
                                 <section id="description">
                                     <header><h2>รายละเอียดโครงการ</h2></header>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras et dui vestibulum,
-                                        bibendum purus sit amet, vulputate mauris. Ut adipiscing gravida tincidunt.
-                                        Duis euismod placerat rhoncus. Phasellus mollis imperdiet placerat. Sed ac
-                                        turpis nisl. Mauris at ante mauris. Aliquam posuere fermentum lorem, a aliquam
-                                        mauris rutrum a. Curabitur sit amet pretium lectus, nec consequat orci.
-                                    </p>
-                                    <p>
-                                        Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos
-                                        himenaeos. Duis et metus in libero sollicitudin venenatis eu sed enim. Nam felis
-                                        lorem, suscipit ac nisl ac, iaculis dapibus tellus. Cras ante justo, aliquet quis
-                                        placerat nec, molestie id turpis. Cras at tincidunt magna. Mauris aliquam sem sit
-                                        amet dapibus venenatis. Sed metus orci, tincidunt sed fermentum non, ornare non quam.
-                                        Aenean nec turpis at libero lobortis pretium.
-                                    </p>
-                                </section><!-- /#description -->
-                                <section id="property-features">
-                                    <header><h2>Property Description</h2></header>
-                                    <ul class="list-unstyled property-features-list">
-                                        <li>Sauna</li>
-                                        <li>Fireplace or fire pit</li>
-                                        <li>Outdoor Kitchen</li>
-                                        <li>Tennis Courts</li>
-                                        <li>Trees and Landscaping</li>
-                                        <li>Sun Room</li>
-                                        <li>Family Room</li>
-                                        <li>Concrete Flooring</li>
-                                    </ul>
                                     <dl>
-                                        <dt><i class="fa fa-user"></i> Phone:</dt>
-                                        <dd>(123) 456 789</dd>
-                                        <dt>Mobile:</dt>
-                                        <dd>888 123 456 789</dd>
-                                        <dt>Email:</dt>
-                                        <dd><a href="mailto:#">agency@example.com</a></dd>
-                                        <dt>Skype:</dt>
-                                        <dd>genius.properties</dd>
+                                        <dt><i class="fa fa-map-marker"></i> เทศบาลที่ตั้งโครงการ:</dt>
+                                          <dd><?php echo $row_municipal['prop_municipal_desc']; ?></dd>
+                                        <dt><i class="fa fa-home"></i> ขนาดพื้นที่ (ไร่/งาน/ตารางวา):</dt>
+                                          <dd><?php if ($strsize != "") {
+                                              echo $strsize;
+                                          } else {
+                                              echo $nodata;
+                                          } ?></dd>
+                                        <dt><i class="fa fa-certificate"></i> เลขที่ใบอนุญาตของโครงการ  :</dt>
+                                          <dd><?php if ($row_prop['prop_regist_no'] != "") {
+                                            echo $row_prop['prop_regist_no'];
+                                        } else {
+                                            echo $nodata;
+                                        } ?></dd>
+                                        <dt><i class="fa fa-user"></i> ผู้ประกอบการเจ้าของโครงการ:</dt>
+                                          <dd><?php if ($row_prop['prop_owner_name'] != "") {
+                                            echo $row_prop['prop_owner_name'];
+                                        } else {
+                                            echo $nodata;
+                                        } ?></dd>
+                                        <dt><i class="fa fa-calendar"></i> วันที่เริ่มดำเนินโครงการ:</dt>
+                                          <dd><?php if ($row_prop['prop_started_date'] != "") {
+                                            echo $row_prop['prop_started_date'];
+                                        } else {
+                                            echo $nodata;
+                                        } ?></dd>
+                                        <dt><i class="fa fa-users"></i> นิติบุคคลบริหารโครงการ:</dt>
+                                          <dd><?php if ($row_prop['prop_corporation'] != "") {
+                                            echo $row_prop['prop_corporation'];
+                                        } else {
+                                            echo $nodata;
+                                        } ?></dd>
+                                        <dt><i class="fa fa-check-square"></i> สถานะสมาชิก:</dt>
+                                          <dd><?php if ($row_prop['prop_membership']) {
+                                            echo "เป็นสมาชิกสมาคมอสังหาริมทรัพย์";
+                                        } else {
+                                            echo "ไม่เป็นสมาชิกสมาคมอสังหาริมทรัพย์";
+                                        } ?></dd>
                                     </dl>
-                                </section><!-- /#property-features -->
+                                </section><!-- /#description -->
+                                <br />
                                 <section id="property-map">
                                     <header><h2>ที่ตั้งโครงการ</h2></header>
                                     <div class="property-detail-map-wrapper">
@@ -254,25 +274,25 @@
                                                     <figure><a href="agent-detail.html"><img alt="" src="<?php echo $row_prop['prop_thumbnail_img'] ?>"></a></figure>
                                                     <div class="agent-contact-info">
                                                         <dl>
-                                                            <dt>ชื่อผู้ติดต่อของโครงการ:</dt>
+                                                            <dt><i class="fa fa-user"></i> ชื่อผู้ติดต่อของโครงการ:</dt>
                                                             <dd><?php if ($row_prop['prop_contact_person'] != "") {
                                                                 echo $row_prop['prop_contact_person'];
                                                             } else {
                                                                 echo $nodata;
                                                             } ?></dd>
-                                                            <dt>โทรศัพท์:</dt>
+                                                            <dt><i class="fa fa-phone"></i> โทรศัพท์:</dt>
                                                             <dd><?php if ($row_prop['prop_phone_no'] != "") {
                                                                 echo substr($row_prop['prop_phone_no'], 0, 3). " " . substr($row_prop['prop_phone_no'], 3, 3) . " " . substr($row_prop['prop_phone_no'], 6);
                                                             } else {
                                                                 echo $nodata;
                                                             } ?></dd>
-                                                            <dt>อีเมล:</dt>
+                                                            <dt><i class="fa fa-envelope"></i> อีเมล:</dt>
                                                             <dd><?php if ($row_prop['prop_email'] != "") {
                                                                 echo "<a href='mailto:#' class='link-arrow'>" . $row_prop['prop_email'] ."</a>";
                                                             } else {
                                                                 echo $nodata;
                                                             } ?></dd>
-                                                            <dt>เว็บไซต์:</dt>
+                                                            <dt><i class="fa fa-sitemap"></i> เว็บไซต์:</dt>
                                                             <dd><?php if ($row_prop['prop_website'] != "") {
                                                                 echo "<a href='" . $row_prop['prop_website'] . "' class='link-arrow'>" . $row_prop['prop_website'] . "</a>";
                                                             } else {

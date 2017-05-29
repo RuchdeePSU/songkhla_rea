@@ -113,6 +113,13 @@ class Property_detail
         $row = mysqli_fetch_array($result);
         return $row['max_price'];
     }
+
+    // read some property details where units_total > 0
+    function readsome(){
+        $query = "SELECT * FROM " . $this->table_name . " WHERE prop_id = " . $this->prop_id . " AND units_total > 0 ORDER BY prop_type_id";
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
 }
 
 ?>
