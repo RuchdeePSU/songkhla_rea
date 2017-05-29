@@ -78,6 +78,18 @@ class Property_type{
             return false;
         }
     }
+
+    // get property type name
+    function gettype_name(){
+        $query = "SELECT prop_type_desc FROM " . $this->table_name . " WHERE prop_type_id = " . $this->prop_type_id;
+        $result = mysqli_query($this->conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_array($result);
+            return $row['prop_type_desc'];
+        } else {
+            return "";
+        }
+    }
 }
 
 ?>

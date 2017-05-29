@@ -46,7 +46,6 @@ class Property_detail
         }else {
             return false;
         }
-
     }
 
     // update property_details data
@@ -63,7 +62,6 @@ class Property_detail
         }else {
             return false;
         }
-
     }
 
     // delete record
@@ -103,7 +101,6 @@ class Property_detail
         } else {
             return 0;
         }
-
     }
 
     // find max_price of a specific prop_id

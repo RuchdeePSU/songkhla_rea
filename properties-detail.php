@@ -57,6 +57,9 @@
     $result_municipal = $property_municipal->readone();
     $row_municipal = mysqli_fetch_array($result_municipal);
 
+    $property_detail->prop_id = $row_prop['prop_id'];
+    $result_prop_detail = $property_detail->readsome();
+
     $nodata = "[ไม่มีข้อมูล]";
 
 ?>
@@ -190,26 +193,36 @@
                             <div class="col-md-4 col-sm-12">
                                 <section id="quick-summary" class="clearfix">
                                     <header><h2>ประเภทโครงการ</h2></header>
-                                    <dl>
-                                        <dt>Location</dt>
-                                            <dd>Chicago, IL 60610</dd>
-                                        <dt>Price</dt>
-                                            <dd><span class="tag price">$78,000</span></dd>
-                                        <dt>Property Type:</dt>
-                                            <dd>House</dd>
-                                        <dt>Status:</dt>
-                                            <dd>Sale</dd>
-                                        <dt>Area:</dt>
-                                            <dd>860 m<sup>2</sup></dd>
-                                        <dt>Beds:</dt>
-                                            <dd>3</dd>
-                                        <dt>Baths:</dt>
-                                            <dd>2</dd>
-                                        <dt>Garages:</dt>
-                                            <dd>2</dd>
-                                        <dt>Rating:</dt>
-                                            <dd><div class="rating rating-overall" data-score="4"></div></dd>
-                                    </dl>
+                                    <?php while ($row_prop_detail = mysqli_fetch_array($result_prop_detail)) { ?>
+                                        <dl>
+                                            <dt>ประเภทโครงการ</dt>
+                                                <dd><?php
+                                                    $property_type->prop_type_id = $row_prop_detail['prop_type_id'];
+                                                    echo $property_type->gettype_name();
+                                                ?></dd>
+                                            <dt>จำนวนยูนิตทั้งหมด</dt>
+                                                <dd><?php echo $row_prop_detail['units_total']; ?></dd>
+                                            <dt>จำนวนยูนิตที่จำหน่ายแล้ว</dt>
+                                                <dd><?php echo $row_prop_detail['units_sold']; ?></dd>
+                                            <dt>จำนวนยูนิตที่จำหน่ายได้เฉลี่ย/เดือน</dt>
+                                                <dd><?php echo $row_prop_detail['units_sold_avg']; ?></dd>
+                                            <dt>จำนวนยูนิตคงค้าง ณ ปัจจุบัน</dt>
+                                                <dd><?php echo $row_prop_detail['units_unsold']; ?></dd>
+                                            <dt>ระยะเวลาคงค้างเฉลี่ย (เดือน)</dt>
+                                                <dd><?php echo $row_prop_detail['time_unsold_avg']; ?></dd>
+                                            <dt>จำนวนยูนิตที่จะสร้างเพิ่ม (6 เดือน)</dt>
+                                                <dd><?php echo $row_prop_detail['units_new_6m']; ?></dd>
+                                            <dt>ราคาจำหน่ายต่ำสุด</dt>
+                                                <dd><span class="tag price">฿<?php echo number_format($row_prop_detail['prop_min_price']); ?></span></dd>
+                                            <dt>ราคาจำหน่ายสูงสุด</dt>
+                                                <dd><span class="tag price">฿<?php echo number_format($row_prop_detail['prop_max_price']); ?></span></dd>
+                                            <dt>ราคาจำหน่ายเฉลี่ย</dt>
+                                                <dd><span class="tag price">฿<?php echo number_format(($row_prop_detail['prop_min_price']+$row_prop_detail['prop_max_price'])/2); ?></span></dd>
+                                        </dl>
+                                        <hr class="thick">
+                                    <?php } ?>
+
+
                                 </section><!-- /#quick-summary -->
                             </div><!-- /.col-md-4 -->
                             <div class="col-md-8 col-sm-12">
