@@ -40,6 +40,8 @@
         }
     }
 
+    $number_of_properties = $property->getTotalRows();
+
     // perform search property data
     // if (!isset($_GET['searchresult'])) {
     //     if (!$property->writejson()) {
@@ -70,7 +72,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, ul, p, button { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, ul, p, button, address { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น</title>
@@ -197,12 +199,13 @@
                     -->
                         <h2 class="no-border">[ จำนวนโครงการทั้งสิ้น ]</h2>
                         <div class="number-wrapper">
-                            <h1 class="number" data-from="1" data-to="136">136</h1>
+                            <h1 class="number" data-from="1" data-to="<?php echo $number_of_properties; ?>"><?php echo $number_of_properties; ?></h1>
                         </div><!-- /.number-wrapper -->
 
                 </div>
             </div>
         </section><!-- /#banner -->
+        <!--
         <section id="new-properties" class="block">
             <div class="container">
                 <header class="section-title">
@@ -242,8 +245,8 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
+                        </div>
+                    </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
                             <a href="property-detail.html">
@@ -276,8 +279,8 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
+                        </div>
+                    </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
                             <a href="property-detail.html">
@@ -310,8 +313,8 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
+                        </div>
+                    </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
                             <a href="property-detail.html">
@@ -344,9 +347,9 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
-                </div><!-- /.row-->
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
@@ -380,8 +383,8 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
+                        </div>
+                    </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
                             <a href="property-detail.html">
@@ -414,8 +417,8 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
+                        </div>
+                    </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
                             <a href="property-detail.html">
@@ -448,8 +451,8 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
+                        </div>
+                    </div>
                     <div class="col-md-3 col-sm-6">
                         <div class="property">
                             <a href="property-detail.html">
@@ -482,11 +485,12 @@
                                     </ul>
                                 </div>
                             </a>
-                        </div><!-- /.property -->
-                    </div><!-- /.col-md-3 -->
-                </div><!-- /.row-->
-            </div><!-- /.container-->
-        </section><!-- /#new-properties-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        -->
         <section id="partners" class="block">
             <div class="container">
                 <header class="section-title"><h2>ผู้สนับสนุน</h2></header>
@@ -524,27 +528,25 @@
                         </div><!-- /.col-sm-3 -->
                         <div class="col-md-3 col-sm-3">
                             <article>
-                                <h3>Contact</h3>
-                                <!--
+                                <h3>ติดต่อ</h3>
                                 <address>
-                                    <strong>Your Company</strong><br>
-                                    4877 Spruce Drive<br>
-                                    West Newton, PA 15089
+                                    <strong>ศูนย์บริการวิชาการ</strong><br>
+                                    อาคารสำนักทรัพยากรการเรียนรู้ฯ (LRC1)<br />
+                                    ชั้น 10 มหาวิทยาลัยสงขลานครินทร์<br />
+                                    เลขที่ 15 ถ.กาญจนวณิชย์<br />
+                                    อ.หาดใหญ่ จ.สงขลา 90110<br />
+                                    0-7428-6972-4
                                 </address>
-                                +1 (734) 123-4567<br>
-                                <a href="#">hello@example.com</a>
-                                -->
                             </article>
                         </div><!-- /.col-sm-3 -->
                         <div class="col-md-3 col-sm-3">
                             <article>
-                                <h3>Useful Links</h3>
+                                <h3>ลิงค์ที่เกี่ยวข้อง</h3>
                                 <ul class="list-unstyled list-links">
-                                    <li><a href="#">All Properties</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Login and Register Account</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Terms and Conditions</a></li>
+                                    <li><a href="http://www.songkhlarea.org/frontpage" target="_blank">สมาคมอสังหาริมทรัพย์จังหวัดสงขลา</a></li>
+                                    <li><a href="http://www.psu.ac.th/" target="_blank">มหาวิทยาลัยสงขลานครินทร์</a></li>
+                                    <li><a href="http://www.outreach.psu.ac.th/" target="_blank">ศูนย์บริการวิชาการ มหาวิทยาลัยสงขลานครินทร์</a></li>
+                                    <li><a href="http://www.fms.psu.ac.th/" target="_blank">คณะวิทยาการจัดการ มหาวิทยาลัยสงขลานครินทร์</a></li>
                                 </ul>
                             </article>
                         </div><!-- /.col-sm-3 -->
@@ -554,7 +556,7 @@
             <aside id="footer-thumbnails" class="footer-thumbnails"></aside><!-- /#footer-thumbnails -->
             <aside id="footer-copyright">
                 <div class="container">
-                    <span>Copyright © 2013. All Rights Reserved.</span>
+                    <span>Copyright © 2017. All Rights Reserved.</span>
                     <span class="pull-right"><a href="#page-top" class="roll">Go to top</a></span>
                 </div>
             </aside>
