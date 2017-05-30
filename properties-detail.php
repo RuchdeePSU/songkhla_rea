@@ -307,7 +307,7 @@
                                                             } ?></dd>
                                                             <dt><i class="fa fa-sitemap"></i> เว็บไซต์:</dt>
                                                             <dd><?php if ($row_prop['prop_website'] != "") {
-                                                                echo "<a href='" . $row_prop['prop_website'] . "' class='link-arrow'>" . $row_prop['prop_website'] . "</a>";
+                                                                echo "<a href='" . $row_prop['prop_website'] . "' class='link-arrow' target='_blank'>" . $row_prop['prop_website'] . "</a>";
                                                             } else {
                                                                 echo $nodata;
                                                             } ?></dd>
