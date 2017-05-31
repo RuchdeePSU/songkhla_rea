@@ -75,5 +75,6 @@ var locations = [
 ["ฮาร์โมนีวิลล์ 3", "ถ.บ้านโป๊ะหมอ ต.บ้านพรุ อ.หาดใหญ่", "฿2,420,000-฿5,200,000", 6.932496, 100.469295, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "4"],
 ["ฮาร์โมนีวิลล์ 1", "ต.บ้านพรุ อ.หาดใหญ่", "฿1,690,000-฿5,490,000", 6.963813, 100.475182, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "3"],
 ["ฮาร์โมนีบิซ", "ต.บ้านพรุ อ.หาดใหญ่", "฿2,800,000-฿8,870,000", 6.966122, 100.475611, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "2"],
-["ปิยะทรัพย์ บ้านไร่", "88/5 ม.8 ถ.บ้านไร่-ทุ่งขมิ้น ต.บ้านพรุ ", "฿0-฿0", 6.896111, 100.476111, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "1"]
+["ปิยะทรัพย์ บ้านไร่", "88/5 ม.8 ถ.บ้านไร่-ทุ่งขมิ้น ต.บ้านพรุ ", "฿0-฿0", 6.896111, 100.476111, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "1"],
+["บ้านสวนวังนนท์", "269 ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿2,900,000-฿7,300,000", 6.934608, 100.454071, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "0"]
 ];

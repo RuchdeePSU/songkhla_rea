@@ -86,11 +86,11 @@ $(document).ready(function($) {
     var $priceSlider = $("#price-input");
     if($priceSlider.length > 0) {
         $priceSlider.slider({
-            from: 500000,
+            from: 0,
             to: 30000000,
             step: 100000,
             round: 1,
-            format: { format: '฿ ###,###,###', locale: 'en' }
+            format: { format: '฿ ###,###,##0', locale: 'en' }
         });
     }
 

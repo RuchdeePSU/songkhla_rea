@@ -160,7 +160,12 @@
                                     <select name="prop_municipal" id="prop_municipal">
                                         <option value="0">ทำเลที่ตั้ง</option>
                                         <?php while ($row_municipal = mysqli_fetch_array($result_municipal)) {
-                                            echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
+                                            if (isset($_GET['prop_municipal']) && $row_municipal['prop_municipal_id'] == $_GET['prop_municipal']) {
+                                                echo "<option value='" . $row_municipal['prop_municipal_id'] . "' selected>" . $row_municipal['prop_municipal_desc'] . "</option>";
+                                            } else {
+                                                echo "<option value='" . $row_municipal['prop_municipal_id'] . "'>" . $row_municipal['prop_municipal_desc'] . "</option>";
+                                            }
+
                                         } ?>
                                     </select>
                                 </div><!-- /.form-group -->
@@ -168,17 +173,36 @@
                                     <select name="prop_type" id="prop_type">
                                         <option value="0">ประเภทอสังหาริมทรัพย์</option>
                                         <?php while ($row_type = mysqli_fetch_array($result_type)) {
-                                            echo "<option value='" . $row_type[prop_type_id] . "'>" . $row_type['prop_type_desc'] . "</option>";
+                                            if (isset($_GET['prop_type']) &&  $row_type[prop_type_id] == $_GET['prop_type']) {
+                                                echo "<option value='" . $row_type[prop_type_id] . "' selected>" . $row_type['prop_type_desc'] . "</option>";
+                                            } else {
+                                                echo "<option value='" . $row_type[prop_type_id] . "'>" . $row_type['prop_type_desc'] . "</option>";
+                                            }
+
                                         } ?>
                                     </select>
                                 </div><!-- /.form-group -->
                                 <div class="form-group">
                                     <div class="price-range">
-                                        <input type="text" id="price-input" name="price"  value="500000;30000000">
+                                        <?php
+                                            if (isset($_GET['price'])) {
+                                                echo "<input type='text' id='price-input' name='price'  value='" . $_GET['price'] ."'>";
+                                            } else {
+                                                echo "<input type='text' id='price-input' name='price'  value='0;30000000'>";
+                                            }
+                                        ?>
+
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-default" id="btn-search"  name="btn-search">ค้นหา</button>
+                                      <button type="submit" class="btn btn-default" id="btn-search" name="btn-search">ค้นหา</button>
+                                </div><!-- /.form-group -->
+                                <div class="form-group">
+                                    <?php if (isset($_GET['btn-search'])) { ?>
+                                            <button type="button" class="btn btn-default" id="btn-searchcancel" name="btn-search-cancel" onclick="return window.location='index.php';">ยกเลิกการค้นหา</button>
+                                    <?php } else { ?>
+                                            <button type="button" class="btn btn-default" id="btn-searchcancel" name="btn-search-cancel" onclick="return window.location='index.php';" disabled>ยกเลิกการค้นหา</button>
+                                    <?php } ?>
                                 </div><!-- /.form-group -->
                             </form><!-- /#form-map -->
                         </div><!-- /.search-box.map -->
