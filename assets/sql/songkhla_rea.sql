@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2017 at 06:36 AM
+-- Generation Time: May 30, 2017 at 10:52 AM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 7.1.1
 
@@ -1033,19 +1033,6 @@ INSERT INTO `tbl_admin` (`email`, `passwd`, `name`, `status`) VALUES
 --
 
 --
--- Indexes for table `properties`
---
-ALTER TABLE `properties`
-  ADD PRIMARY KEY (`prop_id`);
-
---
--- Indexes for table `property_details`
---
-ALTER TABLE `property_details`
-  ADD KEY `prop_id` (`prop_id`),
-  ADD KEY `prop_type_id` (`prop_type_id`);
-
---
 -- Indexes for table `property_municipals`
 --
 ALTER TABLE `property_municipals`
@@ -1068,11 +1055,6 @@ ALTER TABLE `tbl_admin`
 --
 
 --
--- AUTO_INCREMENT for table `properties`
---
-ALTER TABLE `properties`
-  MODIFY `prop_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
---
 -- AUTO_INCREMENT for table `property_municipals`
 --
 ALTER TABLE `property_municipals`
@@ -1082,17 +1064,6 @@ ALTER TABLE `property_municipals`
 --
 ALTER TABLE `property_types`
   MODIFY `prop_type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `property_details`
---
-ALTER TABLE `property_details`
-  ADD CONSTRAINT `property_details_ibfk_1` FOREIGN KEY (`prop_id`) REFERENCES `properties` (`prop_id`),
-  ADD CONSTRAINT `property_details_ibfk_2` FOREIGN KEY (`prop_type_id`) REFERENCES `property_types` (`prop_type_id`);
-
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

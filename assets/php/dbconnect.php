@@ -4,7 +4,7 @@ class Database{
     //connect to mysql database
     private $host = "localhost";
     private $user = "root";
-    private $passwd = "aoc123456";
+    private $passwd = "";
     private $db_name = "songkhla_rea";
     public $conn;
 
@@ -13,7 +13,6 @@ class Database{
         $this->conn = null;
         try{
             $this->conn = mysqli_connect($this->host, $this->user, $this->passwd, $this->db_name);
-            mysqli_set_charset($this->conn, "utf8");
         }catch(Exception $exception){
             echo "Connection error: " . $exception.getMessage();
         }
