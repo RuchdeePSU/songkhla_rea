@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .btn, label, ul { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn, label, ul, address, input[type='text'] { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลประเภทอสังหาริมทรัพย์</title>
@@ -200,18 +200,25 @@
                         </div><!-- /.col-sm-3 -->
                         <div class="col-md-3 col-sm-3">
                             <article>
-                                <h3>Contact</h3>
+                                <h3>ติดต่อ</h3>
+                                <address>
+                                    <strong>ศูนย์บริการวิชาการ</strong><br>
+                                    อาคารสำนักทรัพยากรการเรียนรู้ฯ (LRC1)<br />
+                                    ชั้น 10 มหาวิทยาลัยสงขลานครินทร์<br />
+                                    เลขที่ 15 ถ.กาญจนวณิชย์<br />
+                                    อ.หาดใหญ่ จ.สงขลา 90110<br />
+                                    0-7428-6972-4
+                                </address>
                             </article>
                         </div><!-- /.col-sm-3 -->
                         <div class="col-md-3 col-sm-3">
                             <article>
-                                <h3>Useful Links</h3>
+                                <h3>ลิงค์ที่เกี่ยวข้อง</h3>
                                 <ul class="list-unstyled list-links">
-                                    <li><a href="#">All Properties</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Login and Register Account</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">Terms and Conditions</a></li>
+                                    <li><a href="http://www.songkhlarea.org/frontpage" target="_blank">สมาคมอสังหาริมทรัพย์จังหวัดสงขลา</a></li>
+                                    <li><a href="http://www.psu.ac.th/" target="_blank">มหาวิทยาลัยสงขลานครินทร์</a></li>
+                                    <li><a href="http://www.outreach.psu.ac.th/" target="_blank">ศูนย์บริการวิชาการ มหาวิทยาลัยสงขลานครินทร์</a></li>
+                                    <li><a href="http://www.fms.psu.ac.th/" target="_blank">คณะวิทยาการจัดการ มหาวิทยาลัยสงขลานครินทร์</a></li>
                                 </ul>
                             </article>
                         </div><!-- /.col-sm-3 -->
