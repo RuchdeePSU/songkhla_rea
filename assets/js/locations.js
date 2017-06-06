@@ -1,4 +1,5 @@
 var locations = [
+["บ้านสวนวังนนท์", "269 ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿0-฿0", 6.934608, 100.454071, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "80"],
 ["ปุณณสิริ โฮมเพลส2", "137 ถ.ปุณณกัณฑ์ ต.คอหงส์ อ.หาดใหญ่", "฿4,500,000-฿8,580,000", 6.998597, 100.510112, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "79"],
 ["ปุณณสิริ โฮมเพลส", "ถ.ปุณณกัณฑ์ ต.คอหงส์ อ.หาดใหญ่", "฿3,900,000-฿7,500,000", 6.999682, 100.506302, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "78"],
 ["กาญจนทรัพย์", "ถ.กาญจนวณิชย์ ต.บ้านพรุ อ.หาดใหญ่", "฿2,890,000-฿6,900,000", 6.919482, 100.469099, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "77"],
@@ -75,6 +76,5 @@ var locations = [
 ["ฮาร์โมนีวิลล์ 3", "ถ.บ้านโป๊ะหมอ ต.บ้านพรุ อ.หาดใหญ่", "฿2,420,000-฿5,200,000", 6.932496, 100.469295, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "4"],
 ["ฮาร์โมนีวิลล์ 1", "ต.บ้านพรุ อ.หาดใหญ่", "฿1,690,000-฿5,490,000", 6.963813, 100.475182, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "3"],
 ["ฮาร์โมนีบิซ", "ต.บ้านพรุ อ.หาดใหญ่", "฿2,800,000-฿8,870,000", 6.966122, 100.475611, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "2"],
-["ปิยะทรัพย์ บ้านไร่", "88/5 ม.8 ถ.บ้านไร่-ทุ่งขมิ้น ต.บ้านพรุ ", "฿0-฿0", 6.896111, 100.476111, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "1"],
-["บ้านสวนวังนนท์", "269 ถ.บ้านพรุธานี ต.บ้านพรุ อ.หาดใหญ่", "฿2,900,000-฿7,300,000", 6.934608, 100.454071, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "0"]
+["ปิยะทรัพย์ บ้านไร่", "88/5 ม.8 ถ.บ้านไร่-ทุ่งขมิ้น ต.บ้านพรุ ", "฿0-฿0", 6.896111, 100.476111, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "1"]
 ];
