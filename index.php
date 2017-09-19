@@ -94,12 +94,12 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand nav" id="brand">
-                        <!--
-                        <a href="index-google-map-fullscreen.html"><img src="assets/img/logo.png" alt="brand"></a>
-                      -->
-                        <legend>
+
+                        <a href="index-google-map-fullscreen.html"><img src="assets/img/logo_text4.png" alt="brand"></a>
+
+                        <!-- <legend>
                           โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น
-                        </legend>
+                        </legend> -->
                     </div>
                 </div>
                 <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
