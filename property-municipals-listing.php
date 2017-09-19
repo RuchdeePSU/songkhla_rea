@@ -15,10 +15,20 @@
     // pass connection to property_types table
     $property_municipal = new Property_municipal($db);
 
+    if (isset($_GET['page'])) {
+        $page = $_GET['page'];
+    } else {
+        $page = 1;
+    }
+    $property_municipal->perpage = 5;
+    $property_municipal->start = ($page - 1) * $property_municipal->perpage;
+
     $active = false;
 
     // read all records
     $result = $property_municipal->readall($active);
+    $total_rows = $property_municipal->getTotalRows();
+    $total_pages = ceil($total_rows / $property_municipal->perpage);
 
     if (isset($_GET['municipal_id'])) {
         $property_municipal->prop_municipal_id = $_GET['municipal_id'];
@@ -167,11 +177,13 @@
                             <!-- Pagination -->
                             <div class="center">
                                 <ul class="pagination">
-                                    <li class="active"><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
+                                    <?php for ($i=1; $i <= $total_pages; $i++) {
+                                        if ($page == $i) {
+                                            echo "<li class='active'><a href='property-municipals-listing.php?page=" . $i . "'>" . $i . "</a></li>";
+                                        } else {
+                                            echo "<li><a href='property-municipals-listing.php?page=" . $i . "'>" . $i . "</a></li>";
+                                        }
+                                    } ?>
                                 </ul><!-- /.pagination-->
                             </div><!-- /.center-->
                         </div><!-- /.my-properties -->

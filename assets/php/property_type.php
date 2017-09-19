@@ -10,6 +10,10 @@ class Property_type{
     public $prop_type_desc;
     public $prop_type_status;
 
+    // for pagination
+    public $start;
+    public $perpage;
+
     public function __construct($db){
         $this->conn = $db;
     }
@@ -17,9 +21,9 @@ class Property_type{
     // read all records
     function readall($act){
         if ($act) {
-            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_type_status = 1 ORDER BY prop_type_id";
+            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_type_status = 1 ORDER BY prop_type_id LIMIT " . $this->start . ", " . $this->perpage;
         } else {
-            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_type_id";
+            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_type_id LIMIT " . $this->start . ", " . $this->perpage;
         }
         $result = mysqli_query($this->conn, $query);
         return $result;
@@ -89,6 +93,13 @@ class Property_type{
         } else {
             return "";
         }
+    }
+
+    // get number of total records
+    function getTotalRows(){
+        $query = "SELECT * FROM " . $this->table_name;
+        $result = mysqli_query($this->conn, $query);
+        return mysqli_num_rows($result);
     }
 }
 
