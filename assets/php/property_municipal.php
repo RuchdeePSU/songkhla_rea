@@ -10,6 +10,10 @@ class Property_municipal{
     public $prop_municipal_desc;
     public $prop_municipal_status;
 
+    // for pagination
+    public $start;
+    public $perpage;
+
     public function __construct($db){
         $this->conn = $db;
     }
@@ -18,9 +22,9 @@ class Property_municipal{
     function readall($act){
         // only active - prop_municipal_status = 1
         if ($act) {
-            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_status = 1 ORDER BY prop_municipal_id";
+            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_status = 1 ORDER BY prop_municipal_id LIMIT " . $this->start . ", " . $this->perpage;
         } else {
-            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_municipal_id";
+            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_municipal_id LIMIT " . $this->start . ", " . $this->perpage;
         }
         $result = mysqli_query($this->conn, $query);
         return $result;
@@ -78,6 +82,13 @@ class Property_municipal{
         }else {
             return false;
         }
+    }
+
+    // get number of total records
+    function getTotalRows(){
+        $query = "SELECT * FROM " . $this->table_name;
+        $result = mysqli_query($this->conn, $query);
+        return mysqli_num_rows($result);
     }
 }
 
