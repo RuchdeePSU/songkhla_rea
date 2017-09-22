@@ -95,7 +95,7 @@
                     </button>
                     <div class="navbar-brand nav" id="brand">
 
-                        <a href="index-google-map-fullscreen.html"><img src="assets/img/logo_text4.png" alt="brand"></a>
+                        <a href="index.php"><img src="assets/img/main_logo.png" alt="brand"></a>
 
                         <!-- <legend>
                           โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น
