@@ -84,7 +84,7 @@
         h1, h2, h3, h4, h5, h6, legend, a, ul, p, button, figure, dt, dd, label, address { font-family: 'Pridi', serif; }
     </style>
 
-    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | รายละเอียดโครงการ</title>
+    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดทำแผนที่เบื้องต้น | รายละเอียดโครงการ</title>
 
 </head>
 
