@@ -22,6 +22,17 @@ class Property_municipal{
     function readall($act){
         // only active - prop_municipal_status = 1
         if ($act) {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_status = 1 ORDER BY prop_municipal_id";
+        } else {
+            $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_municipal_id";
+        }
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
+    // read all records
+    function readforpagination(){
+        if ($act) {
             $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_status = 1 ORDER BY prop_municipal_id LIMIT " . $this->start . ", " . $this->perpage;
         } else {
             $query = "SELECT * FROM " . $this->table_name . " ORDER BY prop_municipal_id LIMIT " . $this->start . ", " . $this->perpage;

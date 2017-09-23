@@ -29,14 +29,20 @@
         $property->srch_min_price = substr($_GET['price'], 0, strpos($_GET['price'],';'));
         $property->srch_max_price = substr($_GET['price'], strpos($_GET['price'],';')+1);
         if (!$property->search()) {
-            $searchresult = 0;
-            if (!$property->writejson()) {
-                header("Location: 500.html");
-            }
+            // $searchresult = 0;
+            // if (!$property->writejson()) {
+            //     header("Location: 500.html");
+            // }
+            header("Location: index.php?searchresult=0");
+        }
+    } elseif (isset($_GET['searchresult'])) {
+        $searchresult = $_GET['searchresult'];
+        if (!$property->writejson()) {
+            header("Location: 500.html");
         }
     } else {
         if (!$property->writejson()) {
-                 header("Location: 500.html");
+            header("Location: 500.html");
         }
     }
 

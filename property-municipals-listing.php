@@ -26,7 +26,7 @@
     $active = false;
 
     // read all records
-    $result = $property_municipal->readall($active);
+    $result = $property_municipal->readforpagination($active);
     $total_rows = $property_municipal->getTotalRows();
     $total_pages = ceil($total_rows / $property_municipal->perpage);
 

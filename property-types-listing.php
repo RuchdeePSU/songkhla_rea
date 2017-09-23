@@ -26,7 +26,7 @@
     $active = false;
 
     // read all records
-    $result = $property_type->readall($active);
+    $result = $property_type->readforpagination($active);
     $total_rows = $property_type->getTotalRows();
     $total_pages = ceil($total_rows / $property_type->perpage);
 
