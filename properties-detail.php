@@ -274,6 +274,17 @@
                                         <div class="property-detail-map" id="property-detail-map"></div>
                                     </div>
                                 </section><!-- /#property-map -->
+
+                                <?php if (!empty($row_prop['prop_youtube_link'])) { ?>
+                                    <br />
+                                    <section id="video-presentation">
+                                        <header><h2>วิดีโอของโครงการ</h2></header>
+                                        <div class="video">
+                                            <iframe width="500" height="281" src="<?php echo $row_prop['prop_youtube_link'] ?>" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                    </section><!-- /#video-presentation -->
+                                <?php } ?>
+
                             </div><!-- /.col-md-8 -->
                             <div class="col-md-12 col-sm-12">
                                 <section id="contact-agent">

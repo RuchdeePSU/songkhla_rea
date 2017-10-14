@@ -30,6 +30,29 @@
 
     // form is submitted
     if (isset($_POST['property-submit'])) {
+        if (!empty($_FILES['fileupload'])) {
+            // get the files posted
+            $images = $_FILES['fileupload'];
+            // get file names
+            $filenames = $images['name'];
+            // file paths to store
+            $paths= [];
+            for($i=0; $i < count($filenames); $i++){
+                $ext = explode('.', basename($filenames[$i]));
+                $new_name = md5(uniqid()) . "." . array_pop($ext);
+                $target = "assets/img/properties" . DIRECTORY_SEPARATOR . $new_name;
+                if(move_uploaded_file($images['tmp_name'][$i], $target)) {
+                    $success = true;
+                    $paths[] = $target;
+                } else {
+                    $success = false;
+                    break;
+                }
+            }
+        } else {
+            $paths[] = "assets/img/properties/property-sample.jpg";
+        }
+
         // pass connection to properties table
         $property = new Property($db);
         $property->prop_name = $_POST['property-title'];
@@ -53,6 +76,8 @@
         $property->prop_started_date = $_POST['property-started-date'];
         $property->prop_contact_person = $_POST['property-contact-person'];
         $property->prop_website = $_POST['property-website'];
+        $property->prop_thumbnail_img = $paths[0];
+        $property->prop_youtube_link = $_POST['property-youtube'];
         $property->prop_status = $_POST['property-status'];
         $property->prop_created_date = date("Y/m/d");
 
@@ -82,7 +107,6 @@
                     break;
                 }
             }
-
         } else {
             $success = false;
         }
@@ -103,7 +127,9 @@
     <link rel="stylesheet" href="assets/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="assets/css/jquery.slider.min.css" type="text/css">
     <link rel="stylesheet" href="assets/css/owl.carousel.css" type="text/css">
-    <link rel="stylesheet" href="assets/css/fileinput.min.css" type="text/css">
+    <!-- <link rel="stylesheet" href="assets/css/fileinput.min.css" type="text/css"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
@@ -488,15 +514,34 @@
                               <div class="row">
                                 <div class="col-md-12 col-sm-12">
                                   <section class="block" id="gallery">
+                                      <header><h2>เพิ่มรูปภาพของโครงการ</h2></header>
                                       <div class="center">
                                           <div class="form-group">
-                                              <input id="file-upload" type="file" class="file" multiple="true" data-show-upload="false" data-show-caption="false" data-show-remove="false" accept="image/jpeg,image/png" data-browse-class="btn btn-default" data-browse-label="เลือกรูปภาพ">
+                                              <label for="fileupload">ไฟล์รูปภาพของโครงการควรมีขนาด 440x330 </label>
+                                              <div class="file-loading">
+                                                  <input id="fileupload" name="fileupload[]" type="file">
+                                              </div>
+                                              <input id="property-thumbnail" name="property-thumbnail" type="hidden" value="<?php echo $row_prop['prop_thumbnail_img'] ?>" />
                                           </div>
                                       </div>
                                   </section>
                                   <hr />
                                 </div>
                               </div><!-- /.row -->
+
+                              <div class="row">
+                                  <div class="col-md-10 col-sm-10">
+                                      <header><h2>เพิ่มวิดีโอของโครงการ</h2></header>
+                                      <div class="form-group">
+                                          <label>ตัวอย่างลิงค์วิดีโอจาก youtube: https://www.youtube.com/embed/oI1gIfpEyXI</label>
+                                          <input type="text" class="form-control" id="property-youtube" name="property-youtube" placeholder="ลิงค์วิดีโอของโครงการ">
+                                      </div><!-- /.form-group -->
+                                  </div>
+                                  <div class="col-md-offset-2 col-sm-offset-2">
+                                  </div>
+                              </div><!-- /.row -->
+                              <hr />
+
                               <div class="row">
                                   <div class="block">
                                       <div class="col-md-12 col-sm-12">
@@ -582,7 +627,7 @@
             <aside id="footer-thumbnails" class="footer-thumbnails"></aside><!-- /#footer-thumbnails -->
             <aside id="footer-copyright">
                 <div class="container">
-                    <span>Copyright © 2013. All Rights Reserved.</span>
+                    <span>Copyright © 2017 Songkhla Real Estate Association. All Rights Reserved.</span>
                     <span class="pull-right"><a href="#page-top" class="roll">Go to top</a></span>
                 </div>
             </aside>
@@ -605,7 +650,8 @@
 -->
 <script type="text/javascript" src="assets/js/retina-1.1.0.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery.magnific-popup.min.js"></script>
-<script type="text/javascript" src="assets/js/fileinput.min.js"></script>
+<!-- <script type="text/javascript" src="assets/js/fileinput.min.js"></script> -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
 <script type="text/javascript" src="assets/js/custom-map.js"></script>
 <script type="text/javascript" src="assets/js/custom.js"></script>
 <script type="text/javascript" src="assets/js/validator.min.js"></script>
@@ -688,6 +734,21 @@
             error('Geo Location is not supported');
         }
     });
+</script>
+<script>
+  $(document).ready(function(){
+    $("#fileupload").fileinput({
+        overwriteInitial: true,
+        showClose: false,
+        showCaption: false,
+        showUpload: false,
+        showCancel: false,
+        uploadAsync: false,
+        browseClass: 'btn btn-default',
+        browseLabel: 'เลือกรูปภาพ',
+        allowedFileExtensions: ["jpg", "png"],
+    });
+  });
 </script>
 
 </body>

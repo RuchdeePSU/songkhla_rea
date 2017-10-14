@@ -112,7 +112,7 @@
         <div class="inner">
             <section id="footer-copyright">
                 <div class="container">
-                    <span>Copyright © 2013. All Rights Reserved.</span>
+                    <span>Copyright © 2017 Songkhla Real Estate Association. All Rights Reserved.</span>
                     <span class="pull-right"><a href="#page-top" class="roll">Go to top</a></span>
                 </div>
             </section>
