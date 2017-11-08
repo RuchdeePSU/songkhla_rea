@@ -84,7 +84,7 @@
         h1, h2, h3, h4, h5, h6, legend, a, ul, p, button, figure, dt, dd, label, address { font-family: 'Pridi', serif; }
     </style>
 
-    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | รายละเอียดโครงการ</title>
+    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดทำแผนที่เบื้องต้น | รายละเอียดโครงการ</title>
 
 </head>
 
@@ -103,12 +103,10 @@
                         <span class="icon-bar"></span>
                     </button>
                     <div class="navbar-brand nav" id="brand">
-                        <!--
-                        <a href="index-google-map-fullscreen.html"><img src="assets/img/logo.png" alt="brand"></a>
-                      -->
-                        <legend>
+                        <a href="index.php"><img src="assets/img/main_logo.png" alt="brand"></a>
+                        <!-- <legend>
                           โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น
-                        </legend>
+                        </legend> -->
                     </div>
                 </div>
                 <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
@@ -276,6 +274,17 @@
                                         <div class="property-detail-map" id="property-detail-map"></div>
                                     </div>
                                 </section><!-- /#property-map -->
+
+                                <?php if (!empty($row_prop['prop_youtube_link'])) { ?>
+                                    <br />
+                                    <section id="video-presentation">
+                                        <header><h2>วิดีโอของโครงการ</h2></header>
+                                        <div class="video">
+                                            <iframe width="500" height="281" src="<?php echo $row_prop['prop_youtube_link'] ?>" frameborder="0" allowfullscreen></iframe>
+                                        </div>
+                                    </section><!-- /#video-presentation -->
+                                <?php } ?>
+
                             </div><!-- /.col-md-8 -->
                             <div class="col-md-12 col-sm-12">
                                 <section id="contact-agent">

@@ -22,7 +22,8 @@ class Property{
     public $prop_lat;
     public $prop_long;
     public $prop_detail_link;
-    public $prop_thumbnail_img;
+    public $prop_thumbnail_img;     // length from 50 changed to 100  10/10/2017 Ruchdee
+    public $prop_youtube_link;      // 13/10/2017 Ruchdee
     public $prop_icon_type;
     public $prop_status;
     public $prop_created_date;
@@ -86,7 +87,7 @@ class Property{
         // prop_detail_link
         $this->prop_detail_link = "properties-detail.php";
         // prop_thumbnail_img
-        $this->prop_thumbnail_img = "assets/img/properties/property-sample.jpg";
+        // $this->prop_thumbnail_img = "assets/img/properties/property-sample.jpg";
         /*
         Property Types:
         1-บ้านเดียว, 2-บ้านแฝด, 3-ทาวน์เฮาส์+ทาวน์โฮม, 4-คอนโดมิเนียม, 5-อาคารพานิชย์, 6-อื่นๆ
@@ -115,9 +116,9 @@ class Property{
         // }
 
         // write statement
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_phone_no, prop_email, prop_lat, prop_long, prop_size1, prop_size2, prop_size3, prop_regist_no, prop_owner_name, prop_membership, prop_corporation, prop_started_date, prop_contact_person, prop_website, prop_detail_link, prop_thumbnail_img, prop_icon_type, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_phone_no, prop_email, prop_lat, prop_long, prop_size1, prop_size2, prop_size3, prop_regist_no, prop_owner_name, prop_membership, prop_corporation, prop_started_date, prop_contact_person, prop_website, prop_detail_link, prop_thumbnail_img, prop_youtube_link, prop_icon_type, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_created_date);
+        mysqli_stmt_bind_param($stmt, 'sssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_youtube_link, $this->prop_icon_type, $this->prop_status, $this->prop_created_date);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -138,7 +139,7 @@ class Property{
         // prop_detail_link
         $this->prop_detail_link = "properties-detail.php";
         // prop_thumbnail_img
-        $this->prop_thumbnail_img = "assets/img/properties/property-sample.jpg";
+        //$this->prop_thumbnail_img = "assets/img/properties/property-sample.jpg";
         /*Property Types:
         1-บ้านเดียว, 2-บ้านแฝด, 3-ทาวน์เฮาส์+ทาวน์โฮม, 4-คอนโดมิเนียม, 5-อาคารพานิชย์, 6-อื่นๆ
         */
@@ -165,11 +166,11 @@ class Property{
         //         break;
         // }
 
-        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_municipal_id = ?, prop_phone_no = ?, prop_email = ?, prop_lat = ?, prop_long = ?, prop_size1 = ?, prop_size2 = ?, prop_size3 = ?, prop_regist_no = ?, prop_owner_name = ?, prop_membership = ?, prop_corporation = ?, prop_started_date = ?, prop_contact_person = ?, prop_website = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_icon_type = ?, prop_status = ?, prop_updated_date = ? WHERE prop_id = ?";
+        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_municipal_id = ?, prop_phone_no = ?, prop_email = ?, prop_lat = ?, prop_long = ?, prop_size1 = ?, prop_size2 = ?, prop_size3 = ?, prop_regist_no = ?, prop_owner_name = ?, prop_membership = ?, prop_corporation = ?, prop_started_date = ?, prop_contact_person = ?, prop_website = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_youtube_link = ?, prop_icon_type = ?, prop_status = ?, prop_updated_date = ? WHERE prop_id = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'sssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_icon_type, $this->prop_status, $this->prop_updated_date, $this->prop_id);
+        mysqli_stmt_bind_param($stmt, 'ssssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_youtube_link, $this->prop_icon_type, $this->prop_status, $this->prop_updated_date, $this->prop_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {

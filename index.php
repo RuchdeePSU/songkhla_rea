@@ -29,14 +29,20 @@
         $property->srch_min_price = substr($_GET['price'], 0, strpos($_GET['price'],';'));
         $property->srch_max_price = substr($_GET['price'], strpos($_GET['price'],';')+1);
         if (!$property->search()) {
-            $searchresult = 0;
-            if (!$property->writejson()) {
-                header("Location: 500.html");
-            }
+            // $searchresult = 0;
+            // if (!$property->writejson()) {
+            //     header("Location: 500.html");
+            // }
+            header("Location: index.php?searchresult=0");
+        }
+    } elseif (isset($_GET['searchresult'])) {
+        $searchresult = $_GET['searchresult'];
+        if (!$property->writejson()) {
+            header("Location: 500.html");
         }
     } else {
         if (!$property->writejson()) {
-                 header("Location: 500.html");
+            header("Location: 500.html");
         }
     }
 
@@ -75,7 +81,7 @@
         h1, h2, h3, h4, h5, h6, legend, a, ul, p, button, address, .infobox-location { font-family: 'Pridi', serif; }
     </style>
 
-    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น</title>
+    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดทำแผนที่เบื้องต้น</title>
 
 </head>
 
@@ -95,7 +101,7 @@
                     </button>
                     <div class="navbar-brand nav" id="brand">
 
-                        <a href="index-google-map-fullscreen.html"><img src="assets/img/logo_text4.png" alt="brand"></a>
+                        <a href="index.php"><img src="assets/img/main_logo.png" alt="brand"></a>
 
                         <!-- <legend>
                           โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น
@@ -580,7 +586,7 @@
             <aside id="footer-thumbnails" class="footer-thumbnails"></aside><!-- /#footer-thumbnails -->
             <aside id="footer-copyright">
                 <div class="container">
-                    <span>Copyright © 2017. All Rights Reserved.</span>
+                    <span>Copyright © 2017 Songkhla Real Estate Association. All Rights Reserved.</span>
                     <span class="pull-right"><a href="#page-top" class="roll">Go to top</a></span>
                 </div>
             </aside>

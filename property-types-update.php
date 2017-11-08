@@ -55,7 +55,7 @@
         h1, h2, h3, h4, h5, h6, legend, a, .btn, label, ul, address, input[type='text'] { font-family: 'Pridi', serif; }
     </style>
 
-    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น | ข้อมูลประเภทอสังหาริมทรัพย์</title>
+    <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดทำแผนที่เบื้องต้น | ข้อมูลประเภทอสังหาริมทรัพย์</title>
 
 </head>
 
@@ -74,12 +74,10 @@
                       <span class="icon-bar"></span>
                   </button>
                   <div class="navbar-brand nav" id="brand">
-                      <!--
-                      <a href="index-google-map-fullscreen.html"><img src="assets/img/logo.png" alt="brand"></a>
-                    -->
-                      <legend>
+                      <a href="index.php"><img src="assets/img/main_logo.png" alt="brand"></a>
+                      <!-- <legend>
                         โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดแผนที่เบื้องต้น
-                      </legend>
+                      </legend> -->
                   </div>
               </div>
               <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
@@ -239,7 +237,7 @@
             <aside id="footer-thumbnails" class="footer-thumbnails"></aside><!-- /#footer-thumbnails -->
             <aside id="footer-copyright">
                 <div class="container">
-                    <span>Copyright © 2013. All Rights Reserved.</span>
+                    <span>Copyright © 2017 Songkhla Real Estate Association. All Rights Reserved.</span>
                     <span class="pull-right"><a href="#page-top" class="roll">Go to top</a></span>
                 </div>
             </aside>

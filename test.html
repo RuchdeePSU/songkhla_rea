@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body
+
+  <div class="file-loading">
+      <input id="input-pr" name="input-pr[]" type="file" multiple>
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview.
+    This must be loaded before fileinput.min.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/sortable.min.js" type="text/javascript"></script>
+    <!-- purify.min.js is only needed if you wish to purify HTML content in your preview for
+    HTML files. This must be loaded before fileinput.min.js -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/plugins/purify.min.js" type="text/javascript"></script> -->
+    <!-- the main fileinput plugin file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/js/fileinput.min.js"></script>
+    <!-- optionally if you need a theme like font awesome theme you can include it as mentioned below -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.5/themes/fa/theme.js"></script> -->
+
+    <script type="text/javascript" src="assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <!-- <script type="text/javascript" src="assets/js/fileinput.min.js"></script> -->
+
+    <script>
+      $("#input-pr").fileinput({
+          uploadUrl: "/file-upload-batch/1",
+          uploadAsync: false,
+          minFileCount: 2,
+          maxFileCount: 5,
+          overwriteInitial: false,
+          initialPreview: [
+              // IMAGE RAW MARKUP
+              '<img src="http://lorempixel.com/800/460/nature/1" class="kv-preview-data file-preview-image">',
+              // IMAGE RAW MARKUP
+              '<img src="http://lorempixel.com/800/460/nature/2" class="kv-preview-data file-preview-image">',
+              // TEXT RAW MARKUP
+              '<textarea class="kv-preview-data file-preview-text" readonly>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut mauris ut libero fermentum feugiat eu et dui. Mauris condimentum rhoncus enim, sed semper neque vestibulum id. Nulla semper, turpis ut consequat imperdiet, enim turpis aliquet orci, eget venenatis elit sapien non ante. Aliquam neque ipsum, rhoncus id ipsum et, volutpat tincidunt augue. Maecenas dolor libero, gravida nec est at, commodo tempor massa. Sed id feugiat massa. Pellentesque at est eu ante aliquam viverra ac sed est.</textarea>'
+          ],
+          initialPreviewAsData: false, // allows you to set a raw markup
+          initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+          initialPreviewDownloadUrl: 'http://lorempixel.com/800/460/nature/{key}', // includes the dynamic key tag to be replaced for each config
+          initialPreviewConfig: [
+              {type: "image", caption: "Nature-1.jpg", size: 847000, width: "120px", key: 1, deleteUrl: false},
+              {type: "image", caption: "Nature-2.jpg", size: 817000, url: "/site/file-delete", key: 2},  // set as raw markup
+              {type: "text", size: 1430, caption: "LoremIpsum.txt", url: "/site/file-delete", key: 3, downloadUrl: false} // do not show download
+          ],
+          uploadExtraData: {
+              img_key: "1000",
+              img_keywords: "happy, nature"
+          }
+        }).on('filesorted', function(e, params) {
+            console.log('File sorted params', params);
+        }).on('fileuploaded', function(e, params) {
+            console.log('File uploaded params', params);
+        }).on('fileremoved', function(event, id, index) {
+            console.log('id = ' + id + ', index = ' + index);    
+        });
+    </script>
+  </body>
+</html>
