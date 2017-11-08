@@ -370,7 +370,16 @@
                                         </select>
                                     </div><!-- /.form-group -->
                                   </div>
-                                  <div class="col-md-offset-8 col-sm-offset-8">
+                                  <div class="col-md-4 col-sm-4">
+                                    <div class="form-group">
+                                        <label for="property-status">ผู้สนับสนุนสมาคมอสังหาริมทรัพย์</label>
+                                        <select name="property-supporter" id="property-supporter">
+                                            <option value="0" selected>ไม่เป็นผู้สนับสนุน</option>
+                                            <option value="1">เป็นผู้สนับสนุน</option>
+                                        </select>
+                                    </div><!-- /.form-group -->
+                                  </div>
+                                  <div class="col-md-offset-4 col-sm-offset-4">
                                   </div>
                               </div>
                               <div class="row">
@@ -521,6 +530,25 @@
                                               <div class="file-loading">
                                                   <input id="fileupload" name="fileupload[]" type="file">
                                               </div>
+                                              <input id="property-thumbnail" name="property-thumbnail" type="hidden" />
+                                          </div>
+                                      </div>
+                                  </section>
+                                  <hr />
+                                </div>
+                              </div><!-- /.row -->
+
+                              <div class="row" id="supporter" name="supporter">
+                                <div class="col-md-12 col-sm-12">
+                                  <section class="block" id="gallery-supporter" name="gallery-supporter">
+                                      <header><h2>เพิ่มรูปภาพสำหรับผู้สนับสนุน</h2></header>
+                                      <div class="center">
+                                          <div class="form-group">
+                                              <label for="fileupload2">ไฟล์รูปภาพของโครงการควรมีขนาด 440x330 </label>
+                                              <div class="file-loading">
+                                                  <input id="fileupload2" name="fileupload2[]" type="file" multiple>
+                                              </div>
+                                              <input id="property-thumbnail2" name="property-thumbnail2" type="hidden" />
                                           </div>
                                       </div>
                                   </section>
@@ -747,7 +775,32 @@
         browseLabel: 'เลือกรูปภาพ',
         allowedFileExtensions: ["jpg", "png"],
     });
+    $("#fileupload2").fileinput({
+        overwriteInitial: true,
+        showClose: false,
+        showCaption: false,
+        showUpload: false,
+        showCancel: false,
+        uploadAsync: false,
+        maxFileCount: 10,
+        browseClass: 'btn btn-default',
+        browseLabel: 'เลือกรูปภาพ',
+        allowedFileExtensions: ["jpg", "png"],
+    });
   });
+</script>
+<script>
+    $(document).ready(function(){
+        $("#supporter").hide();
+        $("#property-supporter").change(function () {
+            if ($("#property-supporter").val() == "0") {
+                $("#supporter").hide();
+            } else {
+                $("#supporter").show();
+            }
+        });
+        // .change();
+    });
 </script>
 
 </body>
