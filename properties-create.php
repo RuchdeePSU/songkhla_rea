@@ -37,7 +37,7 @@
             $filenames = $images['name'];
             // file paths to store
             $paths= [];
-            for($i=0; $i < count($filenames); $i++){
+            for($i=0; $i < count($filenames); $i++) {
                 $ext = explode('.', basename($filenames[$i]));
                 $new_name = md5(uniqid()) . "." . array_pop($ext);
                 $target = "assets/img/properties" . DIRECTORY_SEPARATOR . $new_name;
@@ -222,7 +222,7 @@
                     <section id="my-properties">
                         <header><h1>โครงการอสังหาริมทรัพย์</h1></header>
                         <div class="my-properties">
-                          <form role="form" id="property-municipals" method="post" action="<?php $_SERVER['PHP_SELF'] ?>" data-toggle="validator">
+                          <form role="form" id="property-municipals" method="post" action="<?php $_SERVER['PHP_SELF'] ?>" data-toggle="validator" enctype="multipart/form-data">
                               <div class="row">
                                 <div class="col-md-8 col-sm-8">
                                     <div class="form-group">
@@ -521,7 +521,6 @@
                                               <div class="file-loading">
                                                   <input id="fileupload" name="fileupload[]" type="file">
                                               </div>
-                                              <input id="property-thumbnail" name="property-thumbnail" type="hidden" value="<?php echo $row_prop['prop_thumbnail_img'] ?>" />
                                           </div>
                                       </div>
                                   </section>
