@@ -31,7 +31,7 @@ class Property_municipal{
     }
 
     // read all records
-    function readforpagination(){
+    function readforpagination($act){
         if ($act) {
             $query = "SELECT * FROM " . $this->table_name . " WHERE prop_municipal_status = 1 ORDER BY prop_municipal_id LIMIT " . $this->start . ", " . $this->perpage;
         } else {
