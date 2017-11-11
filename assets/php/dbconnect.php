@@ -16,6 +16,7 @@ class Database{
         try{
             $this->conn = mysqli_connect($this->host, $this->user, $this->passwd, $this->db_name);
             //mysqli_query($this->conn, "SET NAMES 'utf8' COLLATE 'utf8_unicode_ci'");
+            mysqli_set_charset($this->conn, "utf8");
         }catch(Exception $exception){
             echo "Connection error: " . $exception.getMessage();
         }
