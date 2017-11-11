@@ -11,12 +11,14 @@
         include_once 'assets/php/property_detail.php';
         include_once 'assets/php/property_municipal.php';
         include_once 'assets/php/property_type.php';
+        include_once 'assets/php/property_supporter.php';
 
         // get connection
         $database = new Database();
         $db = $database->getConnection();
 
         $active = true;
+        $img_supporter_changed=false;
 
         // pass connection to property_municipal tabel
         $prop_municipal = new Property_municipal($db);
@@ -38,8 +40,21 @@
         $property_detail = new Property_detail($db);
         $property_detail->prop_id = $_GET['property_id'];
 
+        if ($row_prop['prop_supporter']) {
+            $isSupporter = true;
+            $property_supporter = new Property_supporter($db);
+            $property_supporter->prop_id = $_GET['property_id'];
+            $result_supporter = $property_supporter->readone();
+        } else {
+            $isSupporter = false;
+        }
+        //echo $isSupporter;
+
         // form is submitted
         if (isset($_POST['property-submit'])) {
+
+            echo $_POST['img-supporter'];
+
             if (!empty($_FILES['fileupload'])) {
                 // get the files posted
                 $images = $_FILES['fileupload'];
@@ -89,6 +104,7 @@
             $property->prop_thumbnail_img = $paths[0];
             $property->prop_youtube_link = $_POST['property-youtube'];
             $property->prop_status = $_POST['property-status'];
+            $property->prop_supporter = $_POST['property-supporter'];
             $property->prop_updated_date = date("Y/m/d");
 
             // insert into properties table
@@ -112,16 +128,66 @@
                     // insert into property_details table
                     if ($property_detail->update()) {
                         $success = true;
-                        echo json_encode($success);
-                        header("Location: properties-listing.php");
                     }else {
                         $success = false;
                         break;
                     }
+                }   // end for property_detail
+
+                $property_supporter = new Property_supporter($db);
+                $property_supporter->prop_id = $_GET['property_id'];
+                // for supporter's images
+                if (!empty($_FILES['fileupload2'])) {
+                    if ($_POST['img-supporter'] == "changed") {
+                        // get the files posted
+                        $images2 = $_FILES['fileupload2'];
+                        // get file names
+                        $filenames = $images2['name'];
+                        if ($property_supporter->delete()) {
+                            for($i=0; $i < count($filenames); $i++) {
+                                $ext = explode('.', basename($filenames[$i]));
+                                $new_name = md5(uniqid()) . "." . array_pop($ext);
+                                $target = "assets/img/properties" . DIRECTORY_SEPARATOR . $new_name;
+                                if(move_uploaded_file($images2['tmp_name'][$i], $target)) {
+                                    //$success = true;
+                                    //$paths_supporter[] = $target;
+                                    $property_supporter->prop_img = $target;
+                                    if ($property_supporter->create()) {
+                                        $success = true;
+                                    } else {
+                                        $success = false;
+                                        break;
+                                    }
+                                } else {
+                                    $success = false;
+                                    break;
+                                }
+                            }
+                        } else {
+                            $success = false;
+                        }
+                    }
+                } else {
+                      if ($property_supporter->delete()) {
+                          $success = true;
+                      } else {
+                          $success = false;
+                      }
+                } // fileupload2
+                if (!$_POST['property-supporter']) {
+                    if ($property_supporter->delete()) {
+                        $success = true;
+                    } else {
+                        $success = false;
+                    }
                 }
+                // end for property_supporters
+
             } else {
                 $success = false;
             }
+            echo json_encode($success);
+            header("Location: properties-listing.php");
         }
     }
 ?>
@@ -235,7 +301,7 @@
                     <section id="my-properties">
                         <header><h1>โครงการอสังหาริมทรัพย์</h1></header>
                         <div class="my-properties">
-                          <form role="form" id="properties" name="properties" method="post" action="<?php $_SERVER['PHP_SELF'] ?>" data-toggle="validator" enctype="multipart/form-data">
+                          <form role="form" id="properties" name="properties" method="post" action="properties-update.php?property_id=<?php echo $property->prop_id; ?>" data-toggle="validator" enctype="multipart/form-data">
                               <div class="row">
                                 <div class="col-md-8 col-sm-8">
                                     <div class="form-group">
@@ -397,7 +463,20 @@
                                       </select>
                                   </div><!-- /.form-group -->
                                 </div>
-                                <div class="col-md-offset-8 col-sm-offet-8">
+                                <div class="col-md-4 col-sm-4">
+                                  <div class="form-group">
+                                      <label for="property-status">ผู้สนับสนุนสมาคมอสังหาริมทรัพย์</label>
+                                      <select name="property-supporter" id="property-supporter">
+                                          <option value="0" <?php if (!$row_prop['prop_supporter']) {
+                                            echo "selected";
+                                          } ?>>ไม่เป็นผู้สนับสนุน</option>
+                                          <option value="1" <?php if ($row_prop['prop_supporter']) {
+                                            echo "selected";
+                                          } ?>>เป็นผู้สนับสนุน</option>
+                                      </select>
+                                  </div><!-- /.form-group -->
+                                </div>
+                                <div class="col-md-offset-4 col-sm-offet-4">
                                 </div>
                               </div>
                               <div class="row">
@@ -558,6 +637,24 @@
                                                   <input id="fileupload" name="fileupload[]" type="file">
                                               </div>
                                               <input id="property-thumbnail" name="property-thumbnail" type="hidden" value="<?php echo $row_prop['prop_thumbnail_img'] ?>" />
+                                          </div>
+                                      </div>
+                                  </section>
+                                  <hr />
+                                </div>
+                              </div><!-- /.row -->
+
+                              <div class="row" id="supporter" name="supporter">
+                                <div class="col-md-12 col-sm-12">
+                                  <section class="block" id="gallery-supporter" name="gallery-supporter">
+                                      <header><h2>เพิ่มรูปภาพสำหรับผู้สนับสนุน</h2></header>
+                                      <div class="center">
+                                          <div class="form-group">
+                                              <label for="fileupload2">ไฟล์รูปภาพของโครงการควรมีขนาด 440x330 </label>
+                                              <div class="file-loading">
+                                                  <input id="fileupload2" name="fileupload2[]" type="file" multiple>
+                                              </div>
+                                              <input id="img-supporter" name="img-supporter" type="hidden" value="" />
                                           </div>
                                       </div>
                                   </section>
@@ -797,7 +894,64 @@
             console.log("file cleared");
             $('#property-thumbnail').val("assets/img/properties/property-sample.jpg");
     });
+    $("#fileupload2").fileinput({
+        overwriteInitial: true,
+        showClose: false,
+        showCaption: false,
+        showUpload: false,
+        showCancel: false,
+        uploadAsync: false,
+        maxFileCount: 10,
+        browseClass: 'btn btn-default',
+        browseLabel: 'เลือกรูปภาพ',
+        allowedFileExtensions: ["jpg", "png"],
+        initialPreview: [
+           // IMAGE RAW MARKUP
+          // '<img src="assets/img/properties/property-sample.jpg" class="file-preview-image" width="210px" height="150px">'
+
+          <?php if ($isSupporter) {
+              while ($row_supporter = mysqli_fetch_array($result_supporter)) { ?>
+                  '<img src="<?php echo $row_supporter['prop_img'] ?>" class="file-preview-image" width="210px" height="150px">',
+          <?php }
+          } ?>
+        ],
+        initialPreviewAsData: false, // allows you to set a raw markup
+        initialPreviewFileType: 'image', // image is the default and can be overridden in config below
+        initialPreviewShowDelete: false,
+        initialPreviewConfig: [
+          <?php if ($isSupporter) {
+              for($i=1; $i<=mysqli_num_rows($result_supporter); $i++) { ?>
+              {type: "image", caption: "รูปโครงการ", size: 147000, width: "200px"},
+          <?php }
+          } ?>
+        ]
+    });
+    $("#fileupload2").on('change', function(event) {
+        console.log("change");
+        $("#img-supporter").val("changed");
+    });
+    $("#fileupload2").on('fileclear', function(event) {
+        console.log("change");
+        $("#img-supporter").val("changed");
+    });
   });
+</script>
+<script>
+    $(document).ready(function(){
+        //var isSupporter = String(<?php echo $row_prop['prop_supporter'] ?>);
+        if (<?php echo $row_prop['prop_supporter'] ?>) {
+            $("#supporter").show();
+        } else {
+            $("#supporter").hide();
+        }
+        $("#property-supporter").change(function () {
+            if ($("#property-supporter").val() == "0") {
+                $("#supporter").hide();
+            } else {
+                $("#supporter").show();
+            }
+        });
+    });
 </script>
 
 </body>

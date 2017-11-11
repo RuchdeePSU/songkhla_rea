@@ -521,18 +521,35 @@
             </div>
         </section>
         -->
-        <section id="partners" class="block">
-            <div class="container">
-                <header class="section-title"><h2>ผู้สนับสนุน</h2></header>
-                <div class="logos">
-                    <div class="logo"><a href=""><img src="assets/img/logo-partner-01.png" alt=""></a></div>
-                    <div class="logo"><a href=""><img src="assets/img/logo-partner-02.png" alt=""></a></div>
-                    <div class="logo"><a href=""><img src="assets/img/logo-partner-03.png" alt=""></a></div>
-                    <div class="logo"><a href=""><img src="assets/img/logo-partner-04.png" alt=""></a></div>
-                    <div class="logo"><a href=""><img src="assets/img/logo-partner-05.png" alt=""></a></div>
-                </div>
-            </div><!-- /.container -->
-        </section><!-- /#partners -->
+        <br />
+
+        <section id="similar-properties">
+          <div class="container">
+            <header class="section-title"><h2>ผู้สนับสนุน</h2></header>
+            <div class="row">
+              <?php $result_supporter = $property->selectonly5supporter();
+                    while ($row_supporter = mysqli_fetch_array($result_supporter)) { ?>
+                <div class="col-md-3 col-sm-4">
+                    <div class="property">
+                        <a href="properties-detail.php?prop_id=<?php echo $row_supporter['prop_id'] ?>">
+                            <div class="property-image">
+                                <img alt="" src="<?php echo $row_supporter['prop_thumbnail_img'] ?>">
+                            </div>
+                            <div class="overlay">
+                                <div class="info">
+                                    <!-- <div class="tag price">$ 11,000</div> -->
+                                    <h3><?php echo $row_supporter['prop_name'] ?></h3>
+                                    <!-- <figure>Golden Valley, MN 55427</figure> -->
+                                </div>
+                            </div>
+                        </a>
+                    </div><!-- /.property -->
+                </div><!-- /.col-md-3 -->
+              <?php } ?>
+            </div><!-- /.row-->
+          </div>
+        </section><!-- /#similar-properties -->
+
     </div>
     <!-- end Page Content -->
     <!-- Page Footer -->

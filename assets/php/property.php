@@ -1,5 +1,6 @@
 <?php
     include_once 'property_detail.php';
+    include_once 'property_supporter.php';
 
 class Property{
 
@@ -26,6 +27,7 @@ class Property{
     public $prop_youtube_link;      // 13/10/2017 Ruchdee
     public $prop_icon_type;
     public $prop_status;
+    public $prop_supporter;       // 8/11/2017 Ruchdee
     public $prop_created_date;
     public $prop_updated_date;
     //
@@ -52,6 +54,11 @@ class Property{
 
     // for search in properties-listing.php
     public $srch_prop_name;
+
+    public $img_changed;
+
+    // for supporter's images 09/11/2017 Ruchdee
+    //public $prop_img = array();
 
     public function __construct($db){
         $this->conn = $db;
@@ -116,9 +123,9 @@ class Property{
         // }
 
         // write statement
-        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_phone_no, prop_email, prop_lat, prop_long, prop_size1, prop_size2, prop_size3, prop_regist_no, prop_owner_name, prop_membership, prop_corporation, prop_started_date, prop_contact_person, prop_website, prop_detail_link, prop_thumbnail_img, prop_youtube_link, prop_icon_type, prop_status, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        $stmt = mysqli_prepare($this->conn, "INSERT INTO " . $this->table_name . " (prop_name, prop_address_no, prop_address_moo, prop_address_road, prop_address_subdistrict, prop_address_district, prop_municipal_id, prop_phone_no, prop_email, prop_lat, prop_long, prop_size1, prop_size2, prop_size3, prop_regist_no, prop_owner_name, prop_membership, prop_corporation, prop_started_date, prop_contact_person, prop_website, prop_detail_link, prop_thumbnail_img, prop_youtube_link, prop_icon_type, prop_status, prop_supporter, prop_created_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'sssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_youtube_link, $this->prop_icon_type, $this->prop_status, $this->prop_created_date);
+        mysqli_stmt_bind_param($stmt, 'ssssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_youtube_link, $this->prop_icon_type, $this->prop_status, $this->prop_supporter, $this->prop_created_date);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -166,11 +173,11 @@ class Property{
         //         break;
         // }
 
-        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_municipal_id = ?, prop_phone_no = ?, prop_email = ?, prop_lat = ?, prop_long = ?, prop_size1 = ?, prop_size2 = ?, prop_size3 = ?, prop_regist_no = ?, prop_owner_name = ?, prop_membership = ?, prop_corporation = ?, prop_started_date = ?, prop_contact_person = ?, prop_website = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_youtube_link = ?, prop_icon_type = ?, prop_status = ?, prop_updated_date = ? WHERE prop_id = ?";
+        $query = "UPDATE " . $this->table_name . " SET prop_name = ?, prop_address_no = ?, prop_address_moo = ?, prop_address_road = ?, prop_address_subdistrict = ?, prop_address_district = ?, prop_municipal_id = ?, prop_phone_no = ?, prop_email = ?, prop_lat = ?, prop_long = ?, prop_size1 = ?, prop_size2 = ?, prop_size3 = ?, prop_regist_no = ?, prop_owner_name = ?, prop_membership = ?, prop_corporation = ?, prop_started_date = ?, prop_contact_person = ?, prop_website = ?, prop_detail_link = ?, prop_thumbnail_img = ?, prop_youtube_link = ?, prop_icon_type = ?, prop_status = ?, prop_supporter = ?, prop_updated_date = ? WHERE prop_id = ?";
         // statement
         $stmt = mysqli_prepare($this->conn, $query);
         // bind parameters
-        mysqli_stmt_bind_param($stmt, 'ssssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_youtube_link, $this->prop_icon_type, $this->prop_status, $this->prop_updated_date, $this->prop_id);
+        mysqli_stmt_bind_param($stmt, 'sssssssssssssssssssssssssssss', $this->prop_name, $this->prop_address_no, $this->prop_address_moo, $this->prop_address_road, $this->prop_address_subdistrict, $this->prop_address_district, $this->prop_municipal_id, $this->prop_phone_no, $this->prop_email, $this->prop_lat, $this->prop_long, $this->prop_size1, $this->prop_size2, $this->prop_size3, $this->prop_regist_no, $this->prop_owner_name, $this->prop_membership, $this->prop_corporation, $this->prop_started_date, $this->prop_contact_person, $this->prop_website, $this->prop_detail_link, $this->prop_thumbnail_img, $this->prop_youtube_link, $this->prop_icon_type, $this->prop_status, $this->prop_supporter, $this->prop_updated_date, $this->prop_id);
 
         /* execute prepared statement */
         if (mysqli_stmt_execute($stmt)) {
@@ -186,14 +193,20 @@ class Property{
         $property_detail = new Property_detail($this->conn);
         $property_detail->prop_id = $this->prop_id;
         if ($property_detail->delete()) {
-            $query = "DELETE FROM " . $this->table_name . " WHERE prop_id = ?";
-            // statement
-            $stmt = mysqli_prepare($this->conn, $query);
-            // bind parameter
-            mysqli_stmt_bind_param($stmt, 's', $this->prop_id);
-            /* execute prepared statement */
-            if (mysqli_stmt_execute($stmt)) {
-                return true;
+            $property_supporter = new Property_supporter($this->conn);
+            $property_supporter->prop_id = $this->prop_id;
+            if ($property_support->delete()) {
+                $query = "DELETE FROM " . $this->table_name . " WHERE prop_id = ?";
+                // statement
+                $stmt = mysqli_prepare($this->conn, $query);
+                // bind parameter
+                mysqli_stmt_bind_param($stmt, 's', $this->prop_id);
+                /* execute prepared statement */
+                if (mysqli_stmt_execute($stmt)) {
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
                 return false;
             }
@@ -377,6 +390,12 @@ class Property{
     // search property in properties-listing.php
     function search_listing(){
         $query = "SELECT * FROM " . $this->table_name . " WHERE prop_name LIKE '%" . $this->srch_prop_name . "%' ORDER BY prop_id DESC LIMIT " . $this->start . ", " . $this->perpage;
+        $result = mysqli_query($this->conn, $query);
+        return $result;
+    }
+
+    function selectonly5supporter(){
+        $query = "SELECT prop_id, prop_name, prop_thumbnail_img FROM " . $this->table_name . " WHERE prop_supporter = 1 ORDER BY RAND() LIMIT 4";
         $result = mysqli_query($this->conn, $query);
         return $result;
     }

@@ -10,6 +10,7 @@
     include_once 'assets/php/property_type.php';
     include_once 'assets/php/property_municipal.php';
     include_once 'assets/php/property_detail.php';
+    include_once 'assets/php/property_supporter.php';
 
     // get connection
     $database = new Database();
@@ -24,6 +25,10 @@
     $property->prop_id = $_GET['prop_id'];
     $result_prop = $property->readone();
     $row_prop = mysqli_fetch_array($result_prop);
+
+    if ($row_prop['prop_supporter']) {
+
+    }
 
     $straddr = "";
     if (!empty($row_prop['prop_address_no'])) {
@@ -283,6 +288,25 @@
                                             <iframe width="500" height="281" src="<?php echo $row_prop['prop_youtube_link'] ?>" frameborder="0" allowfullscreen></iframe>
                                         </div>
                                     </section><!-- /#video-presentation -->
+                                <?php } ?>
+
+                                <?php if ($row_prop['prop_supporter']) { ?>
+                                    <section id="property-gallery">
+                                        <header><h2>รูปโครงการ</h2></header>
+                                        <div class="owl-carousel property-carousel">
+                                            <?php $property_supporter = new Property_supporter($db);
+                                                  $property_supporter->prop_id = $_GET['prop_id'];
+                                                  $result_supporter = $property_supporter->readone();
+                                                  while ($row_supporter = mysqli_fetch_array($result_supporter)) { ?>
+                                                      <div class="property-slide">
+                                                          <a href="<?php echo $row_supporter['prop_img'] ?>" class="image-popup">
+                                                              <div class="overlay"><h3>Front View</h3></div>
+                                                              <img alt="" src="<?php echo $row_supporter['prop_img'] ?>">
+                                                          </a>
+                                                      </div><!-- /.property-slide -->
+                                            <?php } ?>
+                                        </div><!-- /.property-carousel -->
+                                    </section>
                                 <?php } ?>
 
                             </div><!-- /.col-md-8 -->

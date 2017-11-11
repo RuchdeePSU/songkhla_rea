@@ -10,6 +10,7 @@
     include_once 'assets/php/property_detail.php';
     include_once 'assets/php/property_municipal.php';
     include_once 'assets/php/property_type.php';
+    include_once 'assets/php/property_supporter.php';
 
     // get connection
     $database = new Database();
@@ -36,7 +37,7 @@
             // get file names
             $filenames = $images['name'];
             // file paths to store
-            $paths= [];
+            $paths = [];
             for($i=0; $i < count($filenames); $i++) {
                 $ext = explode('.', basename($filenames[$i]));
                 $new_name = md5(uniqid()) . "." . array_pop($ext);
@@ -51,7 +52,7 @@
             }
         } else {
             $paths[] = "assets/img/properties/property-sample.jpg";
-        }
+        } // fileupload
 
         // pass connection to properties table
         $property = new Property($db);
@@ -79,6 +80,7 @@
         $property->prop_thumbnail_img = $paths[0];
         $property->prop_youtube_link = $_POST['property-youtube'];
         $property->prop_status = $_POST['property-status'];
+        $property->prop_supporter = $_POST['property-supporter'];
         $property->prop_created_date = date("Y/m/d");
 
         // insert into properties table
@@ -87,7 +89,6 @@
             $property_detail = new Property_detail($db);
             // get last prop_id
             $property_detail->prop_id = $property->getlastproperty_id();
-
             while ($row_type4 = mysqli_fetch_array($result_type4)) {
                 $property_detail->prop_type_id = $row_type4['prop_type_id'];
                 $property_detail->units_total = $_POST['units-total-' . $row_type4['prop_type_id']];
@@ -107,6 +108,42 @@
                     break;
                 }
             }
+            // end for property_details
+
+            // for supporter's images
+            if (!empty($_FILES['fileupload2'])) {
+                // get the files posted
+                $images2 = $_FILES['fileupload2'];
+                // get file names
+                $filenames = $images2['name'];
+                // file paths to store
+                //$paths_supporter = [];
+                $property_supporter = new Property_supporter($db);
+                $property_supporter->prop_id = $property_detail->prop_id;
+                for($i=0; $i < count($filenames); $i++) {
+                    $ext = explode('.', basename($filenames[$i]));
+                    $new_name = md5(uniqid()) . "." . array_pop($ext);
+                    $target = "assets/img/properties" . DIRECTORY_SEPARATOR . $new_name;
+                    if(move_uploaded_file($images2['tmp_name'][$i], $target)) {
+                        //$success = true;
+                        //$paths_supporter[] = $target;
+                        $property_supporter->prop_img = $target;
+                        if ($property_supporter->create()) {
+                            $success = true;
+                        } else {
+                            $success = false;
+                            break;
+                        }
+
+                    } else {
+                        $success = false;
+                        break;
+                    }
+                }
+                //$property->prop_img = $paths_supporter;
+            } // fileupload2
+            // end for property_supporters
+
         } else {
             $success = false;
         }
@@ -548,7 +585,6 @@
                                               <div class="file-loading">
                                                   <input id="fileupload2" name="fileupload2[]" type="file" multiple>
                                               </div>
-                                              <input id="property-thumbnail2" name="property-thumbnail2" type="hidden" />
                                           </div>
                                       </div>
                                   </section>
@@ -773,7 +809,7 @@
         uploadAsync: false,
         browseClass: 'btn btn-default',
         browseLabel: 'เลือกรูปภาพ',
-        allowedFileExtensions: ["jpg", "png"],
+        allowedFileExtensions: ["jpg", "png"]
     });
     $("#fileupload2").fileinput({
         overwriteInitial: true,
@@ -785,7 +821,7 @@
         maxFileCount: 10,
         browseClass: 'btn btn-default',
         browseLabel: 'เลือกรูปภาพ',
-        allowedFileExtensions: ["jpg", "png"],
+        allowedFileExtensions: ["jpg", "png"]
     });
   });
 </script>
