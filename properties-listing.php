@@ -57,7 +57,7 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta http-equiv=Content-Type content="text/html; charset="UTF-8"/>
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="ThemeStarz">
 
@@ -72,7 +72,7 @@
     <!-- <link rel="stylesheet" type="text/css" href="assets/css/datatables.css"/> -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, .btn, ul, th, td, input[type='search'], .alert, address { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, .btn, ul, th, td, input[type='search'], .alert, address, span { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดทำแผนที่เบื้องต้น | ข้อมูลโครงการ</title>

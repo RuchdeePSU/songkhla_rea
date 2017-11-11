@@ -86,7 +86,7 @@
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pridi:300,400">
     <style>
-        h1, h2, h3, h4, h5, h6, legend, a, ul, p, button, figure, dt, dd, label, address { font-family: 'Pridi', serif; }
+        h1, h2, h3, h4, h5, h6, legend, a, ul, p, button, figure, dt, dd, label, address, span { font-family: 'Pridi', serif; }
     </style>
 
     <title>โครงการสำรวจอุปทานที่อยู่อาศัยเพื่อจัดทำแผนที่เบื้องต้น | รายละเอียดโครงการ</title>
@@ -440,7 +440,7 @@
             <aside id="footer-thumbnails" class="footer-thumbnails"></aside><!-- /#footer-thumbnails -->
             <aside id="footer-copyright">
                 <div class="container">
-                    <span>Copyright © 2017. All Rights Reserved.</span>
+                    <span>Copyright © 2017 Songkhla Real Estate Association. All Rights Reserved.</span>
                     <span class="pull-right"><a href="#page-top" class="roll">Go to top</a></span>
                 </div>
             </aside>
