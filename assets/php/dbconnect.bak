@@ -4,6 +4,8 @@ class Database{
     //connect to mysql database
     private $host = "localhost";
     private $user = "root";
+    // Google Cloud Platform
+    // private $passwd = "3jVuRoJ2";
     private $passwd = "";
     private $db_name = "songkhla_rea";
     public $conn;
