@@ -61,7 +61,7 @@
                 // get file names
                 $filenames = $images['name'];
                 // file paths to store
-                $paths= [];
+                $paths= array();
                 for($i=0; $i < count($filenames); $i++){
                     if ($filenames[$i] == '') {
                         $paths[] = $_POST['property-thumbnail'];

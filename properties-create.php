@@ -37,7 +37,7 @@
             // get file names
             $filenames = $images['name'];
             // file paths to store
-            $paths = [];
+            $paths = array();
             for($i=0; $i < count($filenames); $i++) {
                 $ext = explode('.', basename($filenames[$i]));
                 $new_name = md5(uniqid()) . "." . array_pop($ext);

@@ -4,8 +4,11 @@ class Database{
     //connect to mysql database
     private $host = "localhost";
     private $user = "root";
+    //private $user = "skrea_surveying";
     private $passwd = "";
+    //private $passwd = "NUwaoFwqCo";
     private $db_name = "songkhla_rea";
+    //private $db_name = "skrea_surveying";
     public $conn;
 
     // get the database connection
