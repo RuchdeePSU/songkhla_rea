@@ -195,7 +195,7 @@ class Property{
         if ($property_detail->delete()) {
             $property_supporter = new Property_supporter($this->conn);
             $property_supporter->prop_id = $this->prop_id;
-            if ($property_support->delete()) {
+            if ($property_supporter->delete()) {
                 $query = "DELETE FROM " . $this->table_name . " WHERE prop_id = ?";
                 // statement
                 $stmt = mysqli_prepare($this->conn, $query);

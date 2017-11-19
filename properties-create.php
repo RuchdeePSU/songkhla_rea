@@ -31,23 +31,21 @@
 
     // form is submitted
     if (isset($_POST['property-submit'])) {
+        //file paths to store
+        $paths = array();
         if (!empty($_FILES['fileupload'])) {
             // get the files posted
             $images = $_FILES['fileupload'];
             // get file names
             $filenames = $images['name'];
-            // file paths to store
-            $paths = array();
             for($i=0; $i < count($filenames); $i++) {
                 $ext = explode('.', basename($filenames[$i]));
                 $new_name = md5(uniqid()) . "." . array_pop($ext);
                 $target = "assets/img/properties" . DIRECTORY_SEPARATOR . $new_name;
                 if(move_uploaded_file($images['tmp_name'][$i], $target)) {
-                    $success = true;
                     $paths[] = $target;
                 } else {
-                    $success = false;
-                    break;
+                    $paths[] = "assets/img/properties/property-sample.jpg";
                 }
             }
         } else {
@@ -111,42 +109,47 @@
             // end for property_details
 
             // for supporter's images
-            if (!empty($_FILES['fileupload2'])) {
-                // get the files posted
-                $images2 = $_FILES['fileupload2'];
-                // get file names
-                $filenames = $images2['name'];
-                // file paths to store
-                //$paths_supporter = [];
-                $property_supporter = new Property_supporter($db);
-                $property_supporter->prop_id = $property_detail->prop_id;
-                for($i=0; $i < count($filenames); $i++) {
-                    $ext = explode('.', basename($filenames[$i]));
-                    $new_name = md5(uniqid()) . "." . array_pop($ext);
-                    $target = "assets/img/properties" . DIRECTORY_SEPARATOR . $new_name;
-                    if(move_uploaded_file($images2['tmp_name'][$i], $target)) {
-                        //$success = true;
-                        //$paths_supporter[] = $target;
-                        $property_supporter->prop_img = $target;
-                        if ($property_supporter->create()) {
-                            $success = true;
+            if ($_POST['property-supporter']) {
+                if (!empty($_FILES['fileupload2'])) {
+                    // get the files posted
+                    $images2 = $_FILES['fileupload2'];
+                    // get file names
+                    $filenames = $images2['name'];
+                    // file paths to store
+                    //$paths_supporter = [];
+                    $property_supporter = new Property_supporter($db);
+                    $property_supporter->prop_id = $property_detail->prop_id;
+                    for($i=0; $i < count($filenames); $i++) {
+                        $ext = explode('.', basename($filenames[$i]));
+                        $new_name = md5(uniqid()) . "." . array_pop($ext);
+                        $target = "assets/img/properties" . DIRECTORY_SEPARATOR . $new_name;
+                        if(move_uploaded_file($images2['tmp_name'][$i], $target)) {
+                            //$success = true;
+                            //$paths_supporter[] = $target;
+                            $property_supporter->prop_img = $target;
+                            if ($property_supporter->create()) {
+                                $success = true;
+                            } else {
+                                $success = false;
+                                break;
+                            }
+
                         } else {
                             $success = false;
                             break;
                         }
-
-                    } else {
-                        $success = false;
-                        break;
                     }
-                }
-                //$property->prop_img = $paths_supporter;
-            } // fileupload2
+                    //$property->prop_img = $paths_supporter;
+                } // fileupload2
+            }
+
             // end for property_supporters
 
         } else {
             $success = false;
         }
+        echo json_encode($success);
+        header("Location: properties-listing.php");
     }
 
 ?>

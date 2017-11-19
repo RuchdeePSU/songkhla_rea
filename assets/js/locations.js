@@ -1,5 +1,6 @@
 var locations = [
-["อมรชัยย์ คลองเตย", "ถ.คลองเตย-คลองเปล ต.คอหงส์ อ.หาดใหญ่", "฿3,590,000-฿4,480,000", 7.025864, 100.496720, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "123"],
+["ทดสอบโครงการ", "10 ม.1 ถ.เพชรเกษม ต.หาดใหญ่ อ.หาดใหญ่", "฿0-฿0", 7.006602451357217, 100.47799465588378, "properties-detail.php", "assets/img/properties/8c0ded72157434b7c3242765a0efb3ec.jpg", "assets/img/property-types/single-family.png", "125"],
+["อมรชัยย์ คลองเตย", "ถ.คลองเตย-คลองเปล ต.คอหงส์ อ.หาดใหญ่", "฿3,590,000-฿4,480,000", 7.025864, 100.496720, "properties-detail.php", "assets/img/properties/776e591c6b884102822408b53082becf.jpg", "assets/img/property-types/single-family.png", "123"],
 ["อมรชัย (พร้อมเพชร)", "ถ.พร้อมเพชร ต.คอหงส์ อ.หาดใหญ่", "฿3,550,000-฿3,550,000", 7.045129, 100.497341, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "122"],
 ["พรอารีย์วิลเลจ", "ถ.ลพบุรีราเมศวร์ ต.ท่าช้าง อ.บางกล่ำ", "฿2,700,000-฿5,800,000", 7.006098, 100.416729, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "121"],
 ["บ้านเบญจรงค์", "ถ.บ่อแพร ต.น้ำน้อย อ.หาดใหญ่", "฿2,800,000-฿4,300,000", 7.086690, 100.556143, "properties-detail.php", "assets/img/properties/property-sample.jpg", "assets/img/property-types/single-family.png", "120"],
